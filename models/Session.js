@@ -11,4 +11,4 @@ var SessionSchema = new mongoose.Schema(
 
     }
 )
-module.exports = SessionSchema;
+module.exports=mongoose.model('Session',SessionSchema)

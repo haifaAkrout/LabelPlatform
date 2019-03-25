@@ -6,6 +6,7 @@ var review = require('../models/Review');
 var project= require('../models/Project');
 var education = require('../models/Education');
 var experience = require('../models/Experience');
+
 var link= require('../models/Link');
 var userSchema=new mongoose.Schema({
     LastName:{type:String,required:true},
@@ -20,7 +21,7 @@ var userSchema=new mongoose.Schema({
 })
 var adminSchema=extend(userSchema,{})
 var judgeSchema=extend(userSchema,{
-    Status:{type:String,required:true},
+    Status:{type:String},
     Votes: [vote],
     Reviews: [review],
     createdBy:{ type: mongoose.Schema.ObjectId, ref: 'adminSchema' }
@@ -47,6 +48,7 @@ var teamMemberSchema=extend(userSchema,{
 var candidatureSchema=extend(userSchema,{
     tester:{type:String}
 })
+
 module.exports=mongoose.model('User',userSchema)
 module.exports=mongoose.model('Admin',adminSchema)
 module.exports=mongoose.model('Candidat',candidatureSchema)
