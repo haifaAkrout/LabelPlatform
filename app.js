@@ -7,10 +7,10 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var userRouter=require('./api/user');
-
+var emailRouter=require('./api/email')
 var members = require('./routes/members');
-
-
+var projectsRouter=require('./api/Project');
+var candidaturesRouter=require('./api/Candidature')
 var JudgesRouter=require('./api/JudgeCompte')
 var sessionsRouter=require('./api/Session')
 var app = express();
@@ -27,11 +27,11 @@ app.use(cookieParser());
 app.use(express.static('public'));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-//app.use('/',haRouter);
+app.use('/',emailRouter);
 app.use('/login',userRouter);
-
+app.use('/projects',projectsRouter);
 app.use('/Judges',JudgesRouter);
-
+app.use('/Candidatures',candidaturesRouter);
 
 app.use('/members',members);
 app.use('/sessions',sessionsRouter);

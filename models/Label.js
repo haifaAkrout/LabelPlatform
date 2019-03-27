@@ -4,11 +4,12 @@ var LabelSchema = new mongoose.Schema(
     {
 
 
-        type:{type:String,required:true,enum:['label','PreLabel']},
-        SoumissionDate:{type:Date,required:true},
-        PreLabelDate:{type:Date,required:true}
+        type:{type:String},
+        SoumissionDate:{type:Date},
+        PreLabelDate:{type:Date}
 
 
     }
 )
-module.exports = LabelSchema;
+
+module.exports=mongoose.model('Label',LabelSchema)

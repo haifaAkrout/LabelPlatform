@@ -3,9 +3,11 @@ var mongoose=require('mongoose'),
 var valid=require('validator');
 var vote = require('../models/Vote');
 var review = require('../models/Review');
+var ReviewCharge=require('../models/ReviewCharge');
 var project= require('../models/Project');
 var education = require('../models/Education');
 var experience = require('../models/Experience');
+var Label= require('../models/Label');
 
 var link= require('../models/Link');
 var userSchema=new mongoose.Schema({
@@ -22,6 +24,7 @@ var userSchema=new mongoose.Schema({
 var adminSchema=extend(userSchema,{})
 var judgeSchema=extend(userSchema,{
     Status:{type:String},
+    creationDate:{type:Date},
     Votes: [vote],
     Reviews: [review],
     createdBy:{ type: mongoose.Schema.ObjectId, ref: 'adminSchema' }
@@ -36,20 +39,24 @@ var chargeSchema=extend(userSchema,{
 })
 var teamMemberSchema=extend(userSchema,{
     Role:{type:String,required:true},
-    Bio:{type:String,required:true},
-    Description:{type:String,required:true},
-    image:{type:String,required:true},
-    Cin:{type:String,required:true},
+    Bio:{type:String},
+    Description:{type:String},
+    image:{type:String},
+    Cin:{type:String},
     Education: [education],
     Experience: [experience],
     Link: [link]
 
 })
+
+
 var candidatureSchema=extend(userSchema,{
-    tester:{type:String}
+    TypeLabel:   { type: mongoose.Schema.ObjectId, ref: 'Label' },
+    review:{ type: mongoose.Schema.ObjectId, ref: 'ReviewCharge' },
+
+    Status: {type:String}
 })
 
-module.exports=mongoose.model('User',userSchema)
 module.exports=mongoose.model('Admin',adminSchema)
 module.exports=mongoose.model('Candidat',candidatureSchema)
 module.exports=mongoose.model('Judge',judgeSchema)
