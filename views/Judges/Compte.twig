@@ -1,57 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Homepage 2 | Obama - Responsive admin template.</title>
-    <link rel="shortcut icon" href="img/favicon.ico">
-    <!--STYLESHEET-->
-    <!--=================================================-->
-    <!--Roboto Slab Font [ OPTIONAL ] -->
-    <link href="http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,100,700" rel="stylesheet">
-    <link href="http://fonts.googleapis.com/css?family=Roboto:500,400italic,100,700italic,300,700,500italic,400" rel="stylesheet">
-    <!--Bootstrap Stylesheet [ REQUIRED ]-->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <!--Jasmine Stylesheet [ REQUIRED ]-->
-    <link href="/css/style.css" rel="stylesheet">
-    <!--Font Awesome [ OPTIONAL ]-->
-    <link href="/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!--Switchery [ OPTIONAL ]-->
-    <link href="/plugins/switchery/switchery.min.css" rel="stylesheet">
-    <!--Bootstrap Select [ OPTIONAL ]-->
-    <link href="/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
-    <!--ricksaw.js [ OPTIONAL ]-->
-    <link href="/plugins/jquery-ricksaw-chart/css/rickshaw.css" rel="stylesheet">
-    <!--Bootstrap Validator [ OPTIONAL ]-->
-    <link href="/plugins/bootstrap-validator/bootstrapValidator.min.css" rel="stylesheet">
-    <!--Demo [ DEMONSTRATION ]-->
-    <link href="/css/demo/jquery-steps.min.css" rel="stylesheet">
-    <!--Summernote [ OPTIONAL ]-->
-    <link href="/plugins/summernote/summernote.min.css" rel="stylesheet">
-    <!--Demo [ DEMONSTRATION ]-->
-    <link href="/css/demo/jasmine.css" rel="stylesheet">
-    <!--SCRIPT-->
-    <!--=================================================-->
-    <!--Page Load Progress Bar [ OPTIONAL ]-->
-    <link href="/plugins/pace/pace.min.css" rel="stylesheet">
-    <script src="/plugins/pace/pace.min.js"></script>
-</head>
-<body>
-<h2>Ajouter un document</h2>
-<form method="POST" action="/Judges/addCompte">
-    <label>LastName: </label>
-    <input type="text" name="LastName"></br>
-    <label>FirstName: </label>
-    <input type="text" name="FirstName"></br>
-    <label>Email : </label>
-    <input type="text" name="Email"></br>
-    <label>Password : </label>
-    <input type="text" name="Password"></br>
+{% extends 'index.twig' %}
+{% block container %}
+    <div class="row">
+        <div class="col-lg-6">
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="panel-control">
+                <button class="btn btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></button>
+                <button class="btn btn-default" data-click="panel-reload"><i class="fa fa-refresh"></i></button>
+                <button class="btn btn-default" data-click="panel-collapse"><i class="fa fa-chevron-down"></i></button>
+                <button class="btn btn-default" data-dismiss="panel"><i class="fa fa-times"></i></button>
+            </div>
+            <h3 class="panel-title">Add account</h3>
+        </div>
+        <!-- BASIC FORM ELEMENTS -->
+        <!--===================================================-->
+        <form class="panel-body form-horizontal"  method="POST" action="/Judges/addCompte">
 
-    <button type="submit">Ajouter</button>
-</form>
+            <!--Text Input-->
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="demo-text-input">LastName</label>
+                <div class="col-md-9">
+                    <input type="text" name="LastName" class="form-control" placeholder="LastName">
 
-</body>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="demo-text-input">FirstName</label>
+                <div class="col-md-9">
+                    <input type="text" name="FirstName" class="form-control" placeholder="FirstName">
 
-<!--===================================================-->
-</html>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="demo-text-input">Email</label>
+                <div class="col-md-9">
+                    <input type="text" name="Email" class="form-control" placeholder="Email">
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="demo-text-input">Password</label>
+                <div class="col-md-9">
+                    <input type="password" name="Password" class="form-control" placeholder="Text">
+
+                </div>
+            </div>
+            <button type="submit" class="btn btn-info btn-lg" name="signup" value="Submit">
+                Submit
+            </button>
+
+
+
+
+
+        </form>
+    </div>
+        </div>    <!--===================================================-->
+        <!-- END BASIC FORM ELEMENTS -->
+    </div>
+
+{% endblock %}

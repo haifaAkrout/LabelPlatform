@@ -1,0 +1,74 @@
+{% extends 'index.twig' %}
+{% block container %}
+
+
+            <div class="row">
+                <div class="col-xs-12 col-md-3 col-lg-3">
+                    <div class="mail-categories">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="javascript:;"> <i class="fa fa-inbox"></i> Inbox <span class="label label-info pull-right">6</span> </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="javascript:;"> <i class="fa fa-envelope-o"></i> Send mail </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="javascript:;"> <i class="fa fa-star"></i> Starred <span class="label label-danger pull-right">3</span> </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="javascript:;"> <i class="fa fa-comment-o"></i> Chat <span class="label label-success pull-right">9</span> </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="javascript:;"> <i class="fa fa-pencil"></i> Draft <span class="label label-warning pull-right">1</span> </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="javascript:;"> <i class="fa fa-trash-o"></i> Spam </a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                </div>
+                <div class="col-xs-12 col-md-9 col-lg-9">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <!-- Multiple Select Choosen -->
+                            <!--===================================================-->
+                            <form class="form-horizontal form-bordered" method="POST" action="/api/send">
+                                <div class="form-group nb">
+                                    <label class="control-label col-md-1">To: </label>
+                                    <div class="col-md-11">
+                                        <input type="text"  name="To" class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="form-group nb">
+                                    <label class="control-label col-md-1">CC: </label>
+                                    <div class="col-md-11">
+                                        <input type="text" name="CC" class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="form-group nb">
+                                    <label class="control-label col-md-1">Subject: </label>
+                                    <div class="col-md-11">
+                                        <input type="text" name="Subject "class="form-control ">
+                                    </div>
+                                </div>
+
+                                <div class="form-group nb">
+                                    <label class="control-label col-md-1">Content: </label>
+                                    <div class="col-md-11">
+                                       <textarea name="Content"></textarea>
+                                    </div>
+                                </div>
+                                    <button class="btn btn-danger"><i class="fa fa-send"></i> Send </button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+        <!--===================================================-->
+        <!--End page content-->
+
+{% endblock %}
