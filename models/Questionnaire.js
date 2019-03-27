@@ -9,4 +9,5 @@ var QuestionnaireSchema = new mongoose.Schema(
 
     }
 )
-module.exports = QuestionnaireSchema;
+
+mongoose.model('Questionnaire',QuestionnaireSchema)

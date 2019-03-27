@@ -7,8 +7,14 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var userRouter=require('./api/user');
-var emailRouter=require('./api/email')
-var members = require('./routes/members');
+var emailRouter=require('./api/email');
+var experience = require('./api/Experience');
+var education = require('./api/Education');
+var label = require('./api/Label');
+var link = require('./api/Link');
+var response = require('./api/Response');
+var questionnaire = require('./api/Questionnaire');
+
 var projectsRouter=require('./api/Project');
 var candidaturesRouter=require('./api/Candidature')
 var JudgesRouter=require('./api/JudgeCompte')
@@ -32,10 +38,13 @@ app.use('/login',userRouter);
 app.use('/projects',projectsRouter);
 app.use('/Judges',JudgesRouter);
 app.use('/Candidatures',candidaturesRouter);
-
-app.use('/members',members);
 app.use('/sessions',sessionsRouter);
-
+app.use('/experience',experience);
+app.use('/education',education);
+app.use('/label',label);
+app.use('/link',link);
+app.use('/response',response);
+app.use('/questionnaire',questionnaire);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

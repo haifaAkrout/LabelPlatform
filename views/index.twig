@@ -278,11 +278,17 @@
             <li class="active"> Dashboard </li>
           </ol>
         </div>
+
       </div>
       <!--Page content-->
       <!--===================================================-->
       <noscript>You need to enable JavaScript to run this app.</noscript>
-      <div id="root"></div>
+      <div id="root">
+        <div style="margin-left: 130px;margin-right: 100px ; margin-top: 0px;">
+          {% block container %}
+          {% endblock %}
+        </div>
+      </div>
       <!--===================================================-->
       <!--End page content-->
     </div>
@@ -431,10 +437,10 @@
                 <li class="list-header">Extra</li>
                 <!--Menu list item-->
                 <li>
-                  <a href="/members">
+                  <a href="/Projects">
                     <i class="fa fa-calendar"></i>
                     <span class="menu-title">
-                                            Calendar
+                                            Projects
                                             </span>
                   </a>
                 </li>
@@ -560,11 +566,9 @@
     </nav>
     <!--===================================================-->
     <!--END MAIN NAVIGATION-->
-    <div style="margin-left: 150px">
-      {% block container %}
-      {% endblock %}
-    </div>
+
   </div>
+
 
 </div>
 
@@ -572,6 +576,11 @@
 
 <!-- FOOTER -->
 <!--===================================================-->
+<footer id="footer">
+  <!-- Visible when footer positions are fixed -->
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+</footer>
 
 <!--===================================================-->
 <!-- END FOOTER -->
@@ -582,3 +591,4 @@
 
 <!--===================================================-->
 </html>
+

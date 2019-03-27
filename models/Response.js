@@ -7,4 +7,5 @@ var ReponseSchema = new mongoose.Schema(
 
     }
 )
-module.exports = ReponseSchema;
+
+mongoose.model('Response',ReponseSchema)

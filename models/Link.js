@@ -7,4 +7,5 @@ var LinkSchema = new mongoose.Schema(
 
     }
 )
-module.exports = LinkSchema;
+
+mongoose.model('Link',LinkSchema)

@@ -53,7 +53,6 @@ var teamMemberSchema=extend(userSchema,{
 var candidatureSchema=extend(userSchema,{
     TypeLabel:   { type: mongoose.Schema.ObjectId, ref: 'Label' },
     review:{ type: mongoose.Schema.ObjectId, ref: 'ReviewCharge' },
-
     Status: {type:String}
 })
 
