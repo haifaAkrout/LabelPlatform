@@ -1,13 +1,13 @@
 {% extends '../index.twig' %}
 {% block container %}
     <div class="container">
-        <h1> Detials projets de la sessions {{ Sessions.Name }}</h1>
+        <h1> Detials projets de la sessions {{ Sessions.Name }} {{ Sessions.date | date("Y") }}</h1>
         <table id="TableSession" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
             <thead>
             <tr>
                 <th class="th-sm">Type </th>
                 <th class="th-sm">Nom du projet</th>
-                <th class="th-sm">{{label}}</th>
+                <th class="th-sm">Lead</th>
 
             </tr>
             </thead>
@@ -19,7 +19,12 @@
 
                     <td> {{ Session.createdBy.TypeLabel.type }}</td>
                     <td> {{ Session.Name }} </td>
-                    <td>{{ Session.Project.members[0].LastName }}</td>
+                    {%  for member in Session.members %}
+                        {% if member.Role == 'lead' %}
+                            <td>{{ member.Role }}</td>
+                        {% endif %}
+                    {% endfor %}
+
 
 
             </tr>

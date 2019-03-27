@@ -31,6 +31,8 @@ router.get('/:id', function (req, res) {
             // res.json({
             //       sessions
             //  });
+
+
             res.render('Sessions/detailsCandidature.twig',{Sessions:sessions});
 
         }).catch(err => {
