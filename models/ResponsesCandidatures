@@ -1,0 +1,14 @@
+var mongoose = require('mongoose')
+require("../models/User")
+const candidat=mongoose.model("Candidat")
+var ReponseCandidatSchema = new mongoose.Schema(
+    {
+
+        text:{type:String,required:true},
+        verify:{type:Boolean},
+        createdBy:{ type: mongoose.Schema.ObjectId, ref: 'candidat' }
+
+    }
+)
+
+module.exports=ReponseCandidatSchema

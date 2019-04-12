@@ -4,6 +4,6 @@
     <option name="languageLevel" value="JSX" />
   </component>
   <component name="ProjectPlainTextFileTypeManager">
-    <file url="file://$PROJECT_DIR$/models/TeamMember.js" />
+    <file url="file://$PROJECT_DIR$/client/src/components/login/package.json" />
   </component>
 </project>

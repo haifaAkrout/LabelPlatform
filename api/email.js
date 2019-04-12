@@ -1,14 +1,15 @@
 var nodemailer = require('nodemailer');
 const express = require('express');
 const router = express.Router();
+var mongoose = require('mongoose');
+const Judge = mongoose.model('Judge');
 
-
-router.post('/api/send', function (req, res, next) {
+router.post('/sendEmailToJudge', function (req, res, next) {
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
             user: 'haifaakrout123@gmail.com',
-            pass: 'haifaakrout126A'
+            pass: 'haifa123A@'
         }
     });
     const mailOptions = {
@@ -21,7 +22,16 @@ router.post('/api/send', function (req, res, next) {
         if(err)
             console.log(err)
         else
-            res.redirect('/Judges/demandes')
+        {
+            var Judge1 = new Judge()
+            Judge1.LastName=req.body.LastName;
+            Judge1.FirstName=req.body.FirstName;
+            Judge1.Email=req.body.To;
+            Judge1.Status="en attente";
+            Judge1.createdBy="5ca682c594b3478520c09158",
+            Judge1.creationDate=new Date();
+            Judge1.save();
+        }
     });
 })
 

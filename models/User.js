@@ -2,8 +2,10 @@ var mongoose=require('mongoose'),
     extend=require('mongoose-extend-schema');
 var valid=require('validator');
 var vote = require('../models/Vote');
-var review = require('../models/Review');
+
 var ReviewCharge=require('../models/ReviewCharge');
+
+var Review=require('../models/Review')
 var project= require('../models/Project');
 var education = require('../models/Education');
 var experience = require('../models/Experience');
@@ -18,22 +20,22 @@ var userSchema=new mongoose.Schema({
             validator:valid.isEmail,
             message:'{VALUE}is not a valid email'
         }},
-    Password:{type:String,required:true},
+    Password:{type:String},
    // Status:{type:String,required:true}
 })
 var adminSchema=extend(userSchema,{})
 var judgeSchema=extend(userSchema,{
     Status:{type:String},
     creationDate:{type:Date},
-    Votes: [vote],
-    Reviews: [review],
+    Telephone:{type:Number},
+    YearsOfExperience:{type:Number},
+    Spécialité:{type:String},
     createdBy:{ type: mongoose.Schema.ObjectId, ref: 'adminSchema' }
 
 
 })
 var chargeSchema=extend(userSchema,{
-    Votes: [vote],
-    Reviews: [review],
+   
     createdBy:{ type: mongoose.Schema.ObjectId, ref: 'adminSchema' }
 
 })
@@ -53,6 +55,7 @@ var teamMemberSchema=extend(userSchema,{
 var candidatureSchema=extend(userSchema,{
     TypeLabel:   { type: mongoose.Schema.ObjectId, ref: 'Label' },
     review:{ type: mongoose.Schema.ObjectId, ref: 'ReviewCharge' },
+    review2:[Review],
     Status: {type:String}
 })
 

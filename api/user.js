@@ -18,6 +18,17 @@ router.get('/', function (req, res) {
         }
     });
 });
+router.post('/addCandidature',function (req,res) {
+    //ajouter admin
+    var candidat = new User({
+        FirstName: "akrout",
+        LastName: "haifa",
+        Email: "haifa.akrout@esprit.tn",
+        Password:"hafhouf",
+        Status:"en attente"
+    });
+    candidat.save();
+})
 
 router.post('/addCandidat', function (req, res) {
 
@@ -81,11 +92,12 @@ console.log("ajout candidat");
         PreLabelDate:Date.now()
     });
 
-    console.log(label1);
+    console.log(label1.id);
     label1.save();
     console.log(label1.id)
     User.findById(id).exec(function (err , User) {
-        User.typeLabel.push(label1.id)
+        console.log(User.id)
+        User.TypeLabel=label1.id
         User.save(function (err , User) {
             if (err)
                 res.send(err);
@@ -97,7 +109,7 @@ console.log("ajout candidat");
 });
 
 
-router.post('/addUser', function (req, res) {
+router.post('/addAdmin', function (req, res) {
 
     var User1 = new Userr({
         FirstName: "feriel",

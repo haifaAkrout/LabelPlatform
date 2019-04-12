@@ -1,39 +1,61 @@
 var express = require('express');
+var bodyParser = require("body-parser");
+var Review=require('../models/Review');
 
 var router = express.Router();
 var mongoose = require('mongoose');
-require('../models/Questionnaire');
-const Questionnaire = mongoose.model('Questionnaire');
+require("../models/Questionnaire")
+const  Questionnaire=mongoose.model("Questionnaire");
 
 
 
 
+router.get('/', function (req, res){
 
-router.get('/', function (req, res) {
-    Questionnaire.find().exec( function (err, experiences){
-        if (err)
-            res.send(err)
-        if (!experiences)
-            res.status(404).send();
-        else {
-            res.json(experiences);
-            console.log(experiences)
+  Questionnaire.find().exec(function (err,Questionnaire1) {
+        var list=[];
+
+        for (var i in Questionnaire1)
+        {
+          if(Questionnaire1[i].type==="QuestionJury"){
+              list.push(Questionnaire1[i])
+          }
+
         }
+res.send(list)
+
     });
-});
+
+    });
 router.post('/add', function (req, res) {
 
-
-    var Questionnaire1 = new Questionnaire({
-        text:"questionnaire2",
-        type:"souel2"
+    var Question1 = new Questionnaire({
+        text:"Avez vous déja une sociétè",
+        type:"Question candidat"
     })
-    Questionnaire1.save(function (err, experiences) {
+    // var Question1 = new Questionnaire({
+    //     text:"\n" +
+    //         "As-tu identifié des concurrents ?",
+    //     type:"QuestionJury"
+    // })
+
+    // var Questionnaire1 = new Questionnaire({
+    //     text:"questionnaire2",
+    //     type:"souel2"
+    // })
+    // Question1.save(function (err,Questionnaire1) {
+    //     if (err) {
+    //         res.send(err)
+    //     }
+    //     else
+    //         res.send(Questionnaire1)
+    // })
+    Question1.save(function (err, Questionnaire2) {
         if (err) {
             res.send(err)
         }
         else
-            res.send(experiences)
+            res.send(Questionnaire2)
     })
 
 

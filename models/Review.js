@@ -10,4 +10,4 @@ var ReviewSchema = new mongoose.Schema(
         candidat:{ type: mongoose.Schema.ObjectId, ref: 'Candidature' }
     }
 )
-module.exports = ReviewSchema;
+mongoose.model('Review',ReviewSchema)

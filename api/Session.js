@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Session= require('../models/Session');
-var Project= require('../models/Project');
+
+var Project= require("../models/Project")
 const Label=mongoose.model('Label');
 const Candidat = mongoose.model('Candidat');
 
@@ -45,23 +46,23 @@ router.get('/:id', function (req, res) {
 //ajout session fergha
 router.post('/add',function (req,res) {
     console.log("ajout sessions")
-
-    var Sessio51=new Session({
-        Name:'Session Avril',
-        Status: "En cours",
-        StartDate:'2019-04-01',
-        EndDate:'2019-04-30'
-
-
-    });
-
-    Sessio51.save(function (err, Session) {
-        if (err) {
-            res.send(err)
-        }
-        else
-            res.send(Session)
-    });
+    //
+    // var Sessio1=new Session({
+    //     Name:'Session Avril',
+    //     Status: "En cours",
+    //     StartDate:'2019-04-01',
+    //     EndDate:'2019-04-30'
+    //
+    //
+    // });
+    //
+    // Sessio1.save(function (err, Session) {
+    //     if (err) {
+    //         res.send(err)
+    //     }
+    //     else
+    //         res.send(Session)
+    // });
 
     var Session2=new Session({
         Name:'Session Mars',
@@ -95,20 +96,20 @@ router.post('/:idSession/add', function (req, res) {
         SoumissionDate:Date.now(),
         PreLabelDate:Date.now()
     });
-
+/*
     var prelabel=new Label({
         type:"prelabel",
         SoumissionDate:Date.now(),
         PreLabelDate:Date.now()
-    });
+    });*/
     Label1.save();
-    prelabel.save();
+  /*  prelabel.save();*/
     var Candidature2=new Candidat({
-        LastName: 'akrout',
-        FirstName:'haifa',
-        Email:'akrout.haifa@esprit.tn',
-        Password: 'haifa',
-        TypeLabel:prelabel.id,
+        LastName: 'Bejaoui',
+        FirstName:'chamss',
+        Email:'bejaoui1.chamss1@esprit.tn',
+        Password: 'chamss',
+        TypeLabel:Label1.id,
         Status:'non Traité'
     })
 
@@ -118,8 +119,9 @@ router.post('/:idSession/add', function (req, res) {
 
 
     Session.findById(id).exec(function (err , Session) {
-        Project15 = mongoose.model('Project',Project);
-        var projet4 = new Project15({
+        const Project2=mongoose.model('Project')
+      //  Project15 = mongoose.model('Project',Project);
+        var projet4 = new Project2({
             Name: 'ProjetWeb' ,
             members:[{
                 Role:'lead',
@@ -127,7 +129,7 @@ router.post('/:idSession/add', function (req, res) {
                 FirsName:'Aziza',
                 Email:'Aziza@esprit.tn',
                 Password: 'Aziza'}],
-            createdBy:Candidature2.id
+            createdBy: Candidature2._id
 
         });
         projet4.save();
