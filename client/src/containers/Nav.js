@@ -100,18 +100,14 @@ class Nav extends React.Component {
                                         <a href="#">
                                             <i className="fa fa-th"></i>
                                             <span className="menu-title">
-                                              Labeling startups
+                                              Les sessions
                                             </span>
                                             <i className="arrow"></i>
                                         </a>
 
                                         <ul className="collapse">
-                                            <li><a href=""><i className="fa fa-caret-right"></i>
-                                                Add Judge  </a></li>
-                                            <li><a href="layout-boxed.html"><i className="fa fa-caret-right"></i>
-                                                Delete Judge  </a></li>
-                                            <li><a href="layout-collapsed-sidebar.html"><i
-                                                className="fa fa-caret-right"></i> show Judges </a></li>
+                                            <li><a href="http://localhost:3000/sessions/"><i className="fa fa-caret-right"></i>
+                                               Liste des sessions  </a></li>
 
 
                                         </ul>
@@ -166,6 +162,8 @@ class Nav extends React.Component {
 
                             </div>
                         </div>
+
+
                     </div>
 
 

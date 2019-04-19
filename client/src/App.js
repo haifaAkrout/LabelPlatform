@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import sendEmail from "./components/Dashboard/Judges/sendEmail";
 import AddCompte from "./components/Dashboard/Judges/AddCompte";
@@ -9,6 +9,7 @@ import register from "../src/components/login/register";
 import listCandidatures from "./components/Dashboard/SecondTour/listCandidatures";
 import Dashboard from "./components/Dashboard/Dashboard"
 import Front from "./components/Front/Front"
+ import listeSessions from "./components/Dashboard/FirstTour/listSessions"
 import { Provider } from 'react-redux'
 import store from './store';
 
@@ -29,6 +30,7 @@ class App extends Component {
                 <Route  path="/Judges/editCompte/:id1" exact component={EditJudge} />
                 <Route path="/SecondTour/:id1" exact component={listCandidatures} />
                 <Route path="/Front" exact component={Front} />
+                <Route path="/sessions/listeSessions" exact component={listeSessions}/>
             </React.Fragment>
           </Router>
         </Provider>
