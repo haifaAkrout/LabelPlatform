@@ -2,8 +2,8 @@ var express = require('express');
 
 var router = express.Router();
 var mongoose = require('mongoose');
-require('../models/Response');
-const Response = mongoose.model('Response');
+
+const Response = require('../models/Response');
 
 router.get('/', function (req, res) {
     Response.find().exec( function (err, experiences){

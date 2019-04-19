@@ -4,7 +4,7 @@ var ReponseSchema = new mongoose.Schema(
 
         text:{type:String,required:true},
         verify:{type:Boolean,required:true},
-
+        type:{type:String,require:true}
     }
 )
 

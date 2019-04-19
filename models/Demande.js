@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
-const Judge = mongoose.model('Judge');
+//const user = mongoose.model('User');
 var DemandeSchema = new mongoose.Schema(
     {
         Status :{ type: String, required: true },
-        createdBy:{ type: mongoose.Schema.ObjectId, ref: 'Judge' }
+        //createdBy:{ type: mongoose.Schema.ObjectId, ref: 'user' }
 
     }
 )

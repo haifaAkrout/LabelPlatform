@@ -13,16 +13,16 @@ const  Questionnaire=mongoose.model("Questionnaire");
 router.get('/', function (req, res){
 
   Questionnaire.find().exec(function (err,Questionnaire1) {
-        var list=[];
+        // var list=[];
 
-        for (var i in Questionnaire1)
-        {
-          if(Questionnaire1[i].type==="QuestionJury"){
-              list.push(Questionnaire1[i])
-          }
-
-        }
-res.send(list)
+        // for (var i in Questionnaire1)
+        // {
+        //   if(Questionnaire1[i].type==="QuestionJury"){
+        //       list.push(Questionnaire1[i])
+        //   }
+        //
+        // }
+res.send(Questionnaire1)
 
     });
 
@@ -30,9 +30,14 @@ res.send(list)
 router.post('/add', function (req, res) {
 
     var Question1 = new Questionnaire({
-        text:"Avez vous déja une sociétè",
-        type:"Question candidat"
+        text:req.body.text,
+        type:req.body.type
     })
+
+
+
+
+
     // var Question1 = new Questionnaire({
     //     text:"\n" +
     //         "As-tu identifié des concurrents ?",
@@ -72,8 +77,9 @@ router.post('/:id/add', function (req, res) {
     require('../models/Response');
    var Response = mongoose.model('Response');
     var resp = new Response({
-        text:"Response1",
-        verify:true
+        text:req.body.text,
+        verify:true,
+        type:req.body.type
     });
     Questionnaire.findById(id).exec(function (err , todo) {
         todo.responses.push(resp)

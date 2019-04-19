@@ -1,4 +1,9 @@
 import React from 'react';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import classnames from 'classnames';
+import { Progress } from 'reactstrap';
+
+import Moment from 'react-moment';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import {deleteJudge,
@@ -7,23 +12,34 @@ import {connect} from "react-redux";
 export  default  class listCandidatures extends React.Component{
     constructor(props) {
         super(props);
+        this.toggle = this.toggle.bind(this);
         this.state = {
+            activeTab: '1',
 
             Sessions:[],
-            NomSession:''
+            NomSession:'',
+            DateEnd:''
         } ;
 
 
 
     };
+    toggle(tab) {
+        if (this.state.activeTab !== tab) {
+            this.setState({
+                activeTab: tab
+            });
+        }
+    }
 
 
     componentDidMount() {
         const {id1}=this.props.match.params
         axios.get('http://localhost:6003/candidatures/'+id1).then(res=>{
-            console.log(res.data.Project)
+            console.log(res.data)
             this.setState({NomSession:res.data.Name});
             this.setState({Sessions:res.data.Project});
+            this.setState({DateEnd:res.data.EndDate})
 
 
         })
@@ -285,26 +301,83 @@ export  default  class listCandidatures extends React.Component{
 
                         <div className="panel">
                             <div className="panel-heading">
-                                <h3 className="panel-title">{this.state.NomSession}</h3>
-                            </div>
-                            <div className="panel-body">
-                                <div className="pad-btm form-inline">
-                                    <div className="row">
-                                        <div className="col-sm-6 text-xs-center">
-                                            <div className="form-group">
-                                                <label className="control-label"></label>
-                                                <select id="demo-foo-filter-status" className="form-control">
-                                                    <option value="">Show all</option>
-                                                    <option value="positif">Positif</option>
-                                                    <option value="negatif">negatif</option>
-                                                    <option value="no">Treated</option>
-                                                    <option value="non Traités">No treated</option>
-                                                </select>
-                                            </div>
-                                        </div>
 
-                                    </div>
-                                </div>
+
+
+                                <h2 className="panel-title" style={{float: 'left',width: '34%', textalign:'left'}}>{this.state.NomSession}</h2>
+                                <p className="panel-title" style={{float: 'left', width: '33%', textalign: 'center'}}>2eme Tour</p>
+                                <p className="panel-title" style={{float: 'left', width: '33%', textalign: 'right'}}>
+
+
+
+                                </p>
+                            </div>
+
+
+                           <center> <div className="text-center">25%</div>
+                            <Progress color="#31b0d5" value="25" />
+                           </center>
+
+
+                            <div className="panel-body">
+                                <Nav tabs>
+                                    <NavItem>
+                                        <NavLink
+                                            className={classnames({ active: this.state.activeTab === '1' })}
+                                            onClick={() => { this.toggle('1'); }}
+                                        >
+                                            Candidatures non traitées
+                                        </NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink
+                                            className={classnames({ active: this.state.activeTab === '2' })}
+                                            onClick={() => { this.toggle('2'); }}
+                                        >
+                                            Candidatures traitées
+                                        </NavLink>
+                                    </NavItem>
+                                </Nav>
+                                <br/>
+                                <center>
+                                    <table border="1">
+                                    <Nav tabs>
+                                    <NavItem>
+                                        <NavLink
+                                            className={classnames({ active: this.state.activeTab === '1' })}
+                                            onClick={() => { this.toggle('3'); }}
+                                        >
+                                            Tous
+                                        </NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink
+                                            className={classnames({ active: this.state.activeTab === '2' })}
+                                            onClick={() => { this.toggle('4'); }}
+                                        >
+                                            Avis positif
+                                        </NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink
+                                            className={classnames({ active: this.state.activeTab === '2' })}
+                                            onClick={() => { this.toggle('5'); }}
+                                        >
+                                            Avis neutre
+                                        </NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink
+                                            className={classnames({ active: this.state.activeTab === '2' })}
+                                            onClick={() => { this.toggle('6'); }}
+                                        >
+                                            Avis négatif
+                                        </NavLink>
+                                    </NavItem>
+                                </Nav></table></center>
+                                <br/>
+                                <TabContent activeTab={this.state.activeTab}>
+                                    <TabPane tabId="1">
 
                                 <table id="demo-foo-filtering"
                                        className="table table-bordered table-hover toggle-circle" data-page-size="7">
@@ -324,10 +397,12 @@ export  default  class listCandidatures extends React.Component{
                                     </thead>
                                     <tbody>
                                     {this.state.Sessions.map(function(d, idx){
-                                        if(d.createdBy.Status==='non Traités')
+                                        if (d.createdBy.Status==="non Traité")
                                         return (
 
                                             <tr key={idx}>
+
+
                                                 <td>{d.createdBy.TypeLabel.type}</td>
                                                 <td>{d.Name }</td>
 
@@ -335,25 +410,15 @@ export  default  class listCandidatures extends React.Component{
                                                 <td>{d.createdBy.TypeLabel.SoumissionDate}</td>
                                                 <td>{d.createdBy.review.type}</td>
                                                 <td>{d.createdBy.Status}</td>
-                                                 <td>Juger</td>
+                                               <td> <center>
+                                                   <button className="btn btn-info btn-lg" type="submit"> <Link to={"/Question"}>Juger</Link></button>
+                                               </center></td>
 
 
                                             </tr>
                                         )
-                                        else
-                                            return (
-                                                <tr key={idx}>
-                                                    <td>{d.createdBy.TypeLabel.type}</td>
-                                                    <td>{d.Name }</td>
 
-                                                    <td>{d.members[0].Email}</td>
-                                                    <td>{d.createdBy.TypeLabel.SoumissionDate}</td>
-                                                    <td>{d.createdBy.review.type}</td>
-                                                    <td>{d.createdBy.Status}</td>
-                                                    <td>Consulter</td>
 
-                                                </tr>
-                                            )
 
                                     }.bind(this))}
 
@@ -361,6 +426,230 @@ export  default  class listCandidatures extends React.Component{
                                     </tbody>
                                 </table>
 
+                                    </TabPane>
+                                </TabContent>
+                                <TabContent activeTab={this.state.activeTab}>
+                                    <TabPane tabId="2">
+
+
+
+
+                                        <div className="panel-body">
+
+                                            <table id="demo-foo-filtering"
+                                                   className="table table-bordered table-hover toggle-circle" data-page-size="7">
+
+                                                <thead>
+                                                <tr>
+                                                    <th>Type of candidature</th>
+                                                    <th >Project Name </th>
+                                                    <th >Lead </th>
+
+                                                    <th >Soumission Date </th>
+                                                    <th> Review Charge </th>
+
+                                                    <th>Status</th>
+                                                    <th> Action </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {this.state.Sessions.map(function(d, idx){
+                                                    if (d.createdBy.Status==="Traité")
+                                                        return (
+
+                                                            <tr key={idx}>
+                                                                <td>{d.createdBy.TypeLabel.type}</td>
+                                                                <td>{d.Name }</td>
+
+                                                                <td>{d.members[0].Email}</td>
+                                                                <td>{d.createdBy.TypeLabel.SoumissionDate}</td>
+                                                                <td>{d.createdBy.review.type}</td>
+                                                                <td>{d.createdBy.Status}</td>
+                                                                <td> <center>
+                                                                    <button className="btn btn-info " style={{width:'25%'}} type="submit"> <Link to={"/Question"}>Consulter</Link></button>
+                                                                </center></td>
+
+
+                                                            </tr>
+                                                        )
+
+
+
+                                                }.bind(this))}
+
+
+                                                </tbody>
+                                            </table>
+
+
+                                        </div>
+                                    </TabPane>
+                                </TabContent>
+                                <TabContent activeTab={this.state.activeTab}>
+                                    <TabPane tabId="6">
+
+
+
+
+                                        <div className="panel-body">
+
+                                            <table id="demo-foo-filtering"
+                                                   className="table table-bordered table-hover toggle-circle" data-page-size="7">
+
+                                                <thead>
+                                                <tr>
+                                                    <th>Type of candidature</th>
+                                                    <th >Project Name </th>
+                                                    <th >Lead </th>
+
+                                                    <th >Soumission Date </th>
+                                                    <th> Review Charge </th>
+
+                                                    <th>Status</th>
+                                                    <th> Action </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {this.state.Sessions.map(function(d, idx){
+                                                    if (d.createdBy.review.type==="negatif")
+                                                        return (
+
+                                                            <tr key={idx}>
+                                                                <td>{d.createdBy.TypeLabel.type}</td>
+                                                                <td>{d.Name }</td>
+
+                                                                <td>{d.members[0].Email}</td>
+                                                                <td>{d.createdBy.TypeLabel.SoumissionDate}</td>
+                                                                <td>{d.createdBy.review.type}</td>
+                                                                <td>{d.createdBy.Status}</td>
+                                                                <td>Juger</td>
+
+
+                                                            </tr>
+                                                        )
+
+
+
+                                                }.bind(this))}
+
+
+                                                </tbody>
+                                            </table>
+
+
+                                        </div>
+                                    </TabPane>
+                                </TabContent>
+                                <TabContent activeTab={this.state.activeTab}>
+                                    <TabPane tabId="5">
+
+
+
+
+                                        <div className="panel-body">
+
+                                            <table id="demo-foo-filtering"
+                                                   className="table table-bordered table-hover toggle-circle" data-page-size="7">
+
+                                                <thead>
+                                                <tr>
+                                                    <th>Type of candidature</th>
+                                                    <th >Project Name </th>
+                                                    <th >Lead </th>
+
+                                                    <th >Soumission Date </th>
+                                                    <th> Review Charge </th>
+
+                                                    <th>Status</th>
+                                                    <th> Action </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {this.state.Sessions.map(function(d, idx){
+                                                    if (d.createdBy.review.type==="neutre")
+                                                        return (
+
+                                                            <tr key={idx}>
+                                                                <td>{d.createdBy.TypeLabel.type}</td>
+                                                                <td>{d.Name }</td>
+
+                                                                <td>{d.members[0].Email}</td>
+                                                                <td>{d.createdBy.TypeLabel.SoumissionDate}</td>
+                                                                <td>{d.createdBy.review.type}</td>
+                                                                <td>{d.createdBy.Status}</td>
+                                                                <td>Juger</td>
+
+
+                                                            </tr>
+                                                        )
+
+
+
+                                                }.bind(this))}
+
+
+                                                </tbody>
+                                            </table>
+
+
+                                        </div>
+                                    </TabPane>
+                                </TabContent>
+                                <TabContent activeTab={this.state.activeTab}>
+                                    <TabPane tabId="4">
+
+
+
+
+                                        <div className="panel-body">
+
+                                            <table id="demo-foo-filtering"
+                                                   className="table table-bordered table-hover toggle-circle" data-page-size="7">
+
+                                                <thead>
+                                                <tr>
+                                                    <th>Type of candidature</th>
+                                                    <th >Project Name </th>
+                                                    <th >Lead </th>
+
+                                                    <th >Soumission Date </th>
+                                                    <th> Review Charge </th>
+
+                                                    <th>Status</th>
+                                                    <th> Action </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {this.state.Sessions.map(function(d, idx){
+                                                    if (d.createdBy.review.type==="positif")
+                                                        return (
+
+                                                            <tr key={idx}>
+                                                                <td>{d.createdBy.TypeLabel.type}</td>
+                                                                <td>{d.Name }</td>
+
+                                                                <td>{d.members[0].Email}</td>
+                                                                <td>{d.createdBy.TypeLabel.SoumissionDate}</td>
+                                                                <td>{d.createdBy.review.type}</td>
+                                                                <td>{d.createdBy.Status}</td>
+                                                                <td>Juger</td>
+
+
+                                                            </tr>
+                                                        )
+
+
+
+                                                }.bind(this))}
+
+
+                                                </tbody>
+                                            </table>
+
+
+                                        </div>
+                                    </TabPane>
+                                </TabContent>
                             </div>
 
 

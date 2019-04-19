@@ -8,8 +8,12 @@ import login from "../src/components/login/login";
 import register from "../src/components/login/register";
 import listCandidatures from "./components/Dashboard/SecondTour/listCandidatures";
 import Dashboard from "./components/Dashboard/Dashboard"
-import Front from "./components/Front/Front"
+
  import listeSessions from "./components/Dashboard/FirstTour/listSessions"
+
+import Front from "./components/Front/Front";
+import Questionnaire from "./components/Dashboard/Questionnaire/Questionnaire";
+import Question from "./components/Dashboard/Questionnaire/Question"
 import { Provider } from 'react-redux'
 import store from './store';
 
@@ -30,12 +34,17 @@ class App extends Component {
                 <Route  path="/Judges/editCompte/:id1" exact component={EditJudge} />
                 <Route path="/SecondTour/:id1" exact component={listCandidatures} />
                 <Route path="/Front" exact component={Front} />
+
                 <Route path="/sessions/listeSessions" exact component={listeSessions}/>
+
+                <Route path="/Questionnaire" exact component={Questionnaire} />
+                <Route path="/Question" exact component={Question} />
+
             </React.Fragment>
           </Router>
         </Provider>
     );
-    //   return React.createElement('div',{className:'App'},  React.createElement('h1',null,'I love myself'))
+
   }
 }
 

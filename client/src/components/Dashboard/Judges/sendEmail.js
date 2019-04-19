@@ -134,7 +134,7 @@ class sendEmail extends Component{
                                     </div>
                                 </div>
                                 <div className="form-group nb">
-                                    <label className="control-label col-md-1">Subject: </label>
+                                    <label className="control-label col-md-1">Content: </label>
                                     <div className="col-md-11">
                                         <textarea type="text" name="Content" onChange={this.handleContentChange} className="form-control "/>
                                     </div>

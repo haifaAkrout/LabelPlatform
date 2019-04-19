@@ -212,7 +212,7 @@ class EditJudge extends Component{
 
 
 const mapDispatchToProps = {
-accepterJudge,
+    accepterJudge,
     refuserJudge
 };
 
