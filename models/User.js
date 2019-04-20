@@ -57,7 +57,8 @@ var candidatureSchema=extend(userSchema,{
     review:{ type: mongoose.Schema.ObjectId, ref: 'ReviewCharge' },
     review2:[Review],
     Status: {type:String},
-    Questions:[questions]
+    Questions:[questions],
+    etat:{type:String}
 })
 
 module.exports=mongoose.model('Admin',adminSchema)

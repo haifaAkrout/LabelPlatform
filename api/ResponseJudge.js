@@ -84,10 +84,11 @@ res.send(reviewJudge1)
 //refuser Candidature
 router.put('/:idCandidature/refuser',function (req,res) {
 
-console.log("hhh")
+
 
     candidat.findById(req.params.idCandidature).exec(function (err,candidat1) {
-        candidat1.Status= "refused";
+        candidat1.Status= "Traité";
+        candidat1.etat="refused"
         candidat.findByIdAndUpdate(req.params.idCandidature, candidat1, {new: true}, (err, candidat) => {
           res.send(candidat)
 

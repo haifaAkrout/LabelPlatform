@@ -38,6 +38,12 @@ export default (state = initialState, action) => {
                 Judges: action.payload,
 
             };
+        case "refuser_candidature":
+            return {
+                ...state,
+                candidature: action.payload,
+
+            };
 
         default:
             return state;

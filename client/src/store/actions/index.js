@@ -84,3 +84,16 @@ export const enregistrerBrouillonJudge= (idJudge,idCandidature,Review) => {
         });
     };
 };
+export const refuserCandidature= (idCandidature) => {
+    return async dispatch => {
+        const response = axios.put('http://localhost:6003/responsesJudges/'+idCandidature+'/refuser').then(res=>{console.log(res);
+            console.log(res.data)})
+
+
+
+        return dispatch({
+            type: "refuser_candidature",
+            payload: response.data
+        });
+    };
+};

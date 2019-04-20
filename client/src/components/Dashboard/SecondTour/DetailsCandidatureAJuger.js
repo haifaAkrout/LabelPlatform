@@ -3,19 +3,15 @@ import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, Ca
 import classnames from 'classnames';
 import { Progress } from 'reactstrap';
 import ReactDOM from 'react-dom';
-import {
-    enregistrerBrouillonJudge,
-
-} from "../../../store/actions";
+import {enregistrerBrouillonJudge,} from "../../../store/actions";
+import {refuserCandidature,} from "../../../store/actions";
 import { UncontrolledTooltip } from 'reactstrap';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import moment from 'moment';
 import Header from '../../../containers/Header.js';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import {
-    addCompte, deleteJudge,
-} from "../../../store/actions";
+
 import {connect} from "react-redux";
 import ContentContainer from "../../../containers/ContentContainer";
 class DetailsCandidatureAJuger extends React.Component{
@@ -35,7 +31,7 @@ class DetailsCandidatureAJuger extends React.Component{
         this.handleTextChange = this.handleTextChange.bind(this);
         this.masquer = this.masquer.bind(this);
         this.handleSubmit= this.handleSubmit.bind(this);
-
+        this.handleSubmit2= this.handleSubmit2.bind(this);
     };
     toggle(tab) {
         if (this.state.activeTab !== tab) {
@@ -74,6 +70,14 @@ class DetailsCandidatureAJuger extends React.Component{
        const id4=this.state.id3;
         event.preventDefault();
         this.props.enregistrerBrouillonJudge("5cbb04417a5c065a08b76528",id4,Review); }
+
+    handleSubmit2=event=>{
+
+
+
+        const id4=this.state.id3;
+        event.preventDefault();
+        this.props.refuserCandidature(id4)}
 
     masquer (text) {
         return event => {
@@ -213,9 +217,11 @@ return(
 
 
                                     </form>
+                                        <form onSubmit={this.handleSubmit2 }>
                                         <p className="panel-title" style={{float: 'left', width: '33%', textalign: 'center'}}>
 
                                             <button className="btn btn-danger" type="submit">Refuser</button></p>
+                                        </form>
                                         <p className="panel-title" style={{float: 'left', width: '15%', textalign: 'right'}}>
                                             <button className="btn btn-success" type="submit">
                                                 Appeler pour pitch</button>
@@ -571,6 +577,7 @@ return(
 }
 const mapDispatchToProps = {
     enregistrerBrouillonJudge,
+    refuserCandidature
 
 };
 
