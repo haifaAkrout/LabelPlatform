@@ -2,9 +2,10 @@ import React from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import { Progress } from 'reactstrap';
-
-import Moment from 'react-moment';
+import moment from 'moment';
 import axios from 'axios';
+import ContentContainer from "../../../containers/ContentContainer";
+import Header from '../../../containers/Header.js';
 import { Link } from 'react-router-dom';
 import {deleteJudge,
 } from "../../../store/actions";
@@ -49,255 +50,19 @@ export  default  class listCandidatures extends React.Component{
 
 
     render(){
+        const formattedDate = moment(this.state.DateEnd).format("LLL");
 
         return (
 
             < div
                 id = "container"
                 className = "effect mainnav-sm navbar-fixed mainnav-fixed" >
-                < header
-                    id = "navbar" >
-                    < div
-                        id = "navbar-container"
-                        className = "boxed" >
-
-                        < div
-                            className = "navbar-content clearfix" >
-                            < ul
-                                className = "nav navbar-top-links pull-left" >
-
-                                < li
-                                    className = "tgl-menu-btn" >
-                                    < a
-                                        className = "mainnav-toggle"
-                                        href = "#" > < i
-                                        className = "fa fa-navicon fa-lg" > </i>
-                                    </a >
-                                </li>
-
-                                <li className="dropdown">
-                                    <a href="#" data-toggle="dropdown" className="dropdown-toggle"> <i className="fa fa-envelope fa-lg"></i>
-                                        <span className="badge badge-header badge-warning">9</span>
-                                    </a>
-
-                                    <div className="dropdown-menu dropdown-menu-md with-arrow">
-                                        <div className="pad-all bord-btm">
-                                            <div className="h4 text-muted text-thin mar-no">You have 3 messages.</div>
-                                        </div>
-                                        <div className="nano scrollable">
-                                            <div className="nano-content">
-                                                <ul className="head-list">
-
-
-                                                    <li>
-                                                        <a href="#" className="media">
-                                                            <div className="media-left"><img src="../../../../public/img/av4.png"
-                                                                                             alt="Profile Picture"
-                                                                                             className="img-circle img-sm"/></div>
-                                                            <div className="media-body">
-                                                                <div className="text-nowrap">Andy sent you a message</div>
-                                                                <small className="text-muted">15 minutes ago</small>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="#" className="media">
-                                                            <div className="media-left"><img src="../../../../public/img/av4.png" alt="Profile Picture"
-                                                                                             className="img-circle img-sm"/></div>
-                                                            <div className="media-body">
-                                                                <div className="text-nowrap">Lucy sent you a message</div>
-                                                                <small className="text-muted">30 minutes ago</small>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="#" className="media">
-                                                            <div className="media-left"><img src="../../../../public/img/av3.png" alt="Profile Picture"
-                                                                                             className="img-circle img-sm"/></div>
-                                                            <div className="media-body">
-                                                                <div className="text-nowrap">Jackson sent you a message</div>1
-                                                                <small className="text-muted">40 minutes ago</small>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="#" className="media">
-                                                            <div className="media-left"><img src="../../../../public/img/av6.png" alt="Profile Picture"
-                                                                                             className="img-circle img-sm"/></div>
-                                                            <div className="media-body">
-                                                                <div className="text-nowrap">Donna sent you a message</div>
-                                                                <small className="text-muted">5 hours ago</small>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="media">
-                                                            <div className="media-left"><img src="img/av4.png" alt="Profile Picture"
-                                                                                             className="img-circle img-sm"/></div>
-                                                            <div className="media-body">
-                                                                <div className="text-nowrap">Lucy sent you a message</div>
-                                                                <small className="text-muted">Yesterday</small>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="#" className="media">
-                                                            <div className="media-left"><img src="img/av3.png" alt="Profile Picture"
-                                                                                             className="img-circle img-sm"/></div>
-                                                            <div className="media-body">
-                                                                <div className="text-nowrap">Jackson sent you a message</div>
-                                                                <small className="text-muted">Yesterday</small>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-
-                                        <div className="pad-all bord-top">
-                                            <a href="#" className="btn-link text-dark box-block"> <i
-                                                className="fa fa-angle-right fa-lg pull-right"></i>Show All Messages </a>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li className="dropdown">
-                                    <a href="#" data-toggle="dropdown" className="dropdown-toggle"> <i className="fa fa-bell fa-lg"></i> <span
-                                        className="badge badge-header badge-danger">5</span> </a>
-
-                                    <div className="dropdown-menu dropdown-menu-md with-arrow">
-                                        <div className="pad-all bord-btm">
-                                            <div className="h4 text-muted text-thin mar-no"> Notification</div>
-                                        </div>
-                                        <div className="nano scrollable">
-                                            <div className="nano-content">
-                                                <ul className="head-list">
-
-                                                    <li>
-                                                        <a href="#" className="media">
-                                                            <div className="media-left"><span className="icon-wrap icon-circle bg-primary"> <i
-                                                                className="fa fa-comment fa-lg"></i> </span></div>
-                                                            <div className="media-body">
-                                                                <div className="text-nowrap">New comments waiting approval</div>
-                                                                <small className="text-muted">15 minutes ago</small>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="#" className="media">
-                                                            <span className="badge badge-success pull-right">90%</span>
-                                                            <div className="media-left"><span className="icon-wrap icon-circle bg-danger"> <i
-                                                                className="fa fa-hdd-o fa-lg"></i> </span></div>
-                                                            <div className="media-body">
-                                                                <div className="text-nowrap">HDD is full</div>
-                                                                <small className="text-muted">50 minutes ago</small>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="#" className="media">
-                                                            <div className="media-left"><span className="icon-wrap icon-circle bg-info"> <i
-                                                                className="fa fa-file-word-o fa-lg"></i> </span></div>
-                                                            <div className="media-body">
-                                                                <div className="text-nowrap">Write a news article</div>
-                                                                <small className="text-muted">Last Update 8 hours ago</small>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="#" className="media">
-                                                            <span className="label label-danger pull-right">New</span>
-                                                            <div className="media-left"><span className="icon-wrap icon-circle bg-purple"> <i
-                                                                className="fa fa-comment fa-lg"></i> </span></div>
-                                                            <div className="media-body">
-                                                                <div className="text-nowrap">Comment Sorting</div>
-                                                                <small className="text-muted">Last Update 8 hours ago</small>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="#" className="media">
-                                                            <div className="media-left"><span className="icon-wrap icon-circle bg-success"> <i
-                                                                className="fa fa-user fa-lg"></i> </span></div>
-                                                            <div className="media-body">
-                                                                <div className="text-nowrap">New User Registered</div>
-                                                                <small className="text-muted">4 minutes ago</small>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-
-                                        <div className="pad-all bord-top">
-                                            <a href="#" className="btn-link text-dark box-block"> <i
-                                                className="fa fa-angle-right fa-lg pull-right"></i>Show All Notifications </a>
-                                        </div>
-                                    </div>
-                                </li>
-
-                            </ul>
-                            <ul className="nav navbar-top-links pull-right">
-
-                                <li className="hidden-xs" id="toggleFullscreen">
-                                    <a className="fa fa-expand" data-toggle="fullscreen" href="#" role="button">
-                                        <span className="sr-only">Toggle fullscreen</span>
-                                    </a>
-                                </li>
-
-                                <li id="dropdown-user" className="dropdown">
-                                    <a href="#" data-toggle="dropdown" className="dropdown-toggle text-right">
-                    <span className="pull-right"> <img className="img-circle img-user media-object"
-                                                       src="/img/av1.png" alt="Profile Picture"/> </span>
-                                        <div className="username hidden-xs">Akrout Haifa</div>
-                                    </a>
-                                    <div className="dropdown-menu dropdown-menu-right with-arrow">
-
-                                        <ul className="head-list">
-                                            <li>
-                                                <a href="#"> <i className="fa fa-user fa-fw"></i> Profile </a>
-                                            </li>
-                                            <li>
-                                                <a href="#"> <i className="fa fa-envelope fa-fw"></i> Messages </a>
-                                            </li>
-                                            <li>
-                                                <a href="#"> <i className="fa fa-gear fa-fw"></i> Settings </a>
-                                            </li>
-                                            <li>
-                                                <a href="#"> <i className="fa fa-sign-out fa-fw"></i> Logout </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-
-                            </ul>
-                        </div>
-
-                    </div>
-                </header>
-
+              <Header/>
                 <div className="boxed">
 
                     <div id="content-container">
-                        <div className="pageheader hidden-xs">
-                            <h3><i className="fa fa-home"></i> Dashboard </h3>
-                            <div className="breadcrumb-wrapper">
-                                <span className="label">You are here:</span>
-                                <ol className="breadcrumb">
-                                    <li><a href="#"> Home </a></li>
-                                    <li className="active"> Dashboard</li>
-                                </ol>
-                            </div>
-                        </div>
 
+                        <ContentContainer/>
 
                         <div className="panel">
                             <div className="panel-heading">
@@ -308,7 +73,7 @@ export  default  class listCandidatures extends React.Component{
                                 <p className="panel-title" style={{float: 'left', width: '33%', textalign: 'center'}}>2eme Tour</p>
                                 <p className="panel-title" style={{float: 'left', width: '33%', textalign: 'right'}}>
 
-
+                               Deadline:     {formattedDate}
 
                                 </p>
                             </div>
@@ -338,46 +103,45 @@ export  default  class listCandidatures extends React.Component{
                                         </NavLink>
                                     </NavItem>
                                 </Nav>
-                                <br/>
-                                <center>
-                                    <table border="1">
-                                    <Nav tabs>
-                                    <NavItem>
-                                        <NavLink
-                                            className={classnames({ active: this.state.activeTab === '1' })}
-                                            onClick={() => { this.toggle('3'); }}
-                                        >
-                                            Tous
-                                        </NavLink>
-                                    </NavItem>
-                                    <NavItem>
-                                        <NavLink
-                                            className={classnames({ active: this.state.activeTab === '2' })}
-                                            onClick={() => { this.toggle('4'); }}
-                                        >
-                                            Avis positif
-                                        </NavLink>
-                                    </NavItem>
-                                    <NavItem>
-                                        <NavLink
-                                            className={classnames({ active: this.state.activeTab === '2' })}
-                                            onClick={() => { this.toggle('5'); }}
-                                        >
-                                            Avis neutre
-                                        </NavLink>
-                                    </NavItem>
-                                    <NavItem>
-                                        <NavLink
-                                            className={classnames({ active: this.state.activeTab === '2' })}
-                                            onClick={() => { this.toggle('6'); }}
-                                        >
-                                            Avis négatif
-                                        </NavLink>
-                                    </NavItem>
-                                </Nav></table></center>
-                                <br/>
+
                                 <TabContent activeTab={this.state.activeTab}>
                                     <TabPane tabId="1">
+                                        <center>
+                                            <table border="1">
+                                                <Nav tabs>
+                                                    <NavItem>
+                                                        <NavLink
+                                                            className={classnames({ active: this.state.activeTab === '1' })}
+                                                            onClick={() => { this.toggle('3'); }}
+                                                        >
+                                                            Tous
+                                                        </NavLink>
+                                                    </NavItem>
+                                                    <NavItem>
+                                                        <NavLink
+                                                            className={classnames({ active: this.state.activeTab === '2' })}
+                                                            onClick={() => { this.toggle('4'); }}
+                                                        >
+                                                            Avis positif
+                                                        </NavLink>
+                                                    </NavItem>
+                                                    <NavItem>
+                                                        <NavLink
+                                                            className={classnames({ active: this.state.activeTab === '2' })}
+                                                            onClick={() => { this.toggle('5'); }}
+                                                        >
+                                                            Avis neutre
+                                                        </NavLink>
+                                                    </NavItem>
+                                                    <NavItem>
+                                                        <NavLink
+                                                            className={classnames({ active: this.state.activeTab === '2' })}
+                                                            onClick={() => { this.toggle('6'); }}
+                                                        >
+                                                            Avis négatif
+                                                        </NavLink>
+                                                    </NavItem>
+                                                </Nav></table></center>
 
                                 <table id="demo-foo-filtering"
                                        className="table table-bordered table-hover toggle-circle" data-page-size="7">
@@ -411,7 +175,7 @@ export  default  class listCandidatures extends React.Component{
                                                 <td>{d.createdBy.review.type}</td>
                                                 <td>{d.createdBy.Status}</td>
                                                <td> <center>
-                                                   <button className="btn btn-info btn-lg" type="submit"> <Link to={"/Question"}>Juger</Link></button>
+                                                   <button className="btn btn-info btn-lg" type="submit"> <Link to={"/SecondTour/5ca6d387cf19b7956820d8f4/Details/"+d._id} params={{ id1: d._id,id2:'5ca6d387cf19b7956820d8f4'}}>Juger</Link></button>
                                                </center></td>
 
 
@@ -466,9 +230,8 @@ export  default  class listCandidatures extends React.Component{
                                                                 <td>{d.createdBy.review.type}</td>
                                                                 <td>{d.createdBy.Status}</td>
                                                                 <td> <center>
-                                                                    <button className="btn btn-info " style={{width:'25%'}} type="submit"> <Link to={"/Question"}>Consulter</Link></button>
+                                                                    <button className="btn btn-info btn-lg" type="submit"> <Link to={"/Question"}>Consulter</Link></button>
                                                                 </center></td>
-
 
                                                             </tr>
                                                         )
@@ -488,7 +251,42 @@ export  default  class listCandidatures extends React.Component{
                                 <TabContent activeTab={this.state.activeTab}>
                                     <TabPane tabId="6">
 
-
+                                        <center>
+                                            <table border="1">
+                                                <Nav tabs>
+                                                    <NavItem>
+                                                        <NavLink
+                                                            className={classnames({ active: this.state.activeTab === '1' })}
+                                                            onClick={() => { this.toggle('3'); }}
+                                                        >
+                                                            Tous
+                                                        </NavLink>
+                                                    </NavItem>
+                                                    <NavItem>
+                                                        <NavLink
+                                                            className={classnames({ active: this.state.activeTab === '2' })}
+                                                            onClick={() => { this.toggle('4'); }}
+                                                        >
+                                                            Avis positif
+                                                        </NavLink>
+                                                    </NavItem>
+                                                    <NavItem>
+                                                        <NavLink
+                                                            className={classnames({ active: this.state.activeTab === '2' })}
+                                                            onClick={() => { this.toggle('5'); }}
+                                                        >
+                                                            Avis neutre
+                                                        </NavLink>
+                                                    </NavItem>
+                                                    <NavItem>
+                                                        <NavLink
+                                                            className={classnames({ active: this.state.activeTab === '2' })}
+                                                            onClick={() => { this.toggle('6'); }}
+                                                        >
+                                                            Avis négatif
+                                                        </NavLink>
+                                                    </NavItem>
+                                                </Nav></table></center>
 
 
                                         <div className="panel-body">
@@ -511,7 +309,7 @@ export  default  class listCandidatures extends React.Component{
                                                 </thead>
                                                 <tbody>
                                                 {this.state.Sessions.map(function(d, idx){
-                                                    if (d.createdBy.review.type==="negatif")
+                                                    if (d.createdBy.review.type==="negatif" && d.createdBy.Status==="non Traité")
                                                         return (
 
                                                             <tr key={idx}>
@@ -542,7 +340,42 @@ export  default  class listCandidatures extends React.Component{
                                 </TabContent>
                                 <TabContent activeTab={this.state.activeTab}>
                                     <TabPane tabId="5">
-
+                                        <center>
+                                            <table border="1">
+                                                <Nav tabs>
+                                                    <NavItem>
+                                                        <NavLink
+                                                            className={classnames({ active: this.state.activeTab === '1' })}
+                                                            onClick={() => { this.toggle('3'); }}
+                                                        >
+                                                            Tous
+                                                        </NavLink>
+                                                    </NavItem>
+                                                    <NavItem>
+                                                        <NavLink
+                                                            className={classnames({ active: this.state.activeTab === '2' })}
+                                                            onClick={() => { this.toggle('4'); }}
+                                                        >
+                                                            Avis positif
+                                                        </NavLink>
+                                                    </NavItem>
+                                                    <NavItem>
+                                                        <NavLink
+                                                            className={classnames({ active: this.state.activeTab === '2' })}
+                                                            onClick={() => { this.toggle('5'); }}
+                                                        >
+                                                            Avis neutre
+                                                        </NavLink>
+                                                    </NavItem>
+                                                    <NavItem>
+                                                        <NavLink
+                                                            className={classnames({ active: this.state.activeTab === '2' })}
+                                                            onClick={() => { this.toggle('6'); }}
+                                                        >
+                                                            Avis négatif
+                                                        </NavLink>
+                                                    </NavItem>
+                                                </Nav></table></center>
 
 
 
@@ -566,7 +399,7 @@ export  default  class listCandidatures extends React.Component{
                                                 </thead>
                                                 <tbody>
                                                 {this.state.Sessions.map(function(d, idx){
-                                                    if (d.createdBy.review.type==="neutre")
+                                                    if (d.createdBy.review.type==="neutre" && d.createdBy.Status==="non Traité")
                                                         return (
 
                                                             <tr key={idx}>
@@ -594,9 +427,46 @@ export  default  class listCandidatures extends React.Component{
 
                                         </div>
                                     </TabPane>
+
                                 </TabContent>
                                 <TabContent activeTab={this.state.activeTab}>
                                     <TabPane tabId="4">
+                                        <center>
+                                            <table border="1">
+                                                <Nav tabs>
+                                                    <NavItem>
+                                                        <NavLink
+                                                            className={classnames({ active: this.state.activeTab === '1' })}
+                                                            onClick={() => { this.toggle('3'); }}
+                                                        >
+                                                            Tous
+                                                        </NavLink>
+                                                    </NavItem>
+                                                    <NavItem>
+                                                        <NavLink
+                                                            className={classnames({ active: this.state.activeTab === '2' })}
+                                                            onClick={() => { this.toggle('4'); }}
+                                                        >
+                                                            Avis positif
+                                                        </NavLink>
+                                                    </NavItem>
+                                                    <NavItem>
+                                                        <NavLink
+                                                            className={classnames({ active: this.state.activeTab === '2' })}
+                                                            onClick={() => { this.toggle('5'); }}
+                                                        >
+                                                            Avis neutre
+                                                        </NavLink>
+                                                    </NavItem>
+                                                    <NavItem>
+                                                        <NavLink
+                                                            className={classnames({ active: this.state.activeTab === '2' })}
+                                                            onClick={() => { this.toggle('6'); }}
+                                                        >
+                                                            Avis négatif
+                                                        </NavLink>
+                                                    </NavItem>
+                                                </Nav></table></center>
 
 
 
@@ -621,7 +491,7 @@ export  default  class listCandidatures extends React.Component{
                                                 </thead>
                                                 <tbody>
                                                 {this.state.Sessions.map(function(d, idx){
-                                                    if (d.createdBy.review.type==="positif")
+                                                    if (d.createdBy.review.type==="positif" && d.createdBy.Status==="non Traité")
                                                         return (
 
                                                             <tr key={idx}>

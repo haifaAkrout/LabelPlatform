@@ -2,7 +2,7 @@ var mongoose=require('mongoose'),
     extend=require('mongoose-extend-schema');
 var valid=require('validator');
 var vote = require('../models/Vote');
-
+var questions = require('../models/Questionnaire');
 var ReviewCharge=require('../models/ReviewCharge');
 
 var Review=require('../models/Review')
@@ -56,7 +56,8 @@ var candidatureSchema=extend(userSchema,{
     TypeLabel:   { type: mongoose.Schema.ObjectId, ref: 'Label' },
     review:{ type: mongoose.Schema.ObjectId, ref: 'ReviewCharge' },
     review2:[Review],
-    Status: {type:String}
+    Status: {type:String},
+    Questions:[questions]
 })
 
 module.exports=mongoose.model('Admin',adminSchema)

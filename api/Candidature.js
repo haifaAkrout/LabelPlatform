@@ -265,6 +265,36 @@ router.get('/votes/:id/avisNegatif', function (req, res) {
 
 }
 );
+router.post('/:idCandidature/addQuestion', function (req, res) {
+
+
+    var id = req.params.idCandidature;
+   // require('../models/Questionnaire');
+   // var Questionnaire = mongoose.model('Questionnaire');
+    require('../models/Response');
+    var Response = mongoose.model('Response');
+    console.log("haifa")
+    // var question = new Questionnaire({
+    //     text:req.body.text,
+    //     type:req.body.type
+    // });
+    var response = new Response({
+        text:"oui",
+        type:"candidature"
+    });
+    console.log("haifa")
+    candidat.findById(id).exec(function (err , candidat1) {
+        candidat1.Questions[0].responses.push(response)
+        candidat.findByIdAndUpdate(id, candidat1, {new: true}, (err, candidat2) => {
+            console.log("updated");
+
+         });
+
+
+
+    });
+
+});
 
 
 
