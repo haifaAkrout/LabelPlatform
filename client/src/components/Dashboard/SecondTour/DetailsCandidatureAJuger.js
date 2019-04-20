@@ -2,18 +2,23 @@ import React from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import { Progress } from 'reactstrap';
+import ReactDOM from 'react-dom';
+import {
+    enregistrerBrouillonJudge,
 
+} from "../../../store/actions";
 import { UncontrolledTooltip } from 'reactstrap';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import moment from 'moment';
 import Header from '../../../containers/Header.js';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import {deleteJudge,
+import {
+    addCompte, deleteJudge,
 } from "../../../store/actions";
 import {connect} from "react-redux";
 import ContentContainer from "../../../containers/ContentContainer";
-export  default  class DetailsCandidatureAJuger extends React.Component{
+class DetailsCandidatureAJuger extends React.Component{
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
@@ -24,12 +29,12 @@ export  default  class DetailsCandidatureAJuger extends React.Component{
             NomSession: '',
             DateEnd: '',
             text: '',
-            type: {type: String},
-            createdBy: '',
-            candidat: ''
-        };
+            type: '',
+        id3:''}
+        ;
         this.handleTextChange = this.handleTextChange.bind(this);
-
+        this.masquer = this.masquer.bind(this);
+        this.handleSubmit= this.handleSubmit.bind(this);
 
     };
     toggle(tab) {
@@ -40,7 +45,7 @@ export  default  class DetailsCandidatureAJuger extends React.Component{
         }
     }
     handleTextChange (evt) {
-        this.setState({ Text: evt.target.value });
+        this.setState({text: evt.target.value });
     }
 
 
@@ -58,6 +63,24 @@ export  default  class DetailsCandidatureAJuger extends React.Component{
 
 
 
+    handleSubmit=event=>{
+
+        const Review={
+            text: this.state.text,
+            type:this.state.type
+
+
+        }
+       const id4=this.state.id3;
+        event.preventDefault();
+        this.props.enregistrerBrouillonJudge("5cbb04417a5c065a08b76528",id4,Review); }
+
+    masquer (text) {
+        return event => {
+            event.preventDefault()
+            this.refs.container.value=text
+        }
+    }
 
     render(){
         const formattedDate = moment(this.state.DateEnd).format("LLL");
@@ -121,6 +144,10 @@ export  default  class DetailsCandidatureAJuger extends React.Component{
                                 {Projects.map(project=>{
                                     const {id1}=this.props.match.params
                                     if (project._id===id1)
+                                    {
+                                        this.state.type=project.createdBy.review.type;
+                                        this.state.id3=project.createdBy._id;
+
                                         return (
                                             <div>
                                      <span style={{textDecoration: "underline", color:"blue"}} href="#" id="UncontrolledTooltipExample">Tour2   ></span>
@@ -159,24 +186,33 @@ export  default  class DetailsCandidatureAJuger extends React.Component{
 
 
 
-                                            </div> )})}
+                                            </div> )}})}
                                 <ListGroup>
+
                                     <fieldset border="1">
                                     <legend>Avis Tour2</legend>
-
-
-                                        <Link to={"/Question"}>Reprendre la recommendation du chargé</Link>
-<br/>
-
+                                        {Projects.map(project=>{
+                                            const {id1}=this.props.match.params
+                                            if (project._id===id1) {
+return(
+                                                <Link onClick={this.masquer(project.createdBy.review.text).bind(this)}>Reprendre
+                                                    la recommendation du chargé</Link>)
+                                            }})}
+                                        <form onSubmit={this.handleSubmit }>
                                             <div className="col-md-9">
-                                                <textarea type="text" name="" onChange={this.handleEmailChange} className="form-control" placeholder="Commentaire"/>
+                                                <textarea ref="container" id="a_masquer" type="text" name="text" onChange={this.handleTextChange} className="form-control" placeholder="Commentaire"/>
 
                                         </div>
 <br/>
 
 
+
                                         <h2 className="panel-title" style={{float: 'left',width: '34%', textalign:'left'}}>
                                             <button className="btn btn-info " type="submit">Enregistrer le brouillon</button></h2>
+
+
+
+                                    </form>
                                         <p className="panel-title" style={{float: 'left', width: '33%', textalign: 'center'}}>
 
                                             <button className="btn btn-danger" type="submit">Refuser</button></p>
@@ -194,6 +230,7 @@ export  default  class DetailsCandidatureAJuger extends React.Component{
                                     </fieldset>
 
                                 </ListGroup>
+
                             </TabPane>
                         </TabContent>
                         <nav id="mainnav-container">
@@ -532,3 +569,12 @@ export  default  class DetailsCandidatureAJuger extends React.Component{
         )
     }
 }
+const mapDispatchToProps = {
+    enregistrerBrouillonJudge,
+
+};
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(DetailsCandidatureAJuger);

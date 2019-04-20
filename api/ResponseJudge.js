@@ -32,7 +32,9 @@ router.post('/:id/response',function (req, res) {
 
 });
 router.post('/:idJudge/:idCandidature/addAvis',function (req,res) {
+    console.log("jjjjjj")
     const Review=mongoose.model('Review')
+    console.log(req.body.text);
     reviewJudge1=new Review(req.body)
     reviewJudge1.createdBy=req.params.idJudge;
     reviewJudge1.candidat=req.params.idCandidature;
@@ -46,7 +48,7 @@ router.post('/:idJudge/:idCandidature/addAvis',function (req,res) {
 
         });
 
-
+1
 
     });})
 //reprendre avisChargeEtLeModifier

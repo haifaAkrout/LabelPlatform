@@ -71,3 +71,16 @@ export const refuserJudge= (JudgeId) => {
         });
     };
 };
+export const enregistrerBrouillonJudge= (idJudge,idCandidature,Review) => {
+    return async dispatch => {
+        const response = axios.post('http://localhost:6003/responsesJudges/'+idJudge+'/'+idCandidature+'/addAvis',Review).then(res=>{console.log(res);
+            console.log(res.data)})
+
+
+
+        return dispatch({
+            type: "enregistrerBrouillon_Judge",
+            payload: response.data
+        });
+    };
+};

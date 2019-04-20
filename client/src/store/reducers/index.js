@@ -32,7 +32,12 @@ export default (state = initialState, action) => {
                 accepter: action.payload,
 
             };
+        case "enregistrerBrouillon_Judge":
+            return {
+                ...state,
+                Judges: action.payload,
 
+            };
 
         default:
             return state;
