@@ -144,16 +144,18 @@ router.post('/:idCandidature/addAvis',function (req,res) {
 
 })
 
-router.post('/call', function(request, response) {
+router.post('/:numCandidature/call', function(request, response) {
 
+const num="216"+request.params.numCandidature;
+console.log(num)
     nexmo.calls.create({
         to: [{
             type: 'phone',
-            number:+21658011658 // take a phone number from command line argument
+            number:+num // take a phone number from command line argument
         }],
         from: {
             type: 'phone',
-            number: +21658011658 // your virtual number
+            number: +num // your virtual number
         },
         answer_url: ['https://nexmo-community.github.io/ncco-examples/first_call_talk.json']
     }, (err, res) =>{

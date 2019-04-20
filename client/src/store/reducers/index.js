@@ -44,6 +44,12 @@ export default (state = initialState, action) => {
                 candidature: action.payload,
 
             };
+        case "appeler_candidature":
+            return {
+                ...state,
+                candidature: action.payload,
+
+            };
 
         default:
             return state;

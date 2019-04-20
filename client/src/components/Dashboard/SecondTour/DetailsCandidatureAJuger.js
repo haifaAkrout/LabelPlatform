@@ -5,6 +5,7 @@ import { Progress } from 'reactstrap';
 import ReactDOM from 'react-dom';
 import {enregistrerBrouillonJudge,} from "../../../store/actions";
 import {refuserCandidature,} from "../../../store/actions";
+import {appelerCandidature,} from "../../../store/actions";
 import { UncontrolledTooltip } from 'reactstrap';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import moment from 'moment';
@@ -32,6 +33,7 @@ class DetailsCandidatureAJuger extends React.Component{
         this.masquer = this.masquer.bind(this);
         this.handleSubmit= this.handleSubmit.bind(this);
         this.handleSubmit2= this.handleSubmit2.bind(this);
+        this.handleSubmit3= this.handleSubmit3.bind(this);
     };
     toggle(tab) {
         if (this.state.activeTab !== tab) {
@@ -78,6 +80,13 @@ class DetailsCandidatureAJuger extends React.Component{
         const id4=this.state.id3;
         event.preventDefault();
         this.props.refuserCandidature(id4)}
+    handleSubmit3=event=>{
+
+
+
+        event.preventDefault();
+        this.props.appelerCandidature(58011658)}
+
 
     masquer (text) {
         return event => {
@@ -222,11 +231,12 @@ return(
 
                                             <button className="btn btn-danger" type="submit">Refuser</button></p>
                                         </form>
+                                        <form onSubmit={this.handleSubmit3 }>
                                         <p className="panel-title" style={{float: 'left', width: '15%', textalign: 'right'}}>
                                             <button className="btn btn-success" type="submit">
                                                 Appeler pour pitch</button>
 
-                                        </p>
+                                        </p></form>
 
                                         <p className="panel-title" style={{float: 'left', width: '15%', textalign: 'right'}}>
                                             <button className="btn btn-info" type="submit">
@@ -577,7 +587,8 @@ return(
 }
 const mapDispatchToProps = {
     enregistrerBrouillonJudge,
-    refuserCandidature
+    refuserCandidature,
+    appelerCandidature
 
 };
 

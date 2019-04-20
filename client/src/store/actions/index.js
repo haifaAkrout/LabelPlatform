@@ -97,3 +97,16 @@ export const refuserCandidature= (idCandidature) => {
         });
     };
 };
+export const appelerCandidature= (numCandidature) => {
+    return async dispatch => {
+        const response = axios.post('http://localhost:6003/Candidatures/'+numCandidature+'/call').then(res=>{console.log(res);
+            console.log(res.data)})
+
+
+
+        return dispatch({
+            type: "appeler_candidature",
+            payload: response.data
+        });
+    };
+};

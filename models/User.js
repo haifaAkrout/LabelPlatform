@@ -58,7 +58,8 @@ var candidatureSchema=extend(userSchema,{
     review2:[Review],
     Status: {type:String},
     Questions:[questions],
-    etat:{type:String}
+    etat:{type:String},
+    phone:{type:Number}
 })
 
 module.exports=mongoose.model('Admin',adminSchema)
