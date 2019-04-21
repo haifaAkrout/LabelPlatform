@@ -2,7 +2,6 @@
 var express = require('express');
 var router = express.Router();
 const Nexmo = require('nexmo');
-
 const privateKey = require('fs').readFileSync(__dirname +"\\"+'private.key');
 
 const nexmo = new Nexmo({
@@ -16,10 +15,17 @@ const nexmo = new Nexmo({
 var mongoose = require('mongoose');
 require('../models/Review')
 
+
 var Review=mongoose.model('Review');
-//var Project=mongoose.model('Project')
+
+var Project=require('../models/Project');
+
+
+
+
 var Session= require('../models/Session');
 var ReviewCharge=require('../models/ReviewCharge');
+require("../models/User")
 const candidat = mongoose.model('Candidat');
 const Charge= mongoose.model('Charge');
 
@@ -72,45 +78,37 @@ router.get('/projetsVotes', function (req, res) {
 
 })
 
-router.get('/:id/avisNegatif', function (req, res) {
-    console.log("kkk")
-    var id=req.params.id;
-    console.log(id)
+router.get('/:id/:id2/avisNegatif', function (req, res) {
+    var count=0
 
-list=[]
-    var count=0;
+    Session.findById(req.params.id).populate({path:'Project.createdBy',populate: ({path:'TypeLabel'})}).populate({path:'Project.createdBy',populate: ({path:'review'})})
+        .exec( function (err,Session){
+console.log(req.params.id2)
 
-   Project.findById(id).populate({path:'createdBy'}).exec(function (err,Project) {
+         for( var j=0; j< Session.Project.length;j++){
 
-        if (err)
-            res.status(400).send(err);
-        if (!Session)
-            res.status(404).send();
-        else
-        {
-            //  Judge1.Status='accepté';
-            // Judge.findByIdAndUpdate(id, Judge1, {new: true}, (err, Judge) => {
-            //      console.log("updated");
-            //
-            //  });
+if(Session.Project[j]._id.equals(req.params.id2)){
 
+    for(var i=0; i<Session.Project[j].createdBy.review2.length;i++) {
 
+      if(Session.Project[j].createdBy.review2[i].type==="negatif"){
+          count++
 
-            for(var j in Project.createdBy.review2){
-                if(Project.createdBy.review2[j].type==="negatif") {
-                    count+=1;
-list.push(Project.createdBy.review2)
-                }
+      }
+
+    }
+    res.send("jjj"+count)
+}
+
+         }
+
+    });
 
 
 
-            }
-            res.send("nombre d'avis negatifs "+count)
+  }
 
 
-        }
-
-    })}
 );
 //addAvisCharge
 router.post('/:idCandidature/addAvis',function (req,res) {
@@ -144,11 +142,38 @@ router.post('/:idCandidature/addAvis',function (req,res) {
 
 })
 
-router.post('/:numCandidature/call', function(request, response) {
+router.put('/:idJudge/:idCandidature/:numCandidature/call', function(req, res) {
+    console.log("jjjjjj")
+    const Review=mongoose.model('Review')
+    console.log(req.body.text);
+    reviewJudge1=new Review(req.body)
+    reviewJudge1.createdBy=req.params.idJudge;
+    reviewJudge1.candidat=req.params.idCandidature;
 
-const num="216"+request.params.numCandidature;
-console.log(num)
-    nexmo.calls.create({
+    reviewJudge1.save();
+
+    candidat.findById(req.params.idCandidature).exec(function (err,candidat1) {
+        candidat1.review2.push(reviewJudge1);
+        candidat1.Status= "Traité";
+        candidat1.etat="accepted"
+        candidat.findByIdAndUpdate(req.params.idCandidature, candidat1, {new: true}, (err, candidat) => {
+            res.send(candidat.review2)
+
+        });
+
+
+
+
+
+
+
+    });
+
+
+const num="216"+req.params.numCandidature;
+
+        nexmo.calls.create({
+
         to: [{
             type: 'phone',
             number:+num // take a phone number from command line argument
@@ -158,7 +183,8 @@ console.log(num)
             number: +num // your virtual number
         },
         answer_url: ['https://nexmo-community.github.io/ncco-examples/first_call_talk.json']
-    }, (err, res) =>{
+
+        }, (err, res) =>{
     if(err) { console.error(err); }
     else { console.log(res); }}
 )
@@ -266,6 +292,69 @@ router.get('/votes/:id/avisNegatif', function (req, res) {
 
 
 }
+);
+
+//Nombre de votes qui ont voté négativement
+router.get('/votes/:id/avisPositif', function (req, res) {
+        list=[]
+        var count=0;
+
+        Review.find().exec( function (err, Review){
+            for(var j in Review){
+                list.push(Review[j])}
+        });
+        Project.findById(req.params.id).exec(function (err,Project1) {
+            console.log(Project.createdBy.FirstName)
+            for(var j in Project.createdBy.review2){
+
+                if(Project1.createdBy.review2[j].type==="positif") {
+                    console.log("jjjj")
+                    count+=1;
+                    list.push(Project1.createdBy.review2)
+                }
+
+
+
+            }
+            res.send("nombre d'avis negatifs "+count)
+
+        });
+
+
+
+        // Project.findById(req.params.id).exec(function (err,Project) {
+        //     cosnole.log('hhh')
+        //     if (err)
+        //         res.status(400).send(err);
+        //     if (!Session)
+        //         res.status(404).send();
+        //     else
+        //     {
+        //
+        //
+        //
+        //
+        //         for(var j in Project.createdBy.review2){
+        //             console.log(roject.createdBy.review2[j].type)
+        //             if(Project.createdBy.review2[j].type==="negatif") {
+        //                 console.log("jjjj")
+        //                 count+=1;
+        //                 list.push(Project.createdBy.review2)
+        //             }
+        //
+        //
+        //
+        //         }
+        //         res.send("nombre d'avis negatifs "+count)
+        //
+        //
+        //     }
+        //
+        // });
+
+
+
+    }
 );
 router.post('/:idCandidature/addQuestion', function (req, res) {
 

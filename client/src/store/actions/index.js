@@ -84,9 +84,9 @@ export const enregistrerBrouillonJudge= (idJudge,idCandidature,Review) => {
         });
     };
 };
-export const refuserCandidature= (idCandidature) => {
+export const refuserCandidature= (idJudge,idCandidature,Review) => {
     return async dispatch => {
-        const response = axios.put('http://localhost:6003/responsesJudges/'+idCandidature+'/refuser').then(res=>{console.log(res);
+        const response = axios.put('http://localhost:6003/responsesJudges/'+idJudge+'/'+idCandidature+'/refuser',Review).then(res=>{console.log(res);
             console.log(res.data)})
 
 
@@ -97,9 +97,9 @@ export const refuserCandidature= (idCandidature) => {
         });
     };
 };
-export const appelerCandidature= (numCandidature) => {
+export const appelerCandidature= (idJudge,idCandidature,numCandidature,Review) => {
     return async dispatch => {
-        const response = axios.post('http://localhost:6003/Candidatures/'+numCandidature+'/call').then(res=>{console.log(res);
+        const response = axios.put('http://localhost:6003/Candidatures/'+idJudge+'/'+idCandidature+'/'+numCandidature+'/call',Review).then(res=>{console.log(res);
             console.log(res.data)})
 
 

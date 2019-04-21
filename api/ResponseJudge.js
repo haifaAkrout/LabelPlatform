@@ -48,10 +48,10 @@ router.post('/:idJudge/:idCandidature/addAvis',function (req,res) {
 
         });
 
-1
+
 
     });})
-//reprendre avisChargeEtLeModifier
+
 router.post('/:id/:idJudge/:idCandidature/UpdateAvis',function (req,res) {
 console.log(req.params.id)
 
@@ -78,26 +78,35 @@ res.send(reviewJudge1)
         });})
 
     });
-//addAvisJudge
 
+router.put('/:idJudge/:idCandidature/refuser',function (req,res) {
 
-//refuser Candidature
-router.put('/:idCandidature/refuser',function (req,res) {
+    console.log("jjjjjj")
+    const Review=mongoose.model('Review')
+    console.log(req.body.text);
+    reviewJudge1=new Review(req.body)
+    reviewJudge1.createdBy=req.params.idJudge;
+    reviewJudge1.candidat=req.params.idCandidature;
 
-
+    reviewJudge1.save();
 
     candidat.findById(req.params.idCandidature).exec(function (err,candidat1) {
+        candidat1.review2.push(reviewJudge1);
         candidat1.Status= "Traité";
         candidat1.etat="refused"
         candidat.findByIdAndUpdate(req.params.idCandidature, candidat1, {new: true}, (err, candidat) => {
-          res.send(candidat)
+            res.send(candidat.review2)
 
         });
 
 
 
+
+
+
+
     });})
-//calcul votes negatifs
+
 
 
 module.exports = router;

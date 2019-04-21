@@ -8,6 +8,7 @@ import login from "../src/components/login/login";
 import register from "../src/components/login/register";
 import listCandidatures from "./components/Dashboard/SecondTour/listCandidatures";
  import DetailsCandidaturesAJuger from "./components/Dashboard/SecondTour/DetailsCandidatureAJuger";
+ import VotesProjet from "./components/Dashboard/SecondTour/VotesProjet";
 import Dashboard from "./components/Dashboard/Dashboard"
 
  import listeSessions from "./components/Dashboard/FirstTour/listSessions"
@@ -41,6 +42,7 @@ class App extends Component {
                 <Route path="/Questionnaire" exact component={Questionnaire} />
                 <Route path="/Question" exact component={Question} />
                 <Route path="/SecondTour/:id2/Details/:id1" exact component={DetailsCandidaturesAJuger} />
+                <Route path="/votes" exact component={VotesProjet } />
             </React.Fragment>
           </Router>
         </Provider>

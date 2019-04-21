@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 
 import {connect} from "react-redux";
 import ContentContainer from "../../../containers/ContentContainer";
-class DetailsCandidatureAJuger extends React.Component{
+class VotesProjet extends React.Component{
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
@@ -27,13 +27,10 @@ class DetailsCandidatureAJuger extends React.Component{
             DateEnd: '',
             text: '',
             type: '',
-        id3:''}
+            id3:''}
         ;
-        this.handleTextChange = this.handleTextChange.bind(this);
-        this.masquer = this.masquer.bind(this);
-        this.handleSubmit= this.handleSubmit.bind(this);
-        this.handleSubmit2= this.handleSubmit2.bind(this);
-        this.handleSubmit3= this.handleSubmit3.bind(this);
+
+
     };
     toggle(tab) {
         if (this.state.activeTab !== tab) {
@@ -42,9 +39,7 @@ class DetailsCandidatureAJuger extends React.Component{
             });
         }
     }
-    handleTextChange (evt) {
-        this.setState({text: evt.target.value });
-    }
+
 
 
     componentDidMount() {
@@ -59,72 +54,8 @@ class DetailsCandidatureAJuger extends React.Component{
         })
     }
 
-    handleSubmit(text) {
-        return event => {
-            event.preventDefault()
-            const Review={
-                text: text.value,
-                type:this.state.type
 
 
-            }
-
-            const id4=this.state.id3;
-
-            this.props.enregistrerBrouillonJudge("5cbb04417a5c065a08b76528",id4,Review);
-
-        }
-    }
-
-
-
-
-
-    handleSubmit2 (text) {
-        return event => {
-            event.preventDefault()
-            const Review={
-                text: text.value,
-                type:"negatif"
-
-
-            }
-
-            const id4=this.state.id3;
-
-            this.props.refuserCandidature("5cbb04417a5c065a08b76528",id4,Review)
-        }
-    }
-
-    handleSubmit3 (text) {
-        return event => {
-            event.preventDefault()
-            const Review={
-                text: text.value,
-                type:"positif"
-
-
-            }
-
-            const id4=this.state.id3;
-            this.props.appelerCandidature("5cbb04417a5c065a08b76528",id4,58011658,Review)
-
-        }
-    }
-
-
-
-
-
-
-
-
-    masquer (text) {
-        return event => {
-            event.preventDefault()
-            this.refs.container.value=text
-        }
-    }
 
     render(){
         const formattedDate = moment(this.state.DateEnd).format("LLL");
@@ -135,11 +66,11 @@ class DetailsCandidatureAJuger extends React.Component{
                 id = "container"
                 className = "effect mainnav-sm navbar-fixed mainnav-fixed" >
 
-<Header/>
+                <Header/>
                 <div className="boxed">
 
                     <div id="content-container">
-                       <ContentContainer/>
+                        <ContentContainer/>
 
                         <div className="panel">
                             <div className="panel-heading">
@@ -171,7 +102,7 @@ class DetailsCandidatureAJuger extends React.Component{
                                     className={classnames({ active: this.state.activeTab === '1' })}
                                     onClick={() => { this.toggle('1'); }}
                                 >
-                                    Candidatures non traitées
+                                    Jury
                                 </NavLink>
                             </NavItem>
                             <NavItem>
@@ -179,103 +110,14 @@ class DetailsCandidatureAJuger extends React.Component{
                                     className={classnames({ active: this.state.activeTab === '2' })}
                                     onClick={() => { this.toggle('2'); }}
                                 >
-                                    Candidatures traitées
+                                    Projets
                                 </NavLink>
                             </NavItem>
                         </Nav>
                         <TabContent activeTab={this.state.activeTab}>
                             <TabPane tabId="1">
-                                {Projects.map(project=>{
-                                    const {id1}=this.props.match.params
-                                    if (project._id===id1)
-                                    {
-                                        this.state.type=project.createdBy.review.type;
-                                        this.state.id3=project.createdBy._id;
-
-                                        return (
-                                            <div>
-                                     <span style={{textDecoration: "underline", color:"blue"}} href="#" id="UncontrolledTooltipExample">Tour2   ></span>
-                                    <span>{project.Name}</span>
 
 
-
-
-                                            <ListGroup>
-
-                                                <ListGroupItem><legend>Avis Charge</legend>
-                                                    <Button color="success">{project.createdBy.review.type}</Button>{' '}
-                                                    <br/>
-                                                    {project.createdBy.review.text}</ListGroupItem>
-                                            </ListGroup>
-
-
-                                                {project.createdBy.Questions.map(question => (
-                                                    <ListGroup>
-
-                                                        <ListGroupItem>
-
-                                                            {question.text}</ListGroupItem>
-                                                        {question.responses.map(response => (
-                                                            <ListGroupItem>
-
-                                                                {response.text}</ListGroupItem>
-
-
-                                                        ))}
-
-                                                    </ListGroup>
-
-                                                ))}
-
-
-
-
-                                            </div> )}})}
-                                <ListGroup>
-
-                                    <fieldset border="1">
-                                    <legend>Avis Tour2</legend>
-                                        {Projects.map(project=>{
-                                            const {id1}=this.props.match.params
-                                            if (project._id===id1) {
-return(
-                                                <Link onClick={this.masquer(project.createdBy.review.text).bind(this)}>Reprendre
-                                                    la recommendation du chargé</Link>)
-                                            }})}
-                                <br/>
-                                            <div className="col-md-9">
-                                                <textarea ref="container"  type="text" name="text" onChange={this.handleTextChange} className="form-control" placeholder="Commentaire"/>
-
-                                        </div>
-<br/>
-
-
-
-                                        <h2 className="panel-title" style={{float: 'left',width: '34%', textalign:'left'}}>
-                                            <button className="btn btn-info "  onClick={this.handleSubmit2(this.refs.container).bind(this)}type="submit">Enregistrer le brouillon</button></h2>
-
-
-
-
-                                        <p className="panel-title" style={{float: 'left', width: '33%', textalign: 'center'}}>
-
-                                            <button className="btn btn-danger" onClick={this.handleSubmit2(this.refs.container).bind(this)} type="submit">Refuser</button></p>
-
-
-                                        <p className="panel-title" style={{float: 'left', width: '15%', textalign: 'right'}}>
-                                            <button className="btn btn-success" type="submit" onClick={this.handleSubmit3(this.refs.container).bind(this)}>
-                                                Appeler pour pitch</button>
-
-                                        </p>
-
-                                        <p className="panel-title" style={{float: 'left', width: '15%', textalign: 'right'}}>
-                                            <button className="btn btn-info" type="submit">
-                                                Suivant</button>
-
-                                        </p>
-                                    </fieldset>
-
-                                </ListGroup>
 
                             </TabPane>
                         </TabContent>
@@ -625,4 +467,4 @@ const mapDispatchToProps = {
 export default connect(
     null,
     mapDispatchToProps
-)(DetailsCandidatureAJuger);
+)(VotesProjet);
