@@ -107,7 +107,7 @@ export  default  class listCandidatures extends React.Component{
                                 <TabContent activeTab={this.state.activeTab}>
                                     <TabPane tabId="1">
                                         <center>
-                                            <table border="1">
+
                                                 <Nav tabs>
                                                     <NavItem>
                                                         <NavLink
@@ -141,7 +141,7 @@ export  default  class listCandidatures extends React.Component{
                                                             Avis négatif
                                                         </NavLink>
                                                     </NavItem>
-                                                </Nav></table></center>
+                                                </Nav></center>
 
                                 <table id="demo-foo-filtering"
                                        className="table table-bordered table-hover toggle-circle" data-page-size="7">
@@ -252,7 +252,7 @@ export  default  class listCandidatures extends React.Component{
                                     <TabPane tabId="6">
 
                                         <center>
-                                            <table border="1">
+
                                                 <Nav tabs>
                                                     <NavItem>
                                                         <NavLink
@@ -286,7 +286,7 @@ export  default  class listCandidatures extends React.Component{
                                                             Avis négatif
                                                         </NavLink>
                                                     </NavItem>
-                                                </Nav></table></center>
+                                                </Nav></center>
 
 
                                         <div className="panel-body">
@@ -341,7 +341,7 @@ export  default  class listCandidatures extends React.Component{
                                 <TabContent activeTab={this.state.activeTab}>
                                     <TabPane tabId="5">
                                         <center>
-                                            <table border="1">
+
                                                 <Nav tabs>
                                                     <NavItem>
                                                         <NavLink
@@ -375,7 +375,7 @@ export  default  class listCandidatures extends React.Component{
                                                             Avis négatif
                                                         </NavLink>
                                                     </NavItem>
-                                                </Nav></table></center>
+                                                </Nav></center>
 
 
 
@@ -432,7 +432,7 @@ export  default  class listCandidatures extends React.Component{
                                 <TabContent activeTab={this.state.activeTab}>
                                     <TabPane tabId="4">
                                         <center>
-                                            <table border="1">
+
                                                 <Nav tabs>
                                                     <NavItem>
                                                         <NavLink
@@ -466,7 +466,7 @@ export  default  class listCandidatures extends React.Component{
                                                             Avis négatif
                                                         </NavLink>
                                                     </NavItem>
-                                                </Nav></table></center>
+                                                </Nav></center>
 
 
 

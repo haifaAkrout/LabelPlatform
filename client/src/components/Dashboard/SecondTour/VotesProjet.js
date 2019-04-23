@@ -5,6 +5,7 @@ import { Progress } from 'reactstrap';
 import ReactDOM from 'react-dom';
 import {enregistrerBrouillonJudge,} from "../../../store/actions";
 import {refuserCandidature,} from "../../../store/actions";
+
 import {appelerCandidature,} from "../../../store/actions";
 import { UncontrolledTooltip } from 'reactstrap';
 import { ListGroup, ListGroupItem } from 'reactstrap';
@@ -21,13 +22,16 @@ class VotesProjet extends React.Component{
         this.toggle = this.toggle.bind(this);
         this.state = {
             activeTab: '1',
-
-            Projects: [],
+            votesPour:'',
+            votesContre:'',
+            Sessions: [],
             NomSession: '',
             DateEnd: '',
             text: '',
             type: '',
-            id3:''}
+            id3:'',
+        idSession:'',
+        result:''}
         ;
 
 
@@ -47,26 +51,35 @@ class VotesProjet extends React.Component{
         axios.get('http://localhost:6003/candidatures/'+id2).then(res=>{
             console.log(res.data)
             this.setState({NomSession:res.data.Name});
-            this.setState({Projects:res.data.Project});
+            this.setState({Sessions:res.data.Project});
             this.setState({DateEnd:res.data.EndDate})
-
+            this.setState({idSession:res.data._id})
 
         })
-    }
+
+
+
+       }
 
 
 
 
     render(){
+
+
+
         const formattedDate = moment(this.state.DateEnd).format("LLL");
         const {Projects} = this.state;
+
         return (
+
 
             < div
                 id = "container"
                 className = "effect mainnav-sm navbar-fixed mainnav-fixed" >
 
                 <Header/>
+
                 <div className="boxed">
 
                     <div id="content-container">
@@ -115,10 +128,108 @@ class VotesProjet extends React.Component{
                             </NavItem>
                         </Nav>
                         <TabContent activeTab={this.state.activeTab}>
+                            <TabPane tabId="2">
+
+
+
+
+                                <div className="panel-body">
+
+                                    <table id="demo-foo-filtering"
+                                           className="table table-bordered table-hover toggle-circle" data-page-size="7">
+
+                                        <thead>
+                                        <tr>
+                                            <th>Type of candidature</th>
+                                            <th >Project Name </th>
+                                            <th >Lead </th>
+
+                                            <th >votes pour </th>
+
+                                            <th> Action </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {this.state.Sessions.map(d=>{
+
+
+                                                return (
+
+                                                    <tr >
+                                                        <td>{d.createdBy.TypeLabel.type}</td>
+                                                        <td>{d.Name }</td>
+
+                                                        <td>{d.members[0].Email}</td>
+                                                        <td>{d.createdBy.countPositif}/{d.createdBy.countNegatif}</td>
+
+                                                        <td> <center>
+                                                            <button className="btn btn-info " type="submit"> <Link to={"/Question"}>Consulter</Link></button>
+                                                        </center></td>
+
+                                                    </tr>
+                                                )
+
+
+
+                                        })}
+
+
+                                        </tbody>
+                                    </table>
+
+
+                                </div>
+                            </TabPane>
+                        </TabContent>
+                        <TabContent activeTab={this.state.activeTab}>
                             <TabPane tabId="1">
 
 
 
+
+                                <div className="panel-body">
+
+                                    <table id="demo-foo-filtering"
+                                           className="table table-bordered table-hover toggle-circle" data-page-size="7">
+
+                                        <thead>
+                                        <tr>
+                                            <th>Nom</th>
+                                            <th >Project voté </th>
+                                            <th >Avancement </th>
+
+
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {this.state.Sessions.map(d=>{
+
+
+                                            return (
+
+                                                <tr >
+                                                    <td>{d.createdBy.review2[0].createdBy}</td>
+                                                    <td>{d.nbredeVotes}</td>
+
+                                                    <td>{d.members[0].Email}</td>
+
+
+
+
+                                                </tr>
+                                            )
+
+
+
+                                        })}
+
+
+                                        </tbody>
+                                    </table>
+
+
+                                </div>
                             </TabPane>
                         </TabContent>
                         <nav id="mainnav-container">
@@ -457,14 +568,18 @@ class VotesProjet extends React.Component{
         )
     }
 }
+const mapStateToProps = (state) => ({
+})
 const mapDispatchToProps = {
     enregistrerBrouillonJudge,
     refuserCandidature,
-    appelerCandidature
+    appelerCandidature,
+
 
 };
 
 export default connect(
-    null,
-    mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps,
+
 )(VotesProjet);

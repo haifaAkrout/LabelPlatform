@@ -1,4 +1,5 @@
-const initialState = { judges: [] };
+const initialState = { count:[]};
+
 
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -11,7 +12,7 @@ export default (state = initialState, action) => {
         case "add_judge":
             return {
                 ...state,
-                judges: action.payload,
+                count: action.payload,
 
             };
         case "delete_judge":

@@ -42,7 +42,7 @@ class App extends Component {
                 <Route path="/Questionnaire" exact component={Questionnaire} />
                 <Route path="/Question" exact component={Question} />
                 <Route path="/SecondTour/:id2/Details/:id1" exact component={DetailsCandidaturesAJuger} />
-                <Route path="/votes" exact component={VotesProjet } />
+                <Route path="/votes/:id2" exact component={VotesProjet } />
             </React.Fragment>
           </Router>
         </Provider>

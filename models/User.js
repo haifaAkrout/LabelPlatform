@@ -30,7 +30,8 @@ var judgeSchema=extend(userSchema,{
     Telephone:{type:Number},
     YearsOfExperience:{type:Number},
     Spécialité:{type:String},
-    createdBy:{ type: mongoose.Schema.ObjectId, ref: 'adminSchema' }
+    createdBy:{ type: mongoose.Schema.ObjectId, ref: 'adminSchema' },
+    nbredeVotes:{type:Number}
 
 
 })
@@ -59,7 +60,9 @@ var candidatureSchema=extend(userSchema,{
     Status: {type:String},
     Questions:[questions],
     etat:{type:String},
-    phone:{type:Number}
+    phone:{type:Number},
+    countPositif:{type:Number,default:0},
+    countNegatif:{type:Number,default: 0}
 })
 
 module.exports=mongoose.model('Admin',adminSchema)

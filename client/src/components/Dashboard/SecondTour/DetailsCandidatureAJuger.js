@@ -59,6 +59,8 @@ class DetailsCandidatureAJuger extends React.Component{
         })
     }
 
+
+
     handleSubmit(text) {
         return event => {
             event.preventDefault()
@@ -71,7 +73,7 @@ class DetailsCandidatureAJuger extends React.Component{
 
             const id4=this.state.id3;
 
-            this.props.enregistrerBrouillonJudge("5cbb04417a5c065a08b76528",id4,Review);
+            this.props.enregistrerBrouillonJudge("5cbde9d8abe5a43194e3a80e",id4,Review);
 
         }
     }
@@ -92,7 +94,7 @@ class DetailsCandidatureAJuger extends React.Component{
 
             const id4=this.state.id3;
 
-            this.props.refuserCandidature("5cbb04417a5c065a08b76528",id4,Review)
+            this.props.refuserCandidature("5cbde9d8abe5a43194e3a80e",id4,Review)
         }
     }
 
@@ -107,7 +109,7 @@ class DetailsCandidatureAJuger extends React.Component{
             }
 
             const id4=this.state.id3;
-            this.props.appelerCandidature("5cbb04417a5c065a08b76528",id4,58011658,Review)
+            this.props.appelerCandidature("5cbde9d8abe5a43194e3a80e",id4,55626214,Review)
 
         }
     }
@@ -252,7 +254,7 @@ return(
 
 
                                         <h2 className="panel-title" style={{float: 'left',width: '34%', textalign:'left'}}>
-                                            <button className="btn btn-info "  onClick={this.handleSubmit2(this.refs.container).bind(this)}type="submit">Enregistrer le brouillon</button></h2>
+                                            <button className="btn btn-info "  onClick={this.handleSubmit(this.refs.container).bind(this)}type="submit">Enregistrer le brouillon</button></h2>
 
 
 

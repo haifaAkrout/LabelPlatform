@@ -30,7 +30,14 @@ class JudgeList extends React.Component{
     }
 
     handleclick(id,id1){
-        this.props.deleteJudge(id,id1);
+
+
+           const judges=this.props.deleteJudge(id, id1);
+
+
+              console.log(judges)
+
+
     }
 
 
@@ -56,7 +63,7 @@ class JudgeList extends React.Component{
                                 <h3 className="panel-title">     <a href="/Judges/demandes">Judges</a>->all</h3>
                             </div>
                             <div className="panel-body">
-                                <table id="demo-dt-basic" className="table table-striped table-bordered">
+                                <table ref="table2" id="demo-dt-basic" className="table table-striped table-bordered">
                                     <thead>
                                     <tr>
                                         <th>lastName and FirstName </th>

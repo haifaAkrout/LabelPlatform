@@ -27,6 +27,7 @@ var Session= require('../models/Session');
 var ReviewCharge=require('../models/ReviewCharge');
 require("../models/User")
 const candidat = mongoose.model('Candidat');
+const Judge = mongoose.model('Judge');
 const Charge= mongoose.model('Charge');
 
 router.get('/:id', function (req, res) {
@@ -97,7 +98,7 @@ if(Session.Project[j]._id.equals(req.params.id2)){
       }
 
     }
-    res.send("jjj"+count)
+    res.json(count)
 }
 
          }
@@ -107,6 +108,39 @@ if(Session.Project[j]._id.equals(req.params.id2)){
 
 
   }
+
+
+);
+router.get('/:id/:id2/avisPositif', function (req, res) {
+        var count=0
+
+        Session.findById(req.params.id).populate({path:'Project.createdBy',populate: ({path:'TypeLabel'})}).populate({path:'Project.createdBy',populate: ({path:'review'})})
+            .exec( function (err,Session){
+                console.log(req.params.id2)
+
+                for( var j=0; j< Session.Project.length;j++){
+
+                    if(Session.Project[j]._id.equals(req.params.id2)){
+
+                        for(var i=0; i<Session.Project[j].createdBy.review2.length;i++) {
+
+                            if(Session.Project[j].createdBy.review2[i].type==="positif"){
+                                count=count+1;
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+            );
+
+
+
+    }
 
 
 );
@@ -155,20 +189,24 @@ router.put('/:idJudge/:idCandidature/:numCandidature/call', function(req, res) {
     candidat.findById(req.params.idCandidature).exec(function (err,candidat1) {
         candidat1.review2.push(reviewJudge1);
         candidat1.Status= "Traité";
-        candidat1.etat="accepted"
+        candidat1.etat="accepted";
+        candidat1.countPositif+=1
         candidat.findByIdAndUpdate(req.params.idCandidature, candidat1, {new: true}, (err, candidat) => {
             res.send(candidat.review2)
 
         });
 
+    });
+    Judge.findById(req.params.idJudge).exec(function (err,Judge1) {
+        Judge1.nbredeVotes+=1;
 
 
+        Judge.findByIdAndUpdate(req.params.idJudge, Judge1, {new: true}, (err, Judge) => {
+            res.send(Judge.LastName)
 
-
-
+        });
 
     });
-
 
 const num="216"+req.params.numCandidature;
 

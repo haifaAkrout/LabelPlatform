@@ -5,6 +5,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 require("../models/User")
 const candidat = mongoose.model('Candidat');
+const judge = mongoose.model('Judge');
 var ReviewCharge=require('../models/ReviewCharge');
 var Review=require('../models/Review');
 var auth = require('../api/auth');
@@ -43,14 +44,39 @@ router.post('/:idJudge/:idCandidature/addAvis',function (req,res) {
 
     candidat.findById(req.params.idCandidature).exec(function (err,candidat1) {
         candidat1.review2.push(reviewJudge1);
-        candidat.findByIdAndUpdate(req.params.idCandidature, candidat1, {new: true}, (err, candidat) => {
-            res.send(candidat.review2)
+        candidat1.Status="Traité";
 
+        if(req.body.type==="negatif")
+        {
+            candidat1.countNegatif+=1
+        }
+        if(req.body.type==="positif")
+        {
+            candidat1.countPositif+=1
+        }
+        candidat.findByIdAndUpdate(req.params.idCandidature, candidat1, {new: true}, (err, candidat) => {
+
+            judge.findById(req.params.idJudge).exec(function (err,Judge1) {
+
+                Judge1.nbredeVotes=1;
+
+                judge.findByIdAndUpdate(req.params.idJudge, Judge1, {new: true}, (err, judge) => {
+
+
+                });
+
+
+
+            });
         });
 
 
 
-    });})
+    });
+
+
+
+})
 
 router.post('/:id/:idJudge/:idCandidature/UpdateAvis',function (req,res) {
 console.log(req.params.id)
@@ -94,6 +120,7 @@ router.put('/:idJudge/:idCandidature/refuser',function (req,res) {
         candidat1.review2.push(reviewJudge1);
         candidat1.Status= "Traité";
         candidat1.etat="refused"
+        candidat1.votesContre+=1
         candidat.findByIdAndUpdate(req.params.idCandidature, candidat1, {new: true}, (err, candidat) => {
             res.send(candidat.review2)
 
