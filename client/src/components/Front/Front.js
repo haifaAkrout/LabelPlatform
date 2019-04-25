@@ -94,14 +94,39 @@ const AVG = 1;
                            </div>
                        </div>
                    </div>
-                   <div className="header-wrapper">
-                       <div className="single-slide">
+                   <div >
+                       <div >
                            <div className="container">
                                <div className="row">
-                                   <div className="col-md-5 col-sm-8">
 
-                                   </div>
+                                   <center> <form onSubmit={this.handleFormSubmit}>
+                                       {
+                                           Questions.map((question) => {
+                                               if(question.type==="QuestionJury")
+                                                   return (
+                                                       <div>
+                                                           {question.text}
+                                                           {question.responses.map(response => (
+                                                               <div className="radio" key={response._id}>
+                                                                   <label>
+                                                                       <input type="radio"
+                                                                              checked={this.state.selectedOption[question._id] === response._id}
+                                                                              onChange={() => this.handleOptionChange(question,question._id, response)}/>
+                                                                       {response.text}
+                                                                   </label>
+                                                               </div>
 
+                                                           ))}
+
+                                                       </div>
+                                                   )
+
+
+                                           })}
+
+
+                                       <button className="btn btn-default" type="submit">Save</button>
+                                   </form></center>
                                </div>
                            </div>
                        </div>
@@ -109,18 +134,11 @@ const AVG = 1;
                            <div className="container">
                                <div className="row">
                                    <div className="col-md-5 col-sm-8">
-                                       <div className="slide-content">
-                                           <h1>Gone are the days when design was an after thought.</h1>
-                                           <p>Consectetuer adipiscing elit sed diam nonummy nibh euismod tidunt laoreet
-                                               dolore magna aliquam erat volutpat wisi enim ad minim.</p>
-                                           <span>Watch this video<button className="js-modal-btn"
-                                                                         data-video-id="202177974"><i
-                                               className="fa fa-play-circle"></i></button></span>
-                                       </div>
+
                                    </div>
                                    <div className="col-md-7">
                                        <div className="slide-images">
-
+                                           <img src="../../../public/Front/assets/images/slide-01.png" alt=""/>
                                        </div>
                                    </div>
                                </div>
@@ -131,34 +149,7 @@ const AVG = 1;
 
                </header>
 
-               <form onSubmit={this.handleFormSubmit}>
-                   {
-                       Questions.map((question) => {
-                           if(question.type==="QuestionJury")
-                               return (
-                                   <div>
-                                       {question.text}
-                                       {question.responses.map(response => (
-                                           <div className="radio" key={response._id}>
-                                               <label>
-                                                   <input type="radio"
-                                                          checked={this.state.selectedOption[question._id] === response._id}
-                                                          onChange={() => this.handleOptionChange(question,question._id, response)}/>
-                                                   {response.text}
-                                               </label>
-                                           </div>
 
-                                       ))}
-
-                                   </div>
-                               )
-
-
-                       })}
-
-
-                   <button className="btn btn-default" type="submit">Save</button>
-               </form>
 
 
 

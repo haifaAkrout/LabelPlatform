@@ -14,8 +14,9 @@ import Dashboard from "./components/Dashboard/Dashboard"
  import listeSessions from "./components/Dashboard/FirstTour/listSessions"
 
 import Front from "./components/Front/Front";
-import Questionnaire from "./components/Dashboard/Questionnaire/Questionnaire";
-import Question from "./components/Dashboard/Questionnaire/Question"
+ import front2 from "./components/Front/front2";
+//import Questionnaire from "./components/Dashboard/Questionnaire/Questionnaire";
+import Question from "./components/Front/Question"
 import { Provider } from 'react-redux'
 import store from './store';
 
@@ -36,10 +37,10 @@ class App extends Component {
                 <Route  path="/Judges/editCompte/:id1" exact component={EditJudge} />
                 <Route path="/SecondTour/:id1" exact component={listCandidatures} />
                 <Route path="/Front" exact component={Front} />
-
+                <Route path="/Questionnaire" exact component={front2} />
                 <Route path="/sessions/listeSessions" exact component={listeSessions}/>
 
-                <Route path="/Questionnaire" exact component={Questionnaire} />
+
                 <Route path="/Question" exact component={Question} />
                 <Route path="/SecondTour/:id2/Details/:id1" exact component={DetailsCandidaturesAJuger} />
                 <Route path="/votes/:id2" exact component={VotesProjet } />

@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import Header from '../../../containers/Header.js';
 import ContentContainer from '../../../containers/ContentContainer.js';
 import Nav from '../../../containers/Nav.js';
+import {NotificationManager} from "react-notifications";
 class JudgeList extends React.Component{
     constructor(props) {
         super(props);
@@ -21,7 +22,26 @@ class JudgeList extends React.Component{
 
     };
 
-
+    createNotification = (type) => {
+        return () => {
+            switch (type) {
+                case 'info':
+                    NotificationManager.info('Votre email a étè envoyée avec succées');
+                    break;
+                case 'success':
+                    NotificationManager.success('Success message', 'Title here');
+                    break;
+                case 'warning':
+                    NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
+                    break;
+                case 'error':
+                    NotificationManager.error('Error message', 'Click me!', 5000, () => {
+                        alert('callback');
+                    });
+                    break;
+            }
+        };
+    };
     componentDidMount() {
         this.loadJudges();
     }

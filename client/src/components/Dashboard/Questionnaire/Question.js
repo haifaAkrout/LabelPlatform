@@ -35,6 +35,9 @@ class Question extends React.Component {
     }
 
     componentDidMount() {
+       this.loadJudges()
+    }
+    loadJudges = ()=> {
         axios.get('http://localhost:6003/Questionnaire').then(res => {
 
             console.log(res.data);
@@ -42,6 +45,14 @@ class Question extends React.Component {
 
         })
     }
+    handleclick() {
+
+
+        this.loadJudges()
+
+
+    }
+
 
     handleOptionChange(question,questionId, response) {
         this.setState(prevState => ({
