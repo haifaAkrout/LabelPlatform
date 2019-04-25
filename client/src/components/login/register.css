@@ -53,8 +53,8 @@
     .input-group-addon .fa {
         font-size: 18px;
     }
-    .signin_wrap {
-        min-height: 1000px !important;
+    .sign_in_wrap {
+        min-height: 1110px !important;
         margin-bottom: 2% !important;
     }
     .signin_html_wrap {
@@ -65,4 +65,7 @@
     }
     .logo_h_91 {
         height: 91px;
+    }
+    .hide_overflow{
+            overflow-y: hidden;
     }

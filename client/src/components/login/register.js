@@ -13,7 +13,7 @@ export  default  class register extends React.Component{
     render(){
 
         return (
-           <div className="login-wrap signin_wrap">
+           <div className="login-wrap sign_in_wrap">
         <div className="login-html">
           <a href="/" className="aligncenter">
             <img className="logo_h_91 signin_html_wrap" src={logo} /><br />
@@ -46,7 +46,7 @@ export  default  class register extends React.Component{
               <div className="group row col-12">
                 <div className="col-12">
                   <label htmlFor="FirstName" className="label">Gender</label>
-                  <select name="gender" multiple className="input">
+                  <select name="gender" multiple className="input hide_overflow">
                     <option value={0}>Female</option>
                     <option value={0}>Male</option>
                     <option value={0}>Other</option>
