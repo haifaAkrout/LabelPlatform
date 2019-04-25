@@ -6,6 +6,9 @@ import axios from "axios";
 import setAuthToken from "../../setAuthToken";
 import jwt_decode from "jwt-decode";
 import { GET_ERRORS,SET_CURRENT_USER } from '../../actions/types';
+import './auth.css';
+import './login.css';
+import logo from './logo_label_blanc.png';
 
 
 class login extends React.Component{
@@ -61,57 +64,48 @@ event.preventDefault()
     render(){
 
         return (
-            <div id="container">
 
-                <div className="lock-wrapper">
-                    <div className="row">
-                        <div className="col-xs-12">
-                            <div className="lock-box">
-                                <div className="main">
-                                    <h3>Please Log In, or <a href="#">Sign Up</a></h3>
-                                    <div className="row">
-                                        <div className="col-xs-6 col-sm-6 col-md-6">
-                                            <a href="#" className="btn btn-lg btn-primary btn-block">Facebook</a>
-                                        </div>
-                                        <div className="col-xs-6 col-sm-6 col-md-6">
-                                            <a href="#" className="btn btn-lg btn-info btn-block">Google</a>
-                                        </div>
-                                    </div>
-                                    <div className="login-or">
-
-                                    </div>
-                                    <form className="panel-body form-horizontal" onSubmit={this.handleSubmit }>
-                                        <div className="form-group">
-                                            <label htmlFor="inputUsernameEmail">Username or email</label>
-                                            <input type="text" name="Email" onChange={this.handleEmailChange} className="form-control" placeholder="Email"/>
-                                        </div>
-                                        <div className="form-group">
-                                            <a className="pull-right" href="#">Forgot password?</a>
-                                            <label htmlFor="inputPassword">Password</label>
-                                            <input type="password" name="Password" onChange={this.handlePasswordChange} className="form-control" placeholder="Password" />
-                                        </div>
-                                        <div className="pull-left pad-btm">
-                                            <div className="checkbox">
-                                                <label className="form-checkbox form-icon form-text">
-
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <a href="http://localhost:3000/Dashboard" >  <button type="submit" className="btn btn-block btn-primary">
-                                            Sign In
-                                        </button></a>
-                                    </form>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
+      <div className="login-wrap">
+        <div className="login-html">
+          <a href="#" className="aligncenter">
+            <img className="logo_signin logo_div" src={logo} /><br />
+          </a>
+          <input id="tab-1" type="radio" name="tab" className="sign-in" defaultChecked /><label htmlFor="tab-1" className="tab">Sign In</label>
+          <input id="tab-2" type="radio" name="tab" className="for-pwd" /><label htmlFor="tab-2" className="tab">Forgot Password</label>
+          <div className="login-form">
+            <div className="sign-in-htm">
+              <div className="text-center social-btn">
+                <a href="#" className="btn btn-primary btn-block"><i className="fa fa-facebook" /> Sign in with <b>Facebook</b></a>
+                <a href="#" className="btn btn-danger btn-block"><i className="fa fa-google" /> Sign in with <b>Google</b></a>
+              </div>
+              <div className="hr2" />
+              <div className="group">
+                <label htmlFor="user" className="label">Username or Email</label>
+                <input id="user" type="text" className="input" />
+              </div>
+              <div className="group">
+                <label htmlFor="pass" className="label">Password</label>
+                <input id="pass" type="password" className="input" data-type="password" />
+              </div>
+              <div className="group">
+                <button  className="button">Sign In</button>
+              </div>
             </div>
-)
+            <div className="for-pwd-htm">
+              <div className="group">
+                <label htmlFor="user" className="label">Username or Email</label>
+                <input id="user" type="text" className="input" />
+              </div>
+              <div className="group">
+                <button  className="button">Reset Password</button>
+              </div>
+              <div className="hr" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  
 
 }}
 const mapDispatchToProps = {
