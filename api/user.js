@@ -25,7 +25,7 @@ router.post('/addCandidature',function (req,res) {
         LastName: "haifa",
         Email: "haifa.akrout@esprit.tn",
         Password:"hafhouf",
-        Status:"en attente"
+        Status:"Traité",
     });
     candidat.save();
 })

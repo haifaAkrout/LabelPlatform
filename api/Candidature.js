@@ -39,7 +39,7 @@ router.get('/:id', function (req, res) {
             res.status(404).send();
         else {
 
-res.send(Session)
+            res.send(Session)
         }
     });
 });
@@ -61,9 +61,9 @@ router.get('/projetsVotes', function (req, res) {
 
             for(var i in Project1){
 
-                    if( Project1[i].createdBy.review2!=null)
-                        count++;
-                }
+                if( Project1[i].createdBy.review2!=null)
+                    count++;
+            }
 
 
 
@@ -80,38 +80,6 @@ router.get('/projetsVotes', function (req, res) {
 })
 
 router.get('/:id/:id2/avisNegatif', function (req, res) {
-    var count=0
-
-    Session.findById(req.params.id).populate({path:'Project.createdBy',populate: ({path:'TypeLabel'})}).populate({path:'Project.createdBy',populate: ({path:'review'})})
-        .exec( function (err,Session){
-console.log(req.params.id2)
-
-         for( var j=0; j< Session.Project.length;j++){
-
-if(Session.Project[j]._id.equals(req.params.id2)){
-
-    for(var i=0; i<Session.Project[j].createdBy.review2.length;i++) {
-
-      if(Session.Project[j].createdBy.review2[i].type==="negatif"){
-          count++
-
-      }
-
-    }
-    res.json(count)
-}
-
-         }
-
-    });
-
-
-
-  }
-
-
-);
-router.get('/:id/:id2/avisPositif', function (req, res) {
         var count=0
 
         Session.findById(req.params.id).populate({path:'Project.createdBy',populate: ({path:'TypeLabel'})}).populate({path:'Project.createdBy',populate: ({path:'review'})})
@@ -124,8 +92,42 @@ router.get('/:id/:id2/avisPositif', function (req, res) {
 
                         for(var i=0; i<Session.Project[j].createdBy.review2.length;i++) {
 
-                            if(Session.Project[j].createdBy.review2[i].type==="positif"){
-                                count=count+1;
+                            if(Session.Project[j].createdBy.review2[i].type==="negatif"){
+                                count++
+
+                            }
+
+                        }
+                        res.json(count)
+                    }
+
+                }
+
+            });
+
+
+
+    }
+
+
+);
+router.get('/:id/:id2/avisPositif', function (req, res) {
+        var count=0
+
+        Session.findById(req.params.id).populate({path:'Project.createdBy',populate: ({path:'TypeLabel'})}).populate({path:'Project.createdBy',populate: ({path:'review'})})
+            .exec( function (err,Session){
+                    console.log(req.params.id2)
+
+                    for( var j=0; j< Session.Project.length;j++){
+
+                        if(Session.Project[j]._id.equals(req.params.id2)){
+
+                            for(var i=0; i<Session.Project[j].createdBy.review2.length;i++) {
+
+                                if(Session.Project[j].createdBy.review2[i].type==="positif"){
+                                    count=count+1;
+
+                                }
 
                             }
 
@@ -134,8 +136,6 @@ router.get('/:id/:id2/avisPositif', function (req, res) {
                     }
 
                 }
-
-            }
             );
 
 
@@ -153,11 +153,11 @@ router.post('/:idCandidature/addAvis',function (req,res) {
         Email:'atef.akrout@esprit.tn',
         Password:'atoufa'
     }) ;
-    //charge1.save();
+   // charge1.save();
     var avis=new ReviewCharge({
         text:'pas mal',
         type:'negatif',
-        createdBy:charge1.id,
+        createdBy:"5cc0bda369d2061adcb1c3ea",
         candidat:req.params.idCandidature
     });
 
@@ -165,7 +165,7 @@ router.post('/:idCandidature/addAvis',function (req,res) {
 
     var id=req.params.idCandidature;
     candidat.findById(id).exec(function (err,candidat1) {
-        candidat1.review = avis.id;
+        candidat1.review = avis._id;
         candidat.findByIdAndUpdate(id, candidat1, {new: true}, (err, candidat) => {
             console.log("updated");
 
@@ -185,6 +185,15 @@ router.put('/:idJudge/:idCandidature/:numCandidature/call', function(req, res) {
     reviewJudge1.candidat=req.params.idCandidature;
 
     reviewJudge1.save();
+    Judge.findById(req.params.idJudge).exec(function (err,Judge1) {
+        Judge1.nbredeVotes+=1;
+//Judge1.review.push(reviewJudge1);
+        Judge.findByIdAndUpdate(req.params.idJudge, Judge1, {new: true}, (err, Judge) => {
+
+
+        });
+
+    });
 
     candidat.findById(req.params.idCandidature).exec(function (err,candidat1) {
         candidat1.review2.push(reviewJudge1);
@@ -192,40 +201,31 @@ router.put('/:idJudge/:idCandidature/:numCandidature/call', function(req, res) {
         candidat1.etat="accepted";
         candidat1.countPositif+=1
         candidat.findByIdAndUpdate(req.params.idCandidature, candidat1, {new: true}, (err, candidat) => {
-            res.send(candidat.review2)
 
-        });
-
-    });
-    Judge.findById(req.params.idJudge).exec(function (err,Judge1) {
-        Judge1.nbredeVotes+=1;
-
-
-        Judge.findByIdAndUpdate(req.params.idJudge, Judge1, {new: true}, (err, Judge) => {
-            res.send(Judge.LastName)
 
         });
 
     });
 
-const num="216"+req.params.numCandidature;
 
-        nexmo.calls.create({
+    const num="216"+req.params.numCandidature;
 
-        to: [{
-            type: 'phone',
-            number:+num // take a phone number from command line argument
-        }],
-        from: {
-            type: 'phone',
-            number: +num // your virtual number
-        },
-        answer_url: ['https://nexmo-community.github.io/ncco-examples/first_call_talk.json']
+    nexmo.calls.create({
+
+            to: [{
+                type: 'phone',
+                number:+num // take a phone number from command line argument
+            }],
+            from: {
+                type: 'phone',
+                number: +num // your virtual number
+            },
+            answer_url: ['https://nexmo-community.github.io/ncco-examples/first_call_talk.json']
 
         }, (err, res) =>{
-    if(err) { console.error(err); }
-    else { console.log(res); }}
-)
+            if(err) { console.error(err); }
+            else { console.log(res); }}
+    )
 
 })
 // router.post('/callHaifa', function(request, response) {
@@ -282,15 +282,15 @@ router.get('/votes/:id/avisNegatif', function (req, res) {
             console.log(Project.createdBy.FirstName)
             for(var j in Project.createdBy.review2){
 
-                            if(Project1.createdBy.review2[j].type==="negatif") {
-                                console.log("jjjj")
-                                count+=1;
-                                list.push(Project1.createdBy.review2)
-                            }
+                if(Project1.createdBy.review2[j].type==="negatif") {
+                    console.log("jjjj")
+                    count+=1;
+                    list.push(Project1.createdBy.review2)
+                }
 
 
 
-                        }
+            }
             res.send("nombre d'avis negatifs "+count)
 
         });
@@ -329,7 +329,7 @@ router.get('/votes/:id/avisNegatif', function (req, res) {
 
 
 
-}
+    }
 );
 
 //Nombre de votes qui ont voté négativement
@@ -398,11 +398,11 @@ router.post('/:idCandidature/addQuestion', function (req, res) {
 
 
     var id = req.params.idCandidature;
-   // require('../models/Questionnaire');
-   // var Questionnaire = mongoose.model('Questionnaire');
+    // require('../models/Questionnaire');
+    // var Questionnaire = mongoose.model('Questionnaire');
     require('../models/Response');
     var Response = mongoose.model('Response');
-    console.log("haifa")
+    //console.log("haifa")
     // var question = new Questionnaire({
     //     text:req.body.text,
     //     type:req.body.type
@@ -417,7 +417,7 @@ router.post('/:idCandidature/addQuestion', function (req, res) {
         candidat.findByIdAndUpdate(id, candidat1, {new: true}, (err, candidat2) => {
             console.log("updated");
 
-         });
+        });
 
 
 

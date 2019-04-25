@@ -70,6 +70,7 @@ router.put('/addCompte',function (req,res) {
     var salt = bcrypt.genSaltSync(10,10);
 
     var Judge1 = new Judge(req.body)
+    Judge1.password2=req.body.Password;
     Judge1.Password=bcrypt.hashSync(req.body.Password, salt);
 Judge1.creationDate=Date.now();
     Judge1.Status="acceptée";
@@ -131,10 +132,15 @@ router.put('/update/:id', function (req, res) {
         }
         else   /* i'm not sure if this is a usefull endpoit :) */
         {
-           judge.save();
+           judge.save(
+               res.send({done: true})
+         )
+
         }
 
-    })
+    }).catch(() => {
+        res.send({done: false})
+    });
 
 });
 router.put('/refuse/:id', function (req, res) {
@@ -181,17 +187,13 @@ router.use( function( req, res, next ) {
 router.delete('/:id/:id1',function (req, res) {
     var id = req.params.id;
     var id1 = req.params.id1;
-    Demande.findByIdAndRemove(id , function (err, Demande) {
-        if (err)
-            res.send(err);
-
-    })
     Judge.findByIdAndRemove(id1, function (err, Judge1) {
-        if (err)
-            res.send(err);
 
+
+        res.send({done: true})
+    }).catch(() => {
+        res.send({done: false})
     })
-    res.redirect('/Judges/demandes')
 })
 
 

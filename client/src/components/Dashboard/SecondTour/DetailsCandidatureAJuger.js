@@ -50,7 +50,7 @@ class DetailsCandidatureAJuger extends React.Component{
     componentDidMount() {
         const {id2}=this.props.match.params
         axios.get('http://localhost:6003/candidatures/'+id2).then(res=>{
-            console.log(res.data)
+            console.log(res.data.Project)
             this.setState({NomSession:res.data.Name});
             this.setState({Projects:res.data.Project});
             this.setState({DateEnd:res.data.EndDate})
@@ -73,7 +73,7 @@ class DetailsCandidatureAJuger extends React.Component{
 
             const id4=this.state.id3;
 
-            this.props.enregistrerBrouillonJudge("5cbde9d8abe5a43194e3a80e",id4,Review);
+            this.props.enregistrerBrouillonJudge("5cc0b535b2af384e482709b3",id4,Review);
 
         }
     }
@@ -94,7 +94,7 @@ class DetailsCandidatureAJuger extends React.Component{
 
             const id4=this.state.id3;
 
-            this.props.refuserCandidature("5cbde9d8abe5a43194e3a80e",id4,Review)
+            this.props.refuserCandidature("5cc0b535b2af384e482709b3",id4,Review)
         }
     }
 
@@ -109,7 +109,7 @@ class DetailsCandidatureAJuger extends React.Component{
             }
 
             const id4=this.state.id3;
-            this.props.appelerCandidature("5cbde9d8abe5a43194e3a80e",id4,55626214,Review)
+            this.props.appelerCandidature("5cc0b535b2af384e482709b3",id4,58011658,Review)
 
         }
     }
@@ -216,7 +216,7 @@ class DetailsCandidatureAJuger extends React.Component{
 
                                                         <ListGroupItem>
 
-                                                            {question.text}</ListGroupItem>
+                                                         <strong>Question:</strong>   {question.text}</ListGroupItem>
                                                         {question.responses.map(response => (
                                                             <ListGroupItem>
 

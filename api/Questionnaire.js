@@ -29,20 +29,20 @@ res.send(Questionnaire1)
     });
 router.post('/add', function (req, res) {
 
-    var Question1 = new Questionnaire({
-        text:req.body.text,
-        type:req.body.type
-    })
-
-
-
-
-
     // var Question1 = new Questionnaire({
-    //     text:"\n" +
-    //         "As-tu identifié des concurrents ?",
-    //     type:"QuestionJury"
+    //     text:req.body.text,
+    //     type:req.body.type
     // })
+
+
+
+
+
+    var Question1 = new Questionnaire({
+        text:"\n" +
+            "How many members do you have in your team ?",
+        type:"QuestionJury"
+    })
 
     // var Questionnaire1 = new Questionnaire({
     //     text:"questionnaire2",

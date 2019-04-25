@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from 'react-router-dom'
 import {
     accepterJudge,
 
@@ -22,7 +23,8 @@ class EditJudge extends Component{
             Password:'',
             YearsOfExperience:'',
             Spécialité:'',
-            Telephone:''
+            Telephone:'',
+            redirect: true
 
 
 
@@ -44,7 +46,7 @@ class EditJudge extends Component{
             console.log(res.data)
             console.log();
             this.setState({LastName:res.data.LastName,FirstName:res.data.FirstName,Email:res.data.Email,
-            Password:res.data.Password,YearsOfExperience:res.data.YearsOfExperience,Spécialité:res.data.Spécialité,Telephone:
+            Password:res.data.password2,YearsOfExperience:res.data.YearsOfExperience,Spécialité:res.data.Spécialité,Telephone:
                 res.data.Telephone});
 
         })
@@ -98,6 +100,10 @@ class EditJudge extends Component{
         }
         event.preventDefault();
         this.props.accepterJudge(id1,judge);
+
+        this.props.history.push("../demandes");
+        window.location.reload();
+
     }
     render(){
         return (
@@ -132,14 +138,14 @@ class EditJudge extends Component{
 
                                         <div className="form-group">
                                             <label className="col-md-3 control-label" htmlFor="demo-text-input">LastName</label>
-                                            <div className="col-md-9">
+                                            <div className="col-md-4">
                                                 <input type="text" name="LastName" value={this.state.LastName}  onChange={this.handleLastNameChange} className="form-control" />
 
                                             </div>
                                         </div>
                                         <div className="form-group">
                                             <label className="col-md-3 control-label" htmlFor="demo-text-input">FirstName</label>
-                                            <div className="col-md-9">
+                                            <div className="col-md-4">
                                                 <input type="text" name="FirstName" value={this.state.FirstName } onChange={this.handleFirstNameChange} className="form-control"
                                                 />
 
@@ -147,43 +153,43 @@ class EditJudge extends Component{
                                         </div>
                                         <div className="form-group">
                                             <label className="col-md-3 control-label" htmlFor="demo-text-input">Email</label>
-                                            <div className="col-md-9">
+                                            <div className="col-md-4">
                                                 <input type="text" name="Email" value={this.state.Email } onChange={this.handleEmailChange} className="form-control" placeholder="Email"/>
 
                                             </div>
                                         </div>
                                         <div className="form-group">
                                             <label className="col-md-3 control-label" htmlFor="demo-text-input">Password</label>
-                                            <div className="col-md-9">
+                                            <div className="col-md-4">
                                                 <input type="password" name="Password"  value={this.state.Password } onChange={this.handlePasswordChange} className="form-control" placeholder="Text"/>
 
                                             </div>
                                         </div>
                                         <div className="form-group">
                                             <label className="col-md-3 control-label" htmlFor="demo-text-input">YearsOfExperience</label>
-                                            <div className="col-md-9">
+                                            <div className="col-md-4">
                                                 <input type="Number" name="YearsOfExperience" value={this.state.YearsOfExperience } onChange={this.handleYearsOfExperienceChange} className="form-control" placeholder="Text"/>
 
                                             </div>
                                         </div>
                                         <div className="form-group">
                                             <label className="col-md-3 control-label" htmlFor="demo-text-input">Speciality</label>
-                                            <div className="col-md-9">
+                                            <div className="col-md-4">
                                                 <input type="tetx" name="Spécialité"   value={this.state.Spécialité} onChange={this.handleSpécialitéChange} className="form-control" placeholder="Text"/>
 
                                             </div>
                                         </div>
                                         <div className="form-group">
                                             <label className="col-md-3 control-label" htmlFor="demo-text-input">Telephone</label>
-                                            <div className="col-md-9">
+                                            <div className="col-md-4">
                                                 <input type="tetx" name="Telephone"   value={this.state.Telephone} onChange={this.handleTelephoneChange} className="form-control" placeholder="Text"/>
 
                                             </div>
                                         </div>
 
-                                        <button type="submit" className="btn btn-info btn-lg" name="accepter" value="Submit">
+                               <center>        <button type="submit"   className="btn btn-info " name="accepter" value="Submit">
                                         Update
-                                        </button>
+                                        </button></center>
 
 
                                     </form>

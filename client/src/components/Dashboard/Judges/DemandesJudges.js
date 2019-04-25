@@ -12,7 +12,8 @@ class JudgeList extends React.Component{
         super(props);
         this.state = {
 
-            Judges:[]
+            Judges:[],
+            loading:true
 
         } ;
         this.handleclick = this.handleclick.bind(this);
@@ -22,20 +23,32 @@ class JudgeList extends React.Component{
 
 
     componentDidMount() {
-        axios.get('http://localhost:6003/Judges/listJudges').then(res=>{
-            console.log("hhh")
-            console.log(res.data);
-            this.setState({Judges:res.data});
+        this.loadJudges();
+    }
+
+    loadJudges = ()=> {
+        axios.get('http://localhost:6003/Judges/listJudges').then(res => {
+
+            this.setState({Judges: res.data,loading:false});
         })
     }
 
     handleclick(id,id1){
 
 
-           const judges=this.props.deleteJudge(id, id1);
+        axios.delete('http://localhost:6003/judges/'+id+'/'+id1
+        ).then((res)=>{
+
+                   console.log(res.data.done)
+this.loadJudges()
+
+           }).catch(()=>{
+
+           })
 
 
-              console.log(judges)
+
+
 
 
     }
@@ -60,7 +73,7 @@ class JudgeList extends React.Component{
 
                         <div className="panel">
                             <div className="panel-heading">
-                                <h3 className="panel-title">     <a href="/Judges/demandes">Judges</a>->all</h3>
+                                <h3 className="panel-title">     <a href="/Judges/demandes"><strong>Judges </strong></a><strong>->all</strong></h3>
                             </div>
                             <div className="panel-body">
                                 <table ref="table2" id="demo-dt-basic" className="table table-striped table-bordered">
@@ -88,10 +101,10 @@ class JudgeList extends React.Component{
 
 
                                                     href="/"
-                                                    className="btn btn-success"
+                                                    className="btn btn-info"
                                                 >Delete
                                                 </button>
-                                                <button className="btn btn-danger">  <Link to={"/Judges/editCompte/"+d._id}params={{ id1: d._id}}>Edit</Link>
+                                                <button className="btn btn-pink">  <Link to={"/Judges/editCompte/"+d._id}params={{ id1: d._id}}>Edit</Link>
                                                 </button>
 
                                                 </td>
@@ -103,7 +116,7 @@ class JudgeList extends React.Component{
                                     </tbody>
                                 </table>
 
-
+                          <strong>  <Link to={"/Judges/sendEmail/"}>Add a judge</Link></strong>
 
 
                             </div>

@@ -42,27 +42,10 @@ router.get('/',(req,res)=>{
 
 //ajout session fergha
 router.post('/add',function (req,res) {
-    console.log("ajout sessions")
-
-    var Sessio512=new Session({
-        Name:'Session Avril',
-        Status: "En cours",
-        StartDate:'2019-04-01',
-        EndDate:'2019-04-30'
 
 
-    });
-
-    Sessio512.save(function (err, Session) {
-        if (err) {
-            res.send(err)
-        }
-        else
-            res.send(Session)
-    });
-
-    var Session23=new Session({
-        Name:'Session Mars',
+    var Session1=new Session({
+        Name:'Session 1',
         Status: "En cours",
         StartDate:'2019-05-01',
         EndDate:'2019-05-30'
@@ -72,7 +55,7 @@ router.post('/add',function (req,res) {
 
 
 
-    Session23.save();
+    Session1.save();
 
 });
 

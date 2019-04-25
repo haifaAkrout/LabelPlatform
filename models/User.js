@@ -21,7 +21,7 @@ var userSchema=new mongoose.Schema({
             message:'{VALUE}is not a valid email'
         }},
     Password:{type:String},
-   // Status:{type:String,required:true}
+    // Status:{type:String,required:true}
 })
 var adminSchema=extend(userSchema,{})
 var judgeSchema=extend(userSchema,{
@@ -31,12 +31,13 @@ var judgeSchema=extend(userSchema,{
     YearsOfExperience:{type:Number},
     Spécialité:{type:String},
     createdBy:{ type: mongoose.Schema.ObjectId, ref: 'adminSchema' },
-    nbredeVotes:{type:Number}
+    nbredeVotes:{type:Number},
+    password2:{type:String}
 
 
 })
 var chargeSchema=extend(userSchema,{
-   
+
     createdBy:{ type: mongoose.Schema.ObjectId, ref: 'adminSchema' }
 
 })

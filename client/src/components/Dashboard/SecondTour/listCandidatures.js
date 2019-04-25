@@ -16,7 +16,7 @@ export  default  class listCandidatures extends React.Component{
         this.toggle = this.toggle.bind(this);
         this.state = {
             activeTab: '1',
-
+SessionId:0,
             Sessions:[],
             NomSession:'',
             DateEnd:''
@@ -37,7 +37,8 @@ export  default  class listCandidatures extends React.Component{
     componentDidMount() {
         const {id1}=this.props.match.params
         axios.get('http://localhost:6003/candidatures/'+id1).then(res=>{
-            console.log(res.data)
+            console.log(res.data.Project)
+            this.setState({SessionId:res.data._id});
             this.setState({NomSession:res.data.Name});
             this.setState({Sessions:res.data.Project});
             this.setState({DateEnd:res.data.EndDate})
@@ -51,7 +52,7 @@ export  default  class listCandidatures extends React.Component{
 
     render(){
         const formattedDate = moment(this.state.DateEnd).format("LLL");
-
+        const {Sessions} = this.state;
         return (
 
             < div
@@ -160,31 +161,39 @@ export  default  class listCandidatures extends React.Component{
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {this.state.Sessions.map(function(d, idx){
-                                        if (d.createdBy.Status==="non Traité")
-                                        return (
+                                    {Sessions.map(d=> {
 
-                                            <tr key={idx}>
+                                        if (d.createdBy.Status === "non Traité")
+                                            return (
 
-
-                                                <td>{d.createdBy.TypeLabel.type}</td>
-                                                <td>{d.Name }</td>
-
-                                                <td>{d.members[0].Email}</td>
-                                                <td>{d.createdBy.TypeLabel.SoumissionDate}</td>
-                                                <td>{d.createdBy.review.type}</td>
-                                                <td>{d.createdBy.Status}</td>
-                                               <td> <center>
-                                                   <button className="btn btn-info btn-lg" type="submit"> <Link to={"/SecondTour/5ca6d387cf19b7956820d8f4/Details/"+d._id} params={{ id1: d._id,id2:'5ca6d387cf19b7956820d8f4'}}>Juger</Link></button>
-                                               </center></td>
+                                                <tr key={d._id}>
 
 
-                                            </tr>
-                                        )
+                                                    <td>{d.createdBy.TypeLabel.type}</td>
+                                                    <td>{d.Name}</td>
+
+                                                    <td>{d.members[0].Email}</td>
+                                                    <td>{d.createdBy.TypeLabel.SoumissionDate}</td>
+                                                    <td>{d.createdBy.review.type}</td>
+                                                    <td>{d.createdBy.Status}</td>
+                                                    <td>
+                                                        <center>
+                                                            <button className="btn btn-info btn-lg" type="submit"><Link
+                                                                to={"/SecondTour/" + this.state.SessionId + "/Details/" + d._id}
+                                                                params={{
+                                                                    id1: d._id,
+                                                                    id2: '5ca6d387cf19b7956820d8f4'
+                                                                }}>Juger</Link></button>
+                                                        </center>
+                                                    </td>
 
 
+                                                </tr>
+                                            )
 
-                                    }.bind(this))}
+
+                                    }
+                                    )}
 
 
                                     </tbody>
@@ -217,11 +226,11 @@ export  default  class listCandidatures extends React.Component{
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                {this.state.Sessions.map(function(d, idx){
+                                                {Sessions.map(d=>{
                                                     if (d.createdBy.Status==="Traité")
                                                         return (
 
-                                                            <tr key={idx}>
+                                                            <tr key={d._id}>
                                                                 <td>{d.createdBy.TypeLabel.type}</td>
                                                                 <td>{d.Name }</td>
 
@@ -238,7 +247,7 @@ export  default  class listCandidatures extends React.Component{
 
 
 
-                                                }.bind(this))}
+                                                })}
 
 
                                                 </tbody>
@@ -308,11 +317,11 @@ export  default  class listCandidatures extends React.Component{
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                {this.state.Sessions.map(function(d, idx){
+                                                {Sessions.map(d=> {
                                                     if (d.createdBy.review.type==="negatif" && d.createdBy.Status==="non Traité")
                                                         return (
 
-                                                            <tr key={idx}>
+                                                            <tr key={d._id}>
                                                                 <td>{d.createdBy.TypeLabel.type}</td>
                                                                 <td>{d.Name }</td>
 
@@ -328,7 +337,7 @@ export  default  class listCandidatures extends React.Component{
 
 
 
-                                                }.bind(this))}
+                                                })}
 
 
                                                 </tbody>
@@ -402,7 +411,7 @@ export  default  class listCandidatures extends React.Component{
                                                     if (d.createdBy.review.type==="neutre" && d.createdBy.Status==="non Traité")
                                                         return (
 
-                                                            <tr key={idx}>
+                                                            <tr key={d._id}>
                                                                 <td>{d.createdBy.TypeLabel.type}</td>
                                                                 <td>{d.Name }</td>
 
@@ -490,11 +499,11 @@ export  default  class listCandidatures extends React.Component{
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                {this.state.Sessions.map(function(d, idx){
+                                                {Sessions.map(d=> {
                                                     if (d.createdBy.review.type==="positif" && d.createdBy.Status==="non Traité")
                                                         return (
 
-                                                            <tr key={idx}>
+                                                            <tr key={d._id}>
                                                                 <td>{d.createdBy.TypeLabel.type}</td>
                                                                 <td>{d.Name }</td>
 
@@ -510,7 +519,7 @@ export  default  class listCandidatures extends React.Component{
 
 
 
-                                                }.bind(this))}
+                                                })}
 
 
                                                 </tbody>

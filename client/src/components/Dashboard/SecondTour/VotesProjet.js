@@ -49,7 +49,7 @@ class VotesProjet extends React.Component{
     componentDidMount() {
         const {id2}=this.props.match.params
         axios.get('http://localhost:6003/candidatures/'+id2).then(res=>{
-            console.log(res.data)
+            console.log(res.data.Project)
             this.setState({NomSession:res.data.Name});
             this.setState({Sessions:res.data.Project});
             this.setState({DateEnd:res.data.EndDate})
@@ -69,7 +69,7 @@ class VotesProjet extends React.Component{
 
 
         const formattedDate = moment(this.state.DateEnd).format("LLL");
-        const {Projects} = this.state;
+        const {Sessions} = this.state;
 
         return (
 
@@ -150,12 +150,14 @@ class VotesProjet extends React.Component{
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {this.state.Sessions.map(d=>{
+
+
+                                        {Sessions.map(d=>{
 
 
                                                 return (
 
-                                                    <tr >
+                                                    <tr  key={d._id}>
                                                         <td>{d.createdBy.TypeLabel.type}</td>
                                                         <td>{d.Name }</td>
 
@@ -202,30 +204,9 @@ class VotesProjet extends React.Component{
 
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        {this.state.Sessions.map(d=>{
-
-
-                                            return (
-
-                                                <tr >
-                                                    <td>{d.createdBy.review2[0].createdBy}</td>
-                                                    <td>{d.nbredeVotes}</td>
-
-                                                    <td>{d.members[0].Email}</td>
 
 
 
-
-                                                </tr>
-                                            )
-
-
-
-                                        })}
-
-
-                                        </tbody>
                                     </table>
 
 

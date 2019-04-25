@@ -1,7 +1,9 @@
 
 import React, { Component, Suspense } from 'react';
 import { connect } from "react-redux";
+import 'react-notifications/lib/notifications.css';
 
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 import {
     addCompte,
 
@@ -10,6 +12,16 @@ import Header from '../../../containers/Header.js';
 import ContentContainer from '../../../containers/ContentContainer.js';
 import Nav from '../../../containers/Nav.js';
 class AddCompte extends Component{
+    createNotification = (type) => {
+        return () => {
+            switch (type) {
+                case 'success':
+                    NotificationManager.success('your account has been added successfully', 'Title here');
+                    break;
+
+            }
+        };
+    };
   loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
 
     constructor(props) {
@@ -112,14 +124,14 @@ class AddCompte extends Component{
 
                                 <div className="form-group">
                                     <label className="col-md-3 control-label" htmlFor="demo-text-input">LastName</label>
-                                    <div className="col-md-9">
+                                    <div className="col-md-4">
                                         <input type="text" name="LastName" onChange={this.handleLastNameChange} className="form-control" placeholder="LastName"/>
 
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <label className="col-md-3 control-label" htmlFor="demo-text-input">FirstName</label>
-                                    <div className="col-md-9">
+                                    <div className="col-md-4">
                                         <input type="text" name="FirstName" onChange={this.handleFirstNameChange} className="form-control"
                                                placeholder="FirstName"/>
 
@@ -127,43 +139,43 @@ class AddCompte extends Component{
                                 </div>
                                 <div className="form-group">
                                     <label className="col-md-3 control-label" htmlFor="demo-text-input">Email</label>
-                                    <div className="col-md-9">
+                                    <div className="col-md-4">
                                         <input type="text" name="Email" onChange={this.handleEmailChange} className="form-control" placeholder="Email"/>
 
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <label className="col-md-3 control-label" htmlFor="demo-text-input">Password</label>
-                                    <div className="col-md-9">
-                                        <input type="password" name="Password" onChange={this.handlePasswordChange} className="form-control" placeholder=""/>
+                                    <div className="col-md-4">
+                                        <input type="password" name="Password" onChange={this.handlePasswordChange} className="form-control" placeholder="Password" />
 
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <label className="col-md-3 control-label" htmlFor="demo-text-input">YearsOfExperience</label>
-                                    <div className="col-md-9">
-                                        <input type="Number" name="YearsOfExperience" onChange={this.handleYearsOfExperienceChange} className="form-control" placeholder=""/>
+                                    <div className="col-md-4">
+                                        <input type="Number"  name="YearsOfExperience" onChange={this.handleYearsOfExperienceChange} className="form-control" placeholder="years of experience"/>
 
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <label className="col-md-3 control-label" htmlFor="demo-text-input">Speciality</label>
-                                    <div className="col-md-9">
-                                        <input type="tetx" name="Spécialité" onChange={this.handleSpécialitéChange} className="form-control" placeholder=""/>
+                                    <div className="col-md-4">
+                                        <input type="text"  name="Spécialité" onChange={this.handleSpécialitéChange} className="form-control"  placeholder="specialité"/>
 
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <label className="col-md-3 control-label" htmlFor="demo-text-input">phone Number</label>
-                                    <div className="col-md-9">
-                                        <input type="tetx" name="Telephone" onChange={this.handleTelephoneChange} className="form-control" placeholder=""/>
+                                    <div className="col-md-4">
+                                        <input type="tetx" name="Telephone" onChange={this.handleTelephoneChange} className="form-control" placeholder="Telephone"/>
 
                                     </div>
                                 </div>
-                                <button type="submit" className="btn btn-info btn-lg" name="signup" value="Submit">
-                                    Submit
-                                </button>
-                                <header></header>
+                                <NotificationContainer/>
+                            <center><button type="submit" onClick={this.createNotification('success')} className="btn btn-info " name="signup" value="Submit">
+                                    Add
+                                </button></center>
 
                             </form>
                         </div>

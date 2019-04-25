@@ -73,6 +73,7 @@ class Question extends React.Component {
                         <form onSubmit={this.handleFormSubmit}>
                             {
                                 Questions.map((question) => {
+                                    if(question.type==="QuestionJury")
                                     return (
                                         <div>
                                             {question.text}
