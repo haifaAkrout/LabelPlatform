@@ -11,53 +11,89 @@ import './login.css';
 import logo from './logo_label_blanc.png';
 
 
-class login extends React.Component{
+export default class login extends React.Component{
 
     constructor(props) {
         super(props);
         this.state = {
-
-
-            Email:'',
-            Password:'',
+            username:'',
+            password:'',
+            error: 'true',
+            color_user_input:'',
+            color_pwd_input:'',
+            error_msg: '',
             errors: {},
-
-
         } ;
 
-        this.handleEmailChange = this.handleEmailChange.bind(this);
-        this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
 
-
-        this.handleSubmit = this.handleSubmit.bind(this);
+        // this.handleUsernameChange = this.handleUsernameChange.bind(this);
+        // this.handleEmailChange = this.handleEmailChange.bind(this);
+        // this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
 
     };
 
-    handleEmailChange (evt) {
-        this.setState({ Email: evt.target.value });
-    }
 
-    handlePasswordChange (evt) {
-        this.setState({ Password: evt.target.value });
-    }
-    handleSubmit=event=> {
-event.preventDefault()
-        const user = {
+handleChange(event) {
+       if (event.target.name === 'username')
+          this.setState({username: event.target.value})
 
-            Email: this.state.Email,
-            Password: this.state.Password,}
-            axios.post('http://localhost:6003/judges/login', user)
-                .then(res => {
-                    const {token} = res.data;
-                    localStorage.setItem('jwtToken', token);
-                    setAuthToken(token);
-                    const decoded = jwt_decode(token);
-                   const user1 =setCurrentUser(decoded)
-                   console.log(user1)
-                })
-        this.props.history.push("../Dashboard");
+       if (event.target.name === 'password')
+          this.setState({password: event.target.value})
+     
+}
 
-    }
+ handleClick = event => {
+   console.log(this.state.username)
+   console.log(this.state.password)
+   
+   if(this.state.username.length == 0){
+       console.log("vide")
+   this.setState({color_user_input: '#ff0000ba'})
+   }else {
+   this.setState({color_user_input: 'rgb(39, 129, 42)'})  
+   }
+
+    if(this.state.password.length == 0){
+       console.log("vide")
+   this.setState({color_pwd_input: '#ff0000ba'})
+   }else {
+   this.setState({color_pwd_input: 'rgb(39, 129, 42)'})  
+   }
+
+   if(this.state.password.length != 0 && this.state.username.length !=0){
+            this.setState({error: 'true'})
+          this.setState({error_msg: ''})
+   }else{
+          this.setState({error: ''})
+          this.setState({error_msg: 'Password / Username is required!'})
+   }
+
+
+}
+ 
+
+
+
+//     handleSubmit=event=> {
+// event.preventDefault()
+//         const user = {
+
+//             Email: this.state.Email,
+//             Password: this.state.Password,}
+//             axios.post('http://localhost:6003/judges/login', user)
+//                 .then(res => {
+//                     const {token} = res.data;
+//                     localStorage.setItem('jwtToken', token);
+//                     setAuthToken(token);
+//                     const decoded = jwt_decode(token);
+//                    const user1 =setCurrentUser(decoded)
+//                    console.log(user1)
+//                 })
+//         this.props.history.push("../Dashboard");
+
+//     }
 
 
 
@@ -70,6 +106,7 @@ event.preventDefault()
           <a href="/" className="aligncenter">
             <img className="logo_signin logo_div" src={logo} /><br />
           </a>
+          <div hidden={this.state.error} className="alert alert-danger" role="alert">{this.state.error_msg}</div>
           <input id="tab-1" type="radio" name="tab" className="sign-in" defaultChecked /><label htmlFor="tab-1" className="tab">Sign In</label>
           <input id="tab-2" type="radio" name="tab" className="for-pwd" /><label htmlFor="tab-2" className="tab">Forgot Password</label>
           <div className="login-form">
@@ -80,21 +117,21 @@ event.preventDefault()
               </div>
               <div className="hr2" />
               <div className="group">
-                <label htmlFor="user" className="label">Username or Email</label>
-                <input id="user" type="text" className="input" />
+                <label htmlFor="username" className="label">Username or Email</label>
+                <input id="username" type="text" style={{backgroundColor: this.state.color_user_input}} name="username" className="input" value={this.state.username} onChange={this.handleChange.bind(this)}/>
               </div>
               <div className="group">
-                <label htmlFor="pass" className="label">Password</label>
-                <input id="pass" type="password" className="input" data-type="password" />
+                <label htmlFor="password" className="label">Password</label>
+                <input id="password" name="password"  type="password" style={{backgroundColor: this.state.color_pwd_input}} className="input" data-type="password" value={this.state.password} onChange={this.handleChange.bind(this)} />
               </div>
               <div className="group">
-                <button  className="button">Sign In</button>
+                <button  className="button" onClick={this.handleClick} >Sign In</button>
               </div>
             </div>
             <div className="for-pwd-htm">
               <div className="group">
-                <label htmlFor="user" className="label">Username or Email</label>
-                <input id="user" type="text" className="input" />
+                <label htmlFor="username_fg" className="label">Username or Email</label>
+                <input id="username_fg" type="text" className="input" />
               </div>
               <div className="group">
                 <button  className="button">Reset Password</button>
@@ -108,12 +145,12 @@ event.preventDefault()
   
 
 }}
-const mapDispatchToProps = {
-    loginUser
+// const mapDispatchToProps = {
+//     loginUser
 
-};
+// };
 
-export default connect(
-    null,
-    mapDispatchToProps
-)(login);
+// export default connect(
+//     null,
+//     mapDispatchToProps
+// )(login);
