@@ -67,7 +67,7 @@ event.preventDefault()
 
       <div className="login-wrap">
         <div className="login-html">
-          <a href="#" className="aligncenter">
+          <a href="/" className="aligncenter">
             <img className="logo_signin logo_div" src={logo} /><br />
           </a>
           <input id="tab-1" type="radio" name="tab" className="sign-in" defaultChecked /><label htmlFor="tab-1" className="tab">Sign In</label>

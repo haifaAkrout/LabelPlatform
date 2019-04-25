@@ -15,7 +15,7 @@ export  default  class register extends React.Component{
         return (
            <div className="login-wrap signin_wrap">
         <div className="login-html">
-          <a href="#" className="aligncenter">
+          <a href="/" className="aligncenter">
             <img className="logo_h_91 signin_html_wrap" src={logo} /><br />
           </a>
           <input id="tab-1" type="radio" name="tab" className="sign-in" defaultChecked /><label htmlFor="tab-1" className="tab">Sign Up</label>

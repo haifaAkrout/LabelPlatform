@@ -6,6 +6,7 @@ import EditJudge from "./components/Dashboard/Judges/EditJudge";
 import JudgeList from "./components/Dashboard/Judges/DemandesJudges";
 import login from "../src/components/login/login";
 import register from "../src/components/login/register";
+import home from "../src/components/Home/home";
 import listCandidatures from "./components/Dashboard/SecondTour/listCandidatures";
  import DetailsCandidaturesAJuger from "./components/Dashboard/SecondTour/DetailsCandidatureAJuger";
  import VotesProjet from "./components/Dashboard/SecondTour/VotesProjet";
@@ -28,6 +29,7 @@ class App extends Component {
     return ( <Provider store={store}>
           <Router>
             <React.Fragment>
+                <Route path="/" exact component={home} />
                 <Route path="/login" exact component={login} />
                 <Route path="/Dashboard" exact component={Dashboard} />
                 <Route path="/register" exact component={register} />

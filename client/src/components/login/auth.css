@@ -4,7 +4,7 @@ body {
     background:#c8c8c8;
     background:url(material-design-4k-2048x1152.jpg) fixed;
     background-size: cover;
-    font:600 16px/18px 'Open Sans',sans-serif;
+    /* font:600 16px/18px 'Open Sans',sans-serif; */
 }
 :after,:before{box-sizing:border-box}
 .clearfix:after,.clearfix:before{content:'';display:table}
