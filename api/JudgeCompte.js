@@ -198,14 +198,63 @@ router.delete('/:id/:id1',function (req, res) {
 
 
 router.post('/login',function (req, res) {
+    const Email = req.body.Email;
+    const Password = req.body.Password;
+
+    Judge.findOne({Email})
+        .then(Judge => {
+
+            bcrypt.compare(Password, Judge.Password)
+                .then(isMatch => {
+                    if(isMatch) {
+                        console.log("jjj")
+                        const payload = {
+                            id: Judge._id,
+                            name: Judge.FirstName,
+
+                        }
+                        jwt.sign(payload, 'secret', {
+                            expiresIn: 3600
+                        }, (err, token) => {
+                            if(err) console.error('There is some error in token', err);
+                            else {
+                                res.json({
+                                    success: true,
+                                    token: `Bearer ${token}`
+                                });
+                            }
+                        });
+                    }
+
+                });
+        });
+
+
+
+
     Judge.findOne({ Email: req.body.Email},function (err, Judge) {
         console.log(Judge.Password)
         console.log(req.body.Password)
 
         if (bcrypt.compareSync(req.body.Password.toString(),Judge.Password)) {
-            console.log('Judge found', Judge);
-            var token = jwt.sign({Email: Judge.Email}, 's3cr3t', {expiresIn: 3600});
-            res.status(200).json({success: true, token: token});
+            console.log('user found', Judge);
+            console.log("jjj")
+            const payload = {
+                id: Judge._id,
+                name: Judge.FirstName,
+
+            }
+            jwt.sign(payload, 'secret', {
+                expiresIn: 3600
+            }, (err, token) => {
+                if(err) console.error('There is some error in token', err);
+                else {
+                    res.json({
+                        success: true,
+                        token: `Bearer ${token}`
+                    });
+                }
+            });
         } else {
             res.status(401).json('unauthorized');
         }

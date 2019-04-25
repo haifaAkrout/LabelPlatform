@@ -1,5 +1,7 @@
 import axios from 'axios';
-
+import { GET_ERRORS,SET_CURRENT_USER } from '../../actions/types';
+import setAuthToken from '../../setAuthToken';
+import jwt_decode from 'jwt-decode';
 export const sendemail= (email) => {
     return async dispatch => {
         const response = axios.post('http://localhost:6003/sendEmailToJudge',email
@@ -110,4 +112,26 @@ export const appelerCandidature= (idJudge,idCandidature,numCandidature,Review) =
         });
     };
 };
+export const loginUser = (judge) => {
+    return async dispatch => {
+        axios.post('http://localhost:6003/judges/login', judge)
+            .then(res => {
+                const {token} = res.data;
+                localStorage.setItem('jwtToken', token);
+                setAuthToken(token);
+                const decoded = jwt_decode(token);
+                setCurrentUser(decoded)
+                return dispatch({
+                    type: "GET_USER",
+                    payload: res.data
+                });
+            })
+    }
 
+}
+export const setCurrentUser = decoded => {
+    return {
+        type: SET_CURRENT_USER,
+        payload: decoded
+    }
+}

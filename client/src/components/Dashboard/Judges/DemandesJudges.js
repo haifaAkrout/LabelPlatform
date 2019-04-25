@@ -1,13 +1,16 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import {deleteJudge,
+import {
+    deleteJudge, setCurrentUser,
 } from "../../../store/actions";
 import {connect} from "react-redux";
 import Header from '../../../containers/Header.js';
 import ContentContainer from '../../../containers/ContentContainer.js';
 import Nav from '../../../containers/Nav.js';
 import {NotificationManager} from "react-notifications";
+import setAuthToken from "../../../setAuthToken";
+import jwt_decode from "jwt-decode";
 class JudgeList extends React.Component{
     constructor(props) {
         super(props);
@@ -43,6 +46,13 @@ class JudgeList extends React.Component{
         };
     };
     componentDidMount() {
+
+
+        console.log(localStorage.getItem('jwtToken'));
+      //   setAuthToken(localStorage.getItem("token"));
+        const decoded = jwt_decode(localStorage.getItem('jwtToken'));
+        const user1 =setCurrentUser(decoded)
+        console.log(user1.id)
         this.loadJudges();
     }
 

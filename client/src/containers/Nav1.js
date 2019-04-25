@@ -5,12 +5,12 @@ import React from 'react';
 import axios from "axios";
 
 
-class Nav extends React.Component {
+class Nav1 extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-          Sessions:[]
+            Sessions:[]
         } ;
 
 
@@ -130,9 +130,9 @@ class Nav extends React.Component {
 
 
                                             {this.state.Sessions.map(d=> (
-                                            <li>
+                                                <li>
 
-                                                <Link to={"/SecondTour/"+d._id}params={{ id1: d._id}}>{d.Name}</Link>
+                                                    <Link to={"/SecondTour/"+d._id}params={{ id1: d._id}}>{d.Name}</Link>
                                                 </li>))}
 
 
@@ -204,4 +204,4 @@ class Nav extends React.Component {
 }
 
 
-export default Nav;
+export default Nav1;

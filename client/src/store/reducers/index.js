@@ -1,4 +1,8 @@
-const initialState = { count:[]};
+import { GET_ERRORS } from '../../actions/types';
+import { SET_CURRENT_USER } from '../../actions/types';
+
+const initialState = { count:[],
+    isAuthenticated: false,};
 
 
 export default (state = initialState, action) => {
@@ -51,6 +55,19 @@ export default (state = initialState, action) => {
                 candidature: action.payload,
 
             };
+        case "GET_USER":
+            return{
+                ...state,
+            user:action.payload}
+
+        case SET_CURRENT_USER:
+            return {
+                ...state,
+                isAuthenticated: true,
+                user: action.payload,
+                auth:action.payload
+            }
+
 
         default:
             return state;
