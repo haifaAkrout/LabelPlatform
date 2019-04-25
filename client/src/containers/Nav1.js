@@ -137,6 +137,17 @@ class Nav1 extends React.Component {
 
 
                                         </ul>
+                                        <ul className="collapse">
+
+
+                                            {this.state.Sessions.map(d=> (
+                                                <li>
+
+                                                    <Link to={"/votes/"+d._id}params={{ id1: d._id}}>{d.Name}</Link>
+                                                </li>))}
+
+
+                                        </ul>
                                     </li>
 
 

@@ -52,7 +52,7 @@ event.preventDefault()
                    const user1 =setCurrentUser(decoded)
                    console.log(user1)
                 })
-
+        this.props.history.push("../Dashboard");
 
     }
 

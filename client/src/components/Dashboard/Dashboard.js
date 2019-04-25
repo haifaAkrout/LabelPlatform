@@ -1,5 +1,6 @@
 
 import React, { Component, Suspense } from 'react';
+import Nav1 from '../../containers/Nav1.js';
 import Header from '../../containers/Header.js';
 import ContentContainer from '../../containers/ContentContainer';
 import Nav from '../../containers/Nav.js';
@@ -17,7 +18,7 @@ export default class Dashboard extends Component{
                 <div className="boxed">
 <ContentContainer/>
 
-                  <Nav/>
+             <Nav1/>
 
                 </div>
 

@@ -80,11 +80,27 @@ SessionId:0,
                                 </p>
                             </div>
 
+                            {Sessions.map(d=> {
 
-                           <center> <div className="text-center">25%</div>
-                            <Progress color="#31b0d5" value="25" />
-                           </center>
+var i=0
+                                if (d.createdBy.countPositif !== 0 || d.createdBy.countNegatif!==0) {
+                                    {
+                                        i++
+                                        return(
+                                        <center>
+                                            <div className="text-center"><span>{i}% Completés </span><span></span><span></span>{i}/{Sessions.length} projects</div>
+                                            <Progress color="#31b0d5" value={Sessions.length}/>
+                                        </center>)
+                                    }
+                                }
+                                else
+                                    return(
+                                        <center>
+                                            <div className="text-center">{Sessions.length}%</div>
+                                            <Progress color="#31b0d5" value={Sessions.length}/>
+                                        </center>)
 
+                            })}
 
                             <div className="panel-body">
                                 <Nav tabs>
