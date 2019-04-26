@@ -8,3 +8,30 @@ Comme première étape et afin de lancer rapidement le programme, on commence pa
 Il faut néanmoins prendre en compte les évolutions futures de la plateforme lors de la conception et des choix techniques.
 Le présent document concerne la mise en place du portail des startups dont le lancement est une condition sinéquanone pour la réception et la gestion des candidatures des startups.
 
+
+Exemple of some API URL specifications for interacting with documents and subdocuments
+
+Action	Method	URL path	Parameters	Example
+Get all users	GET	/users/getAll	-	200 OK
+{
+"error": false,
+"users": [{
+"_id": "5ca6c0b6d5e20a55c82fe35c",
+"FirstName": "seif",
+"LastName": "ben salem",
+"Email": "nader@gmail.com",
+"created_at": "2019-04-05T02:43:02.497Z",
+"__v": 0,"id": "5ca6c0b6d5e20a55c82fe35c"
+}]}
+-------------------
+Add new user	
+POST	/users/add	
+params :
+FirstName
+LastName
+Email
+Password	
+Response :200 ok
+{
+    "error": false
+}
