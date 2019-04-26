@@ -439,7 +439,7 @@ p {
 	position: absolute;
 	overflow: scroll;
 	overflow-x: hidden;
-	top: 0;
+	top: 18px;
 	right: 0;
 	bottom: 0;
 	left: 0
@@ -466,6 +466,18 @@ p {
 	position: relative;
 	margin: 0;
 	border-radius: 0
+}
+.btm_0{
+	    margin-top: 0!important;
+}
+
+.txt_left{
+	text-align: left;
+}.txt_center{
+	text-align: center;
+}
+.h_108{
+	    height: 108px !important;
 }
 .nano-hide.nano>.nano-pane {
 	display: none !important

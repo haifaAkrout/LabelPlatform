@@ -9,11 +9,18 @@ import { GET_ERRORS,SET_CURRENT_USER } from '../../actions/types';
 import './auth.css';
 import './login.css';
 import logo from './logo_label_blanc.png';
+import { Redirect } from 'react-router-dom'
 
 
 export default class login extends React.Component{
 
+
+     
+  
+
     constructor(props) {
+
+
         super(props);
         this.state = {
             username:'',
@@ -63,8 +70,36 @@ handleChange(event) {
    }
 
    if(this.state.password.length != 0 && this.state.username.length !=0){
-            this.setState({error: 'true'})
-          this.setState({error_msg: ''})
+      axios.post('http://localhost:6003/login', {email:this.state.username , password:this.state.password})
+                .then(res => {
+                   //  const {token} = res.data;
+                   //  localStorage.setItem('jwtToken', token);
+                   //  setAuthToken(token);
+                   //  const decoded = jwt_decode(token);
+                   // const user1 =setCurrentUser(decoded)
+                   console.log(res.data)
+                   if(res.data.error == false){
+                       this.setState({error: 'true'})
+                        localStorage.setItem('user_id', res.data.user_id);
+                        localStorage.setItem('user_email', res.data.user.Email);
+                        localStorage.setItem('user_fistname', res.data.user.FirstName);
+                        localStorage.setItem('user_lastname', res.data.user.LastName);
+                        console.log(res.data)
+                        
+                       
+                        this.props.history.push("/Dashboard");
+                      
+
+                   }else{
+
+
+                        this.setState({error: ''})
+                         this.setState({error_msg: res.data.info.error})
+                        //this.reset() 
+                   }
+                   console.log(res.data)
+                })
+   
    }else{
           this.setState({error: ''})
           this.setState({error_msg: 'Password / Username is required!'})
@@ -98,7 +133,8 @@ handleChange(event) {
 
 
     render(){
-
+      if(localStorage.user_id)
+        return <Redirect to='/Dashboard' />
         return (
 
       <div className="login-wrap">
@@ -111,7 +147,7 @@ handleChange(event) {
           <input id="tab-2" type="radio" name="tab" className="for-pwd" /><label htmlFor="tab-2" className="tab">Forgot Password</label>
           <div className="login-form">
             <div className="sign-in-htm">
-              <div className="text-center social-btn">
+              <div className="text-center social-btn" hidden='true'>
                 <a href="#" className="btn btn-primary btn-block"><i className="fa fa-facebook" /> Sign in with <b>Facebook</b></a>
                 <a href="#" className="btn btn-danger btn-block"><i className="fa fa-google" /> Sign in with <b>Google</b></a>
               </div>

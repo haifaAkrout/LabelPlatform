@@ -24,6 +24,14 @@ var JudgesRouter=require('./api/JudgeCompte')
 var sessionsRouter=require('./api/Session')
 var responsescandidat=require('./api/ResponseCandidat')
 var app = express();
+var passport = require('passport');
+app.use(passport.initialize());
+app.use(passport.session());
+require('./routes/passport')(passport);
+ 
+//var authRouter = require('./routes/auth');
+
+
 var db= require('./models/db');
 app.use(express.static(__dirname));
 
@@ -32,15 +40,18 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'twig');
 app.use(cors());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(express.static('public'));
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+//app.use('/auth', authRouter);
+require('./routes/auth')(app, passport);
+require('./routes/users')(app);
+// app.use('/users', usersRouter);
 app.use('/',emailRouter);
 app.use('/login',userRouter);
 app.use('/projects',projectsRouter);

@@ -3,12 +3,15 @@ import React from 'react';
 import './home.css';
 
 import logo from './logo_label_blanc.png';
+import { Redirect } from 'react-router-dom'
 
 
 export default class home extends React.Component{
 
 
     render(){
+       if(localStorage.user_id)
+        return <Redirect to='/Dashboard' />
 
         return (
 

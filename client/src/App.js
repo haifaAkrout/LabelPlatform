@@ -6,12 +6,17 @@ import EditJudge from "./components/Dashboard/Judges/EditJudge";
 import JudgeList from "./components/Dashboard/Judges/DemandesJudges";
 import login from "../src/components/login/login";
 import register from "../src/components/login/register";
+import NotFoundPage from "../src/components/NotFoundPage/NotFoundPage";
 import home from "../src/components/Home/home";
+import profile from "../src/components/profile/profile";
+import updateprofile from "../src/components/profile/updateprofile";
+import disableprofile from "../src/components/profile/disableprofile";
+import logout from "../src/components/Home/logout";
 import listCandidatures from "./components/Dashboard/SecondTour/listCandidatures";
  import DetailsCandidaturesAJuger from "./components/Dashboard/SecondTour/DetailsCandidatureAJuger";
  import VotesProjet from "./components/Dashboard/SecondTour/VotesProjet";
 import Dashboard from "./components/Dashboard/Dashboard"
-
+import { Redirect, Switch } from 'react-router-dom'
  import listeSessions from "./components/Dashboard/FirstTour/listSessions"
 
 import Front from "./components/Front/Front";
@@ -21,17 +26,40 @@ import Question from "./components/Front/Question"
 import { Provider } from 'react-redux'
 import store from './store';
 
-
+ // <Redirect to="/error"/>
 import './App.css';
 
+var isAuthenticated = false;
+
+ if(localStorage.user_id)
+        isAuthenticated = true
+      
+const PrivateRoute = ({ component: Component, ...rest }) => (
+ 
+  <Route {...rest} render={(props) => (
+    isAuthenticated === true
+      ? <Component {...props} />
+      : <Redirect to='/login' />
+  )} />
+)      
+
 class App extends Component {
+
+
+
   render() {
-    return ( <Provider store={store}>
+
+      return ( <Provider store={store}>
           <Router>
             <React.Fragment>
+          <Switch>
                 <Route path="/" exact component={home} />
                 <Route path="/login" exact component={login} />
-                <Route path="/Dashboard" exact component={Dashboard} />
+                <PrivateRoute path="/Dashboard" exact component={Dashboard} />
+                <PrivateRoute path="/profile" exact component={profile} />
+                <PrivateRoute path="/update/profile" exact component={updateprofile} />
+                <PrivateRoute path="/disable/profile" exact component={disableprofile} />
+                <Route path="/logout" exact component={logout} />
                 <Route path="/register" exact component={register} />
               <Route path="/Judges/sendEmail" exact component={sendEmail} />
                 <Route path="/Judges/addCompte/" exact component={AddCompte} />
@@ -41,15 +69,21 @@ class App extends Component {
                 <Route path="/Front" exact component={Front} />
                 <Route path="/Questionnaire" exact component={front2} />
                 <Route path="/sessions/listeSessions" exact component={listeSessions}/>
-
+                 <PrivateRoute path='/protected' component={Dashboard} />
 
                 <Route path="/Question" exact component={Question} />
                 <Route path="/SecondTour/:id2/Details/:id1" exact component={DetailsCandidaturesAJuger} />
                 <Route path="/votes/:id2" exact component={VotesProjet } />
+                <Route path="/error" exact component={NotFoundPage } />
+       
+               
+            </Switch>
             </React.Fragment>
           </Router>
         </Provider>
-    );
+    
+);
+
 
   }
 }

@@ -35,7 +35,7 @@ class Nav extends React.Component {
                     <a href="index.html" className="navbar-brand">
                         <i className="fa fa-forumbee brand-icon"></i>
                         <div className="brand-title">
-                            <span className="brand-text">WOW</span>
+                            <span className="brand-text">WOW22</span>
                         </div>
                     </a>
                 </div>

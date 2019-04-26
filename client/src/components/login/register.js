@@ -1,8 +1,9 @@
 import React from 'react';
 import './auth.css';
 import './register.css';
-
+import axios from "axios";
 import logo from './logo_label_blanc.png';
+import { Redirect } from 'react-router-dom'
 
 export  default  class register extends React.Component{
     
@@ -50,6 +51,15 @@ handleChange(event) {
        if (event.target.name === 'cfpassword')
           this.setState({cfpassword: event.target.value})
      
+}
+
+reset(){
+                         this.setState({username: ''})  
+                         this.setState({password: ''})  
+                         this.setState({firstName: ''})  
+                         this.setState({lastName: ''})  
+                         this.setState({cfpassword: ''}) 
+
 }
 
  handleClick = event => {
@@ -110,6 +120,35 @@ handleChange(event) {
               console.log(this.state.firstName)
               console.log(this.state.lastName)
 
+            axios.post('http://localhost:6003/signin/candidat', {email:this.state.username , password:this.state.password, firstName:this.state.firstName, lastName: this.state.lastName})
+                .then(res => {
+                   //  const {token} = res.data;
+                   //  localStorage.setItem('jwtToken', token);
+                   //  setAuthToken(token);
+                   //  const decoded = jwt_decode(token);
+                   // const user1 =setCurrentUser(decoded)
+                   if(res.data.error == false){
+                       this.setState({error: 'true'})
+                        localStorage.setItem('user_id', res.data.user_id);
+                        localStorage.setItem('user_email', res.data.user.email);
+                        localStorage.setItem('user_fistname', res.data.user.firstName);
+                        localStorage.setItem('user_lastname', res.data.user.lastName);
+                        console.log(res.data)
+                        
+                       
+                        this.props.history.push("/Dashboard");
+                      
+
+                   }else{
+
+
+                        this.setState({error: ''})
+                         this.setState({error_msg: res.data.error})
+                        //this.reset() 
+                   }
+                   console.log(res.data)
+                })
+
    }
           
    }else{
@@ -124,7 +163,8 @@ handleChange(event) {
 
 
     render(){
-
+        if(localStorage.user_id)
+        return <Redirect to='/Dashboard' />
         return (
            <div className="login-wrap sign_in_wrap">
         <div className="login-html">
@@ -136,8 +176,8 @@ handleChange(event) {
           <input id="tab-2" type="radio" name="tab" className="for-pwd" /><label htmlFor="tab-2" className="tab" />
           <div className="login-form">
             <div className="sign-in-htm">
-              <div className="text-center social-btn">
-                <a href="#" className="btn btn-primary btn-block"><i className="fa fa-facebook" /> Sign up with <b>Facebook</b></a>
+              <div className="text-center social-btn" hidden='true'>
+                <a href="http://localhost:6003/auth/facebook" className="btn btn-primary btn-block"><i className="fa fa-facebook" /> Sign up with <b>Facebook</b></a>
                 <a href="#" className="btn btn-danger btn-block"><i className="fa fa-google" /> Sign up with <b>Google</b></a>
               </div>
               <div className="hr2" />
