@@ -14,15 +14,15 @@ var link = require('../models/Link');
 var userSchema = new mongoose.Schema({
     LastName: {
         type: String,
-        required: true
+        //required: true
     },
     FirstName: {
         type: String,
-        required: true
+        //required: true
     },
     Email: {
         type: String,
-        required: true,
+        //required: true,
     },
     created_at: {
         type: Date
@@ -60,42 +60,35 @@ var judgeSchema = extend(userSchema, {
         type: String
     }
 })
-var chargeSchema = extend(userSchema, {
-    createdBy: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'adminSchema'
-    }
-})
-var teamMemberSchema = extend(userSchema, {
-    Role: {
-        type: String,
-        required: true
-    },
-    Bio: {
-        type: String
-    },
-    Description: {
-        type: String
-    },
-    image: {
-        type: String
-    },
-    Cin: {
-        type: String
-    },
+var chargeSchema=extend(userSchema,{
+
+    createdBy:{ type: mongoose.Schema.ObjectId, ref: 'adminSchema' },
+    Status:{type:String},
+    review:{ type: mongoose.Schema.ObjectId, ref: 'ReviewCharge' },
+    avis:{ type: mongoose.Schema.ObjectId, ref: 'Avis' },
+
+});
+var teamMemberSchema=extend(userSchema,{
+    Role:{type:String},
+    Bio:{type:String},
+    Description:{type:String},
+    image:{type:String},
+    Cin:{type:String},
+    LinkLinkedIn:{type:String},
+    LinkFacebook:{type:String},
     Education: [education],
     Experience: [experience],
-    Link: [link]
-})
+
+});
 var candidatureSchema = extend(userSchema, {
     TypeLabel: {
         type: mongoose.Schema.ObjectId,
         ref: 'Label'
     },
-    review: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'ReviewCharge'
-    },
+    // review: {
+    //     type: mongoose.Schema.ObjectId,
+    //     ref: 'ReviewCharge'
+    // },
     review2: [Review],
     Status: {
         type: String
@@ -114,7 +107,11 @@ var candidatureSchema = extend(userSchema, {
     countNegatif: {
         type: Number,
         default: 0
-    }
+    },
+    charges:{
+        type: mongoose.Schema.ObjectId,
+        ref: 'Charge' },
+
 })
 
 

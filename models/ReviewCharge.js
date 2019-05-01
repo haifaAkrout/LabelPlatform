@@ -4,10 +4,10 @@ var  Candidat=require('../models/User');
 
 var ReviewChargeSchema= new mongoose.Schema(
     {
-        text :{ type: String, required: true },
-        type:{ type: String, required: true },
-        createdBy:{ type: mongoose.Schema.ObjectId, ref: 'Charge' },
-        candidat:{ type: mongoose.Schema.ObjectId, ref: 'Candidat' }
+        text :{ type: String },
+        candidat:{ type: mongoose.Schema.ObjectId, ref: 'Candidat' },
+        estValide:{type:Boolean},
+        cause:{type:String},
     }
 )
 module.exports=mongoose.model('ReviewCharge',ReviewChargeSchema)

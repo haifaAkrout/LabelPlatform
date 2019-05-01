@@ -10,7 +10,8 @@ class TableSessions extends Component {
         return (
             <tr>
                 <td>
-                    {this.props.obj.Name}
+
+                    <Link to={"/sessions/listeProjetsparIdSes/"+ this.props.obj._id} params={{ idSession: this.props.obj._id}}>{this.props.obj.Name}</Link>
                 </td>
                 <td>
                     {Moment(this.props.obj.StartDate).format('DD-MM-YYYY')}
@@ -19,7 +20,7 @@ class TableSessions extends Component {
                     {Moment(this.props.obj.EndDate).format('DD-MM-YYYY')}
                 </td>
                 <td>
-                    <Link to={"/ListeProjetByIDSessions/"+this.props.obj._id} className="btn btn-primary">{this.props.obj.Status}</Link>
+                    {this.props.obj.Status}
                 </td>
 
             </tr>

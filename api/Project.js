@@ -1,60 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-// router.post('/add',function (req,res) {
-//
-// var Label1=new Label({
-// type:'Label'
-//
-// });
-// Label1.save();
-//
-// //
-// //     Label1.save(function (err,Label ) {
-// //         if(err){
-// //             res.send(err)
-// //         }
-// //         else{
-// //             res.send(Label1)
-// //         }
-// //     })
-// var Candidature=new Candidat({
-//     LastName: 'akrout',
-//     FirstName:'abir',
-//     Email:'akrout.abir@esprit.tn',
-//     Password: 'abir',
-//     TypeLabel:Label1.id,
-//     Status:'non Traité'
-// })
-//    Candidature.save();
-//
-//
-//     var Session1=new Session({
-//         Name:'Session1',
-//         Project:[{  Name: 'ProjetSalleDeSport' ,
-//             members:[{
-//                 Role:'lead',
-//                 LastName: 'Fadhloun',
-//                 FirsName:'Feriel',
-//                 Email:'Fadhloun.Feriel@esprit.tn',
-//                 Password: 'Feriel'
-//
-//             }],
-//             createdBy:Candidature.id
-//         }],
-//         StartDate:'2016-07-08',
-//         EndDate:'2017-06-02'
-//     })
-//     Session1.save(function (err,Session) {
-//         if(err){
-//             res.send(err)
-//         }
-//         else{
-//             res.send(Session1)
-//         }
-//     })
-// })
 
+//import model
+require('../models/User');
+const Membre = mongoose.model('Member');
 
 var Session= require('../models/Session');
 var Projet = require('../models/Project');
@@ -91,7 +41,8 @@ router.post('/affectation/:idProjet/:idCharge', function (req, res) {
             Candidature.findById(projets.createdBy).exec(function (err, Candidatures) {
 
                 Charge1.findById(idC).exec(function (err,charge) {
-                    console.log(charge);
+                    console.log("liste des charge");
+                    console.log(Candidatures.charges)
                     Candidatures.charges = idC;
                     Candidatures.save(function (err, cand) {
                         if (err)
@@ -147,8 +98,9 @@ router.get('/listeProjetsparIdSes/:id', function (req, res) {
     console.log('liste des projets par id sessions')
 
     Session.findById(req.params.id).populate({path: 'Project.createdBy', populate: {path: 'TypeLabel'}})
-        .then(sessions => {
-            res.json( sessions.Project);
+        .then(Session => {
+            console.log(Session)
+            res.json( Session);
 
         }).catch(err => {
         res.status(500).send({
@@ -160,65 +112,88 @@ router.get('/listeProjetsparIdSes/:id', function (req, res) {
 
 //get projet par id projet par session id
 // les questionnaire par id projet par id sessions
-router.get('/:idSession/:idProjet', function (req, res) {
+router.get('/detailsProjets/:idSession/:idProjet', function (req, res) {
     console.log('liste des projets par id sessions')
 
     var idS = req.params.idSession;
+    console.log(idS)
     var idP = req.params.idProjet;
     Session.findById(idS).populate({path: 'Project.createdBy', populate: {path: 'TypeLabel'}})
         .then(sessions => {
 
-            // res.json(sessions.Project)
             for (var i = 0; i < sessions.Project.length; i++)
             {
                 console.log(sessions.Project[i]._id)
+                console.log("id projet")
                 console.log(idP)
                 if( sessions.Project[i]._id == idP )
                 {
-                    res.json(sessions.Project[i].questionnaire)
+                    res.json({
+                            data:  sessions.Project[i],
+                            NomSession:  sessions.Name,
+                            DateDebutSession:sessions.StartDate,
+                            idSessionBack:sessions._id
+                        }
+                    )
 
                 }
                 else
-                    res.send("project not found")
+                {
+                    console.log("not found")
+                    console.log(idP)
+                    console.log(sessions.Project[i]._id)
+                    // res.send("project not found")
+                }
+
             }
 
 
-        }).catch(err => {
-        res.status(500).send({
-            message: err.message || "Some error occurred while retrieving notes."
-        });
-    });
+        }).catch();
 
 });
 
 
-//afficher liste des membres mte projet par id projet w id session
+//supprimer membre par id projet w membre w session
 router.get('/ListeMembres/:idSession/:idProjet', function (req, res) {
     console.log('liste des membres dun projet');
 
     var idS = req.params.idSession;
+    console.log(idS)
     var idP = req.params.idProjet;
+    console.log(idP)
+
     Session.findById(idS).populate({path: 'Project.createdBy', populate: {path: 'TypeLabel'}})
         .then(sessions => {
 
-            // console.log(sessions.Project)
             for (var i = 0; i < sessions.Project.length; i++)
             {
                 console.log(sessions.Project[i]._id)
+                console.log("id projet")
                 console.log(idP)
                 if( sessions.Project[i]._id == idP )
                 {
-                    res.json(sessions.Project[i].members)
+                    res.json({
+                            data:  sessions.Project[i],
+                            NomSession:  sessions.Name,
+                            DateFinSession:sessions.EndDate,
+                            idSessionBack:sessions._id
+                        }
+                    )
+
 
                 }
-
+                else
+                {
+                    // console.log("not found")
+                    // console.log(idP)
+                    // console.log(sessions.Project[i]._id)
+                    // // res.send("project not found")
+                }
 
             }
 
-            res.send("project not found")
-        }).catch(err => {
-        console.log(err)
-    });
+
+        }).catch();
 
 });
 

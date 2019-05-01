@@ -135,3 +135,51 @@ export const setCurrentUser = decoded => {
         payload: decoded
     }
 }
+
+
+
+//affecter charge a un projet
+export const affecterCharge= (idProjet,idCharge) => {
+    return async dispatch => {
+        const response = axios.post('http://localhost:6003/projects/affectation/'+idProjet,idCharge
+        ).then(res=>{console.log(res);
+            console.log(res.data)})
+
+        return dispatch({
+            type: "affecterCharge",
+            payload: response.data
+        });
+    };
+};
+
+//supprimer membre
+export const SupprimerMembre= (idMember) => {
+    return async dispatch => {
+        const response = axios.delete('http://localhost:6003/members/deleteMember/'+idMember
+        ).then(res=>{console.log(res);
+            console.log(res.data)})
+
+
+
+        return dispatch({
+            type: "SupprimerMembre",
+            payload: response.data
+        });
+    };
+};
+
+//Editer membre
+export const editerMembre= (idMembre,membre) => {
+    return async dispatch => {
+        const response = axios.put('http://localhost:6003/membres/editMember/'+idMembre,membre
+        ).then(res=>{console.log(res);
+            console.log(res.data)})
+
+
+
+        return dispatch({
+            type: "editerMembre",
+            payload: response.data
+        });
+    };
+};

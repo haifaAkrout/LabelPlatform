@@ -31,3 +31,162 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+
+
+#divForm{
+  margin-left:  280px;
+}
+#namepage{
+  font-size: larger;
+  text-align: center;
+}
+#btn{
+  margin-left: 250px;
+}
+
+#divtitle{
+  display: flex;
+  justify-content: space-between;
+  margin-right: 50px;
+}
+
+#table{
+  width: 1000px;
+  margin-left: 100px;
+}
+#btnajout{
+  margin-left: 50px;
+}
+
+
+#tableSession{
+  margin-left: 130px;
+  margin-top: 50px;
+  width: 1000px;
+}
+
+#nav{
+  display: flex;
+  justify-content: space-between;
+  margin-right: 50px;
+}
+
+#div{
+  margin-left: 50px;
+}
+
+#questionnaire{
+  margin-left: 100px;
+}
+
+#formulaire{
+  margin-left: 150px;
+  margin-top: 50px;
+
+}
+#fieldsetD {
+  border:1px solid #999;
+  border-radius:8px;
+  box-shadow:0 0 10px #999;
+  height: 400px;
+  width: 700px;
+  padding-top: 50px;
+  padding-left: 50px;
+}
+/*fieldset {*/
+/*  padding-top:10px;*/
+/*  border:1px solid #666;*/
+/*  border-radius:8px;*/
+/*  box-shadow:0 0 10px #666;*/
+/*}*/
+legend {
+  float:left;
+  margin-top:-20px;
+}
+legend + * {
+  clear:both;
+}
+#divbutton{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  padding-left: 100px;
+  padding-left: 100px;
+;
+}
+
+#avis {
+  font-size: 15px;
+  text-align: center;
+}
+
+#avis2 {
+  font-size: 15px;
+  text-align: center;
+
+}
+#avis3 {
+  font-size: 15px;
+  text-align: center;
+
+}
+
+#divAvis{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+
+#divValide{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+#labValide{
+  font-size: 15px;
+  text-align: center;
+  padding-left: 10px;
+}
+
+#linkCSV{
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  margin-right: 100px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+#exporting{
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  margin-right: 100px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+#formulaireAvis{
+  margin-left: 250px;
+  width: 600px;
+
+}
+
+#fieldsetAvis{
+  border:1px solid #999;
+  border-radius:8px;
+  box-shadow:0 0 10px #999;
+  height: 250px;
+  width: 750px;
+  padding-top: 50px;
+  padding-left: 50px;
+
+}
+
+#lab{
+  text-align: center;
+
+}
