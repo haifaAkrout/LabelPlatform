@@ -103,17 +103,19 @@ handleBioChange (evt) {
         console.log(this.state.LinkLinkedIn)
         formData.append('image',this.state.image);
         formData.append('LinkLinkedIn',this.state.LinkLinkedIn);
-        formData.append('Password',this.state.password)
-        formData.append('Role',this.state.Role)
-        formData.append('Description',this.state.Description)
-        formData.append('Bio',this.state.Bio)
-        formData.append('Email',this.state.Email)
+        formData.append('Password',this.state.password);
+        formData.append('Role',this.state.Role);
+        formData.append('Description',this.state.Description);
+        formData.append('Bio',this.state.Bio);
+        formData.append('Email',this.state.Email);
+        const {idSession} = this.props.match.params;
+        const {idProjet} = this.props.match.params;
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'
             }
         };
-        axios.put('http://localhost:6003/members/editMember/5cba2219bb0f481fe0e48b36/5cba238d2b5d6736fc6c8949/'+idMembre, formData,config
+        axios.put('http://localhost:6003/members/editMember/'+idSession+'/'+idProjet+'/'+idMembre, formData,config
         ).then(res=>{console.log(res);
             console.log(res.data)})
 

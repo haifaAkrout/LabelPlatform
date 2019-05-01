@@ -148,8 +148,10 @@ export default class ListeEquipe extends React.Component {
 
 
                                                         <td>
-                                                            <Link to={"/members/editMember/5cba2219bb0f481fe0e48b36/5cba238d2b5d6736fc6c8949/" + member._id}
-                                                                  params={{idMembre: member._id}}>
+                                                            <Link to={"/members/editMember/"+this.state.idSession+"/"+this.state.idProj+"/" + member._id}
+                                                                  params={{idMembre: member._id,
+                                                                            idSession:this.state.idSession,
+                                                                            idProjet:this.state.idProjet}}>
                                                                 Editer
                                                             </Link>
 

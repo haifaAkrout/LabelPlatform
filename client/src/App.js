@@ -91,7 +91,7 @@ class App extends Component {
 
               <Route path="/members/addMember/" exact component={AddMember} />
               <Route path="/projects/ListeMembres/:idSessionP/:idProjet" exact component={ListEquipe} />
-              <Route path="/members/editMember/5cba2219bb0f481fe0e48b36/5cba238d2b5d6736fc6c8949/:idMembre" exact component={EditMember} />
+              <Route path="/members/editMember/:idSession/:idProjet/:idMembre" exact component={EditMember} />
               <Route path="/resultat/" exact component={Resultat} />
               <Route path="/Candidatures/detailsCandidature/:idCand" exact component={RedactionAvis} />
        
