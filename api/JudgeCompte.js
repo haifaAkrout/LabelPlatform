@@ -70,8 +70,10 @@ router.put('/addCompte',function (req,res) {
     var salt = bcrypt.genSaltSync(10,10);
 
     var Judge1 = new Judge(req.body)
+    Judge1.UserType='j';
     Judge1.password2=req.body.Password;
     Judge1.Password=bcrypt.hashSync(req.body.Password, salt);
+Judge1.creationDate=Date.now();
 Judge1.creationDate=Date.now();
     Judge1.Status="acceptée";
     Judge1.createdBy="5ca682c594b3478520c09158",

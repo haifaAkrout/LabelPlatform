@@ -3,6 +3,8 @@ import Nav1 from '../../containers/Nav1.js';
 import Header from '../../containers/Header.js';
 import ContentContainer from '../../containers/ContentContainer';
 import Nav from '../../containers/Nav.js';
+
+import axios from "axios";
 import './profile.css';
 
 import { Redirect } from 'react-router-dom'
@@ -10,6 +12,150 @@ import { Redirect } from 'react-router-dom'
 
 export default class updateprofile extends React.Component{
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            username:'',
+            password:'',
+            cfpassword:'',
+            oldpassword:'',
+            firstName:'',
+            lastName:'',
+            bio:'',
+            tel:'',
+            gender:'',
+            color_password_input:'',
+            color_cfpassword_input:'',
+            error: 'true',
+            error_msg: '',
+            errors: {},
+
+        } ;
+
+ 
+
+        this.handleChange = this.handleChange.bind(this);
+
+        // this.handleUsernameChange = this.handleUsernameChange.bind(this);
+        // this.handleEmailChange = this.handleEmailChange.bind(this);
+        // this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
+
+    };
+
+
+
+handleChange(event) {
+   if (event.target.name === 'username')
+          this.setState({username: event.target.value})
+
+       if (event.target.name === 'password')
+          this.setState({password: event.target.value})
+
+       if (event.target.name === 'firstName')
+          this.setState({firstName: event.target.value})
+      
+       if (event.target.name === 'lastName')
+          this.setState({lastName: event.target.value})
+
+       if (event.target.name === 'password')
+          this.setState({password: event.target.value})
+       if (event.target.name === 'cfpassword')
+          this.setState({cfpassword: event.target.value})
+
+       if (event.target.name === 'oldpassword')
+          this.setState({oldpassword: event.target.value})
+       if (event.target.name === 'bio')
+          this.setState({bio: event.target.value})
+       if (event.target.name === 'tel')
+          this.setState({tel: event.target.value})
+       if (event.target.name === 'gender')
+          this.setState({gender: event.target.value})
+       
+}
+
+ handleClick2 = event => {
+   
+   if(this.state.password.length != 0 && this.state.password == this.state.cfpassword){
+ axios.post('http://localhost:6003/users/update/pwd', {
+   user_id: localStorage.user_id,
+   
+   password:this.state.password, 
+  })
+                .then(res => {
+                   //  const {token} = res.data;
+                   //  localStorage.setItem('jwtToken', token);
+                   //  setAuthToken(token);
+                   //  const decoded = jwt_decode(token);
+                   // const user1 =setCurrentUser(decoded)
+                   if(res.data.error == false){
+                       this.setState({error: 'true'})
+                       
+                        this.props.history.push("/logout");
+                        
+                       
+                        
+                      
+
+                   }
+                   console.log(res.data)
+                })
+
+ 
+}else {
+  if(this.state.password != this.state.cfpassword && this.state.cfpassword.length!=0 && this.state.password.length!=0){
+ this.setState({color_password_input: 'rgb(39, 129, 42)'}) 
+  this.setState({color_cfpassword_input: 'rgb(39, 129, 42)'}) 
+  }
+}
+ }
+ handleClick = event => {
+
+
+console.log(localStorage.user_id)
+console.log(this.state.username)
+console.log(this.state.firstName)
+ axios.post('http://localhost:6003/users/update', {
+   user_id: localStorage.user_id,
+   email:this.state.username , 
+   password:this.state.password, 
+   firstName:this.state.firstName, 
+   tel:this.state.tel, 
+   bio:this.state.bio, 
+   lastName: this.state.lastName})
+                .then(res => {
+                   //  const {token} = res.data;
+                   //  localStorage.setItem('jwtToken', token);
+                   //  setAuthToken(token);
+                   //  const decoded = jwt_decode(token);
+                   // const user1 =setCurrentUser(decoded)
+                   if(res.data.error == false){
+                       this.setState({error: 'true'})
+                       
+                        localStorage.setItem('user_email', res.data.user.Email);
+                         localStorage.setItem('user_fistname', res.data.user.FirstName);
+                         localStorage.setItem('user_lastname', res.data.user.LastName);
+                         
+                         if(res.data.user.tel)
+                         localStorage.setItem('user_tel', res.data.user.tel);
+
+                         if(res.data.user.bio)
+                         localStorage.setItem('user_bio', res.data.user.bio);
+
+                        
+
+                        console.log(res.data)
+                        window.location.reload();
+                        
+                       
+                        
+                      
+
+                   }
+                   console.log(res.data)
+                })
+
+ }
 
     render(){
        if(!localStorage.user_id)
@@ -106,7 +252,7 @@ export default class updateprofile extends React.Component{
                     {/*Default Tabs (Left Aligned)*/} 
                     {/*===================================================*/}
                     <div className="">
-                      <form className="panel-body form-horizontal td">
+                      <div className="panel-body form-horizontal td">
         {/*Static*/}
         <div className="form-group">
           <label className="col-md-3 control-label"></label>
@@ -118,21 +264,21 @@ export default class updateprofile extends React.Component{
         <div className="form-group">
           <label className="col-md-3 control-label" htmlFor="demo-text-input">Username / Email</label>
           <div className="col-md-9">
-            <input type="text" id="demo-text-input" className="form-control" placeholder={localStorage.user_email} />
+            <input type="text" id="demo-text-input" className="form-control" placeholder={localStorage.user_email} name="username"  value={this.state.username} onChange={this.handleChange.bind(this)} />
        
           </div>
         </div>
         <div className="form-group">
           <label className="col-md-3 control-label" htmlFor="demo-text-input">FirstName</label>
           <div className="col-md-9">
-            <input type="text" id="demo-text-input" className="form-control" placeholder={localStorage.user_fistname} />
+            <input type="text" id="demo-text-input" className="form-control" placeholder={localStorage.user_fistname} name="firstName"  value={this.state.firstName} onChange={this.handleChange.bind(this)} />
        
           </div>
         </div>
         <div className="form-group">
           <label className="col-md-3 control-label" htmlFor="demo-text-input">LastName</label>
           <div className="col-md-9">
-            <input type="text" id="demo-text-input" className="form-control" placeholder={localStorage.user_lastname} />
+            <input type="text" id="demo-text-input" className="form-control" placeholder={localStorage.user_lastname} name="lastName"  value={this.state.lastName} onChange={this.handleChange.bind(this)} />
        
           </div>
         </div>
@@ -140,21 +286,16 @@ export default class updateprofile extends React.Component{
         <div className="form-group">
           <label className="col-md-3 control-label" htmlFor="demo-textarea-input">BIO</label>
           <div className="col-md-9">
-            <textarea id="demo-textarea-input" rows={9} className="form-control" placeholder="Your content here.." defaultValue={""} />
+            <textarea id="demo-textarea-input" rows={9} className="form-control" placeholder={localStorage.user_bio} defaultValue={""}  name="bio"  value={this.state.bio} onChange={this.handleChange.bind(this)}/>
           </div>
         </div>
            {/*Textarea*/}
-        <div className="form-group">
-          <label className="col-md-3 control-label" htmlFor="demo-textarea-input">Naissance</label>
-          <div className="col-md-9">
-            <input type="date" className="form-control" defaultValue={""} />
-          </div>
-        </div>
+
          {/*Textarea*/}
         <div className="form-group">
-          <label className="col-md-3 control-label" htmlFor="demo-textarea-input">Num° Telephone</label>
+          <label className="col-md-3 control-label" htmlFor="demo-textarea-input" >Num° Telephone</label>
           <div className="col-md-9">
-            <input type="texte" className="form-control" defaultValue={""} />
+            <input type="texte" className="form-control" placeholder={localStorage.user_tel} defaultValue={""} name="tel"  value={this.state.tel} onChange={this.handleChange.bind(this)} />
           </div>
         </div>
 
@@ -181,7 +322,7 @@ export default class updateprofile extends React.Component{
    
         {/*Password*/}
         <div className="form-group">
-          <label className="col-md-3 control-label" htmlFor="demo-password-input">Old Password</label>
+          <label className="col-md-3 control-label" htmlFor="demo-password-input" name="oldpassword"  value={this.state.oldpassword} onChange={this.handleChange.bind(this)}>Old Password</label>
           <div className="col-md-9">
             <input type="password" id="demo-password-input" className="form-control" placeholder="Your old Password" />
             
@@ -191,7 +332,7 @@ export default class updateprofile extends React.Component{
         <div className="form-group">
           <label className="col-md-3 control-label" htmlFor="demo-password-input">New Password</label>
           <div className="col-md-9">
-            <input type="password" id="demo-password-input" className="form-control" placeholder="New Password" />
+            <input type="password" id="demo-password-input" className="form-control" placeholder="New Password" name="password" style={{backgroundColor: this.state.color_password_input}} value={this.state.password} onChange={this.handleChange.bind(this)} />
             
           </div>
         </div>
@@ -199,7 +340,7 @@ export default class updateprofile extends React.Component{
         <div className="form-group">
           <label className="col-md-3 control-label" htmlFor="demo-password-input">Confirm Password</label>
           <div className="col-md-9">
-            <input type="password" id="demo-password-input" className="form-control" placeholder="Confirm Password" />
+            <input type="password" id="demo-password-input2" className="form-control" placeholder="Confirm Password" style={{backgroundColor: this.state.color_cfpassword_input}} name="cfpassword"  value={this.state.cfpassword} onChange={this.handleChange.bind(this)} />
             
           </div>
         </div>
@@ -207,9 +348,10 @@ export default class updateprofile extends React.Component{
         
         
         <div className="panel-footer text-right">
-                                                <button className="btn btn-info" type="submit">Update my profile</button>
+                                                <button className="btn btn-info" type="submit"  onClick={this.handleClick}>Update my profile</button>
+                                                <button className="btn btn-warning" type="submit"  onClick={this.handleClick2}>Change my password</button>
                                             </div>
-      </form>
+      </div>
                     </div>
                     {/*===================================================*/} 
                     {/*End Default Tabs (Left Aligned)*/} 

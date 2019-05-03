@@ -24,12 +24,24 @@ var userSchema = new mongoose.Schema({
         type: String,
         //required: true,
     },
+    naissance: {
+        type: Date
+    },
+    bio: {
+        type: String
+    },
+    tel: {
+        type: String
+    },
     created_at: {
         type: Date
     },
     Password: {
         type: String
     },
+    UserType:{
+        type:String //c:candidat, ch:charge, j:judge, m:membre, a:admin
+    }
     // Status:{type:String,required:true}
 })
 var adminSchema = extend(userSchema, {})

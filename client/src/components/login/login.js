@@ -24,6 +24,7 @@ export default class login extends React.Component{
         super(props);
         this.state = {
             username:'',
+            username2:'',
             password:'',
             error: 'true',
             color_user_input:'',
@@ -85,9 +86,16 @@ handleChange(event) {
                         localStorage.setItem('user_fistname', res.data.user.FirstName);
                         localStorage.setItem('user_lastname', res.data.user.LastName);
                         console.log(res.data)
-                        
-                       
-                        this.props.history.push("/Dashboard");
+                        if(res.data.user.UserType == 'a')
+                           this.props.history.push("/Dashboard");
+                        if(res.data.user.UserType == 'c')
+                           this.props.history.push("/Dashboard");
+                        if(res.data.user.UserType == 'm')
+                           this.props.history.push("/Dashboard");
+                        if(res.data.user.UserType == 'ch')
+                           this.props.history.push("/Dashboard");
+                        if(res.data.user.UserType == 'j')
+                           this.props.history.push("/Dashboard");
                       
 
                    }else{
@@ -108,6 +116,19 @@ handleChange(event) {
 
 }
  
+
+ // handleClickFgPasswod = event => {
+
+ // // axios.post('http://localhost:6003/forgetpwd', {email:this.state.username2})
+ // //                .then(res => {
+ // //                   //  const {token} = res.data;
+ // //                   //  localStorage.setItem('jwtToken', token);
+ // //                   //  setAuthToken(token);
+ // //                   //  const decoded = jwt_decode(token);
+ // //                   // const user1 =setCurrentUser(decoded)
+ // //                   console.log(res.data)
+ // //                   if(res.data.error == false){}}
+ // }
 
 
 
@@ -167,10 +188,10 @@ handleChange(event) {
             <div className="for-pwd-htm">
               <div className="group">
                 <label htmlFor="username_fg" className="label">Username or Email</label>
-                <input id="username_fg" type="text" className="input" />
+                <input id="username_fg" type="text" className="input" value={this.state.username2} onChange={this.handleChange.bind(this)} />
               </div>
               <div className="group">
-                <button  className="button">Reset Password</button>
+                <button  className="button" >Reset Password</button>
               </div>
               <div className="hr" />
             </div>

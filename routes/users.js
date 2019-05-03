@@ -84,14 +84,20 @@ app.post('/users/remove', function(req, res, next) {
 });
 /* Update user. */
 app.post('/users/update', function(req, res, next) {
+    console.log("req.user")
+    console.log(req.body)
     if (req.body.user_id) {
         db_users.findOne({
             _id: req.body.user_id
         }, function(err, user) {
             if ((!err) && (user)) {
-                if (req.body.FirstName) user.FirstName = req.body.FirstName;
-                if (req.body.LastName) user.LastName = req.body.LastName;
-                if (req.body.Email) user.Email = req.body.Email;
+                if (req.body.firstName) user.FirstName = req.body.firstName;
+                if (req.body.lastName) user.LastName = req.body.lastName;
+                if (req.body.email) user.Email = req.body.email;
+                if (req.body.tel) user.tel = req.body.tel;
+                if (req.body.bio) user.bio = req.body.bio;
+                if (req.body.naissance) user.naissance = req.body.naissance;
+                
                 user.save(function(err) {
                     if (err) {
                         return res.json({
@@ -99,7 +105,80 @@ app.post('/users/update', function(req, res, next) {
                         })
                     } else {
                         return res.json({
-                            error: false
+                            error: false,
+                            user: user
+                        })
+                    }
+                });
+            } else return res.json({
+                error: true,
+                msg: "user inexistant"
+            });
+        });
+    } else return res.json({
+        error: true
+    });
+});
+
+/* Update pwd user. */
+app.post('/forgetpwd', function(req, res, next) {
+     console.log("req.user")
+    console.log(req.body)
+    if (req.body.email) {
+        db_users.findOne({
+            Email: req.body.email
+        }, function(err, user) {
+            if ((!err) && (user)) {
+                var pwd = Math.floor(Math.random() * 51023);
+                if (req.body.password) user.password = user.generateHash(pwd);
+               
+
+                
+                user.save(function(err) {
+                    if (err) {
+                        return res.json({
+                            error: true,
+                            pwd: pwd
+                        })
+                    } else {
+                        return res.json({
+                            error: false,
+                            user: user
+                        })
+                    }
+                });
+            } else return res.json({
+                error: true,
+                msg: "user inexistant"
+            });
+        });
+    } else return res.json({
+        error: true
+    });
+
+});
+
+/* Update pwd user. */  
+app.post('/users/update/pwd', function(req, res, next) {
+    console.log("req.user")
+    console.log(req.body)
+    if (req.body.user_id) {
+        db_users.findOne({
+            _id: req.body.user_id
+        }, function(err, user) {
+            if ((!err) && (user)) {
+                if (req.body.password) user.password = user.generateHash(req.body.password);
+               
+                
+                user.save(function(err) {
+                    if (err) {
+                        return res.json({
+                            error: true
+                        })
+                    } else {
+                        return res.json({
+                            error: false,
+                            user: user
                         })
                     }
                 });
