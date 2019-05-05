@@ -194,7 +194,7 @@ export  default  class Resultat extends React.Component{
 
                                                                                             <span key={m}>
                                                                                     {membre.LastName} {membre.FirstName}
-                                                                                        {membre.Email}
+                                                                                                {membre.Email}
                                                                                 </span>
                                                                                         )
 
@@ -205,7 +205,9 @@ export  default  class Resultat extends React.Component{
                                                                             {Moment(projet.createdBy.TypeLabel.SoumissionDate).format('DD/MM/YYYY')}
                                                                         </td>
                                                                         <td>
-                                                                            {projet.createdBy.charges.FirstName} {projet.createdBy.charges.LastName}
+                                                                            {projet.createdBy.charges.Email}
+                                                                            <br/>
+                                                                            {projet.createdBy.charges.LastName}
                                                                         </td>
                                                                         <td>
                                                                             {projet.createdBy.Status}
@@ -276,7 +278,8 @@ export  default  class Resultat extends React.Component{
                                                                                         return (
 
                                                                                             <span key={m}>
-                                                                                    {membre.LastName} {membre.FirstName}{membre.Email}
+                                                                                    {membre.LastName} {membre.FirstName}
+                                                                                                {membre.Email}
                                                                                 </span>
 
 
@@ -324,25 +327,30 @@ export  default  class Resultat extends React.Component{
                                             <Row>
 
                                                 {this.state.resultats.map(function(projet, idx) {
-                                                        const csvData = [
-                                                            [   projet.Name,
-                                                                projet.createdBy.TypeLabel.type,
-                                                                projet.createdBy.Status,
-                                                            ]
-                                                        ];
-                                                       const headers = [
-                                                            { label: "Project Name", key: "nomprojet" },
-                                                            { label: "Activite", key: "activite" },
-                                                            { label: "cause", key: "cause" }
-                                                        ];
-                                                    return(
-                                                        <CSVLink key={idx} id="linkCSV"
-                                                                 data={csvData}
-                                                                 headers={headers}
-                                                                 filename={"my-file.csv"}>
-                                                            Exporté tous les resultats vers excel
-                                                        </CSVLink>
-                                                    )
+                                                    const csvData = [
+                                                        [   projet.Name,
+                                                            projet.createdBy.TypeLabel.type,
+                                                            projet.createdBy.Status,
+                                                        ]
+                                                    ];
+                                                    const headers = [
+                                                        { label: "Project Name", key: "nomprojet" },
+                                                        { label: "Activite", key: "activite" },
+                                                        { label: "cause", key: "cause" }
+                                                    ];
+                                                    if(projet.length != 0){
+                                                        if(projet.createdBy.Status === "1er_tour"
+                                                            || projet.createdBy.Status === "2eme_tour"){
+                                                            return(
+                                                                <CSVLink key={idx} id="linkCSV"
+                                                                         data={csvData}
+                                                                         headers={headers}
+                                                                         filename={"my-file.csv"}>
+                                                                    Exporté tous les resultats vers excel
+                                                                </CSVLink>
+                                                            )
+                                                        }
+                                                    }
                                                 })
                                                 }
                                                 <Col sm="12">
