@@ -10,7 +10,7 @@ export default class RedactionAvis extends Component {
     constructor(props) {
         super(props);
         this.state = {
-           status:'',
+            status:'',
             charges:[],
             candidature:[],
             commentaire:'',
@@ -99,8 +99,9 @@ export default class RedactionAvis extends Component {
 
 
     handleSubmit=event=>{
-        const {idCand} = this.props.match.params
+        const {idCand} = this.props.match.params;
         if(this.state.isValide === false){
+
             const avis = {
                 cause:this.state.refus,
                 commentaire:this.state.commentaire
@@ -119,7 +120,7 @@ export default class RedactionAvis extends Component {
         {
 
             const avis = {
-                comentaire:this.state.commentaire
+                commentaire:this.state.commentaire
             }
             axios.post('http://localhost:6003/avis/add/'+this.state.idCharge,avis
             ).then(res=>{console.log(res);
@@ -133,7 +134,7 @@ export default class RedactionAvis extends Component {
                 console.log(res.data)})
         }
 
-        this.context.router.history.push('/resultat/');
+        // this.context.router.history.push('/resultat/');
 
     }
 
@@ -164,29 +165,30 @@ export default class RedactionAvis extends Component {
                                 <Form className="panel-body form-horizontal" onSubmit={this.handleSubmit} id={"formulaireAvis"}>
                                     <fieldset id="fieldsetAvis">
 
-                                        <label>{this.state.status}</label>
+                                        <label id={"labelStatus"}>{this.state.status}</label>
 
                                         {
                                             this.state.isValide === false &&
                                             <FormGroup row>
-                                                <Label for="exampleEmail" sm={2}>Refus</Label>
+                                                <Label for="exampleEmail" sm={3}>Cause du refus</Label>
                                                 <Col sm={8}>
                                                     <Input  type="text" name="refus"  onChange={this.handleRefusChange}
-                                                            value={this.state.refus}    className="form-control" placeholder="LinkLinkedIn"/>
+                                                            required={true}
+                                                            value={this.state.refus}    className="form-control" placeholder="cause refus"/>
                                                 </Col>
                                             </FormGroup>
                                         }
                                         <FormGroup row>
-                                            <Label for="exampleEmail" sm={2}>Commentaire</Label>
+                                            <Label for="exampleEmail" sm={3}>Commentaire detaillé</Label>
                                             <Col sm={8}>
                                                 <textarea type="text" name="commentaire" onChange={this.handleCommentaireChange}
                                                           required={true}
-                                                          value={this.state.commentaire} className="form-control" placeholder="comentaire"/>
+                                                          value={this.state.commentaire} className="form-control" placeholder="commentaire"/>
                                             </Col>
                                         </FormGroup>
                                         <FormGroup row>
                                             <Button color="primary" size="sm"
-                                                     // onClick={this.test.bind(this)}
+                                                // onClick={this.test.bind(this)}
                                                     id="button1" type="submit"
                                                     className="btn btn-info" name="Passer en instance" value="Submit">
                                                 Passer en instance
