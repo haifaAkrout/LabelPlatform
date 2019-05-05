@@ -95,9 +95,11 @@ handleBioChange (evt) {
 
 
     handleSubmit=event=>{
-        const {idMembre} = this.props.match.params
-        console.log("id membre from ")
-        console.log(idMembre)
+        const {idMembre} = this.props.match.params;
+        console.log("id membre from ");
+        console.log(idMembre);
+        const {idSession} = this.props.match.params;
+        const {idProjet} = this.props.match.params;
         const formData = new FormData();
 
         console.log(this.state.LinkLinkedIn)
@@ -108,8 +110,7 @@ handleBioChange (evt) {
         formData.append('Description',this.state.Description);
         formData.append('Bio',this.state.Bio);
         formData.append('Email',this.state.Email);
-        const {idSession} = this.props.match.params;
-        const {idProjet} = this.props.match.params;
+
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'

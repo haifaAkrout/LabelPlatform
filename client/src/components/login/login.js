@@ -31,10 +31,6 @@ export default class login extends React.Component{
 
         this.handleChange = this.handleChange.bind(this);
 
-        // this.handleUsernameChange = this.handleUsernameChange.bind(this);
-        // this.handleEmailChange = this.handleEmailChange.bind(this);
-        // this.handlePasswordChange = this.handlePasswordChange.bind(this);
-        // this.handleSubmit = this.handleSubmit.bind(this);
 
     };
 
@@ -67,7 +63,6 @@ handleChange(event) {
    }
 
    if(this.state.password.length != 0 && this.state.username.length !=0){
-       console.log("hello")
 
        axios.post('http://localhost:6003/login', {email:this.state.username , password:this.state.password})
                 .then(res => {
