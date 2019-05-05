@@ -14,10 +14,6 @@ import { Redirect } from 'react-router-dom'
 
 export default class login extends React.Component{
 
-
-     
-  
-
     constructor(props) {
 
 
@@ -71,7 +67,9 @@ handleChange(event) {
    }
 
    if(this.state.password.length != 0 && this.state.username.length !=0){
-      axios.post('http://localhost:6003/login', {email:this.state.username , password:this.state.password})
+       console.log("hello")
+
+       axios.post('http://localhost:6003/login', {email:this.state.username , password:this.state.password})
                 .then(res => {
                    //  const {token} = res.data;
                    //  localStorage.setItem('jwtToken', token);
@@ -93,7 +91,10 @@ handleChange(event) {
                         if(res.data.user.UserType == 'm')
                            this.props.history.push("/Dashboard");
                         if(res.data.user.UserType == 'ch')
-                           this.props.history.push("/Dashboard");
+                        {
+                            this.props.history.push("/DashboardCharge");
+                            console.log('charge work place')
+                        }
                         if(res.data.user.UserType == 'j')
                            this.props.history.push("/Dashboard");
                       

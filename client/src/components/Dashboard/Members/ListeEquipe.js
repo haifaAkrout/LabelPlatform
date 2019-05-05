@@ -77,17 +77,17 @@ export default class ListeEquipe extends React.Component {
 
     definirLeader(idSession, idProjet, idMember) {
         console.log({idSession, idProjet, idMember})
-        axios.put('http://localhost:6003/members/leader/' + idSession + '/' + idProjet + '/' + idMember).then(res => {
-            console.log(res);
-            console.log(res.data)
-        }).then(((response)=>{
-            console.log("xasa");
+        axios.put('http://localhost:6003/members/leader/' + idSession + '/' + idProjet + '/' + idMember).then(
+        ).then((response) => {
+            console.log(response)
+            console.log("definir comme leader");
             if(response.data.done === true)
             {
                 this.loadMembers()
             }
-        }));
-        // this.props.history.push("/");
+        }).catch(() => {
+
+        })
     }
 
 
@@ -109,16 +109,16 @@ export default class ListeEquipe extends React.Component {
 
                             <div className="panel-body">
                                 <div className="panel-heading" id={"divtitle"}>
-                                            <label id={"label1"}>
-                                                {this.state.NomSession} &nbsp;
-                                                <span>
+                                    <label id={"label1"}>
+                                        {this.state.NomSession} &nbsp;
+                                        <span>
                                                     {Moment(this.state.DateFinSession).format('YYYY')}
                                                 </span>
-                                            </label>
+                                    </label>
 
-                                            <label>
-                                                Deadline : {Moment(this.state.DateFinSession).format('DD/MM/YYYY')}
-                                            </label>
+                                    <label>
+                                        Deadline : {Moment(this.state.DateFinSession).format('DD/MM/YYYY')}
+                                    </label>
                                 </div>
                                 <Table striped id={"table"}>
 
@@ -134,73 +134,71 @@ export default class ListeEquipe extends React.Component {
                                     <tbody>
 
                                     {/*{this.state.loading ? 'Loading .......... ' : <>*/}
-                                        {this.state.members.map((member, idx) => {
-                                            if (member.Role === 'lead') {
-                                                return (
+                                    {this.state.members.map((member, idx) => {
+                                        if (member.Role === 'lead') {
+                                            return (
 
-                                                    <tr key={idx}>
-                                                        <td>
-                                                            {member.FirstName}{member.LastName}{member.Email}
-                                                        </td>
-                                                        <td>
-                                                            {member.Role}
-                                                        </td>
+                                                <tr key={idx}>
+                                                    <td>
+                                                        {member.FirstName}{member.LastName}{member.Email}
+                                                    </td>
+                                                    <td>
+                                                        {member.Role}
+                                                    </td>
 
 
-                                                        <td>
-                                                            <Link to={"/members/editMember/"+this.state.idSession+"/"+this.state.idProj+"/" + member._id}
-                                                                  params={{idMembre: member._id,
-                                                                            idSession:this.state.idSession,
-                                                                            idProjet:this.state.idProjet}}>
-                                                                Editer
-                                                            </Link>
+                                                    <td>
+                                                        <Link to={"/members/editMember/5cba2219bb0f481fe0e48b36/5cba238d2b5d6736fc6c8949/" + member._id}
+                                                              params={{idMembre: member._id}}>
+                                                            Editer
+                                                        </Link>
 
-                                                            <Button color="link"
+                                                        <Button color="link"
                                                                 onClick={() => this.supprimerMembre(this.state.idSession, this.state.idProj, member._id)}>
-                                                                Supprimer
-                                                            </Button>
+                                                            Supprimer
+                                                        </Button>
 
-                                                        </td>
+                                                    </td>
 
 
-                                                    </tr>
+                                                </tr>
 
-                                                )
-                                            }
-                                            else {
-                                                return (
+                                            )
+                                        }
+                                        else {
+                                            return (
 
-                                                    <tr key={idx}>
-                                                        <td>
-                                                            {member.FirstName}{member.LastName}{member.Password}
-                                                        </td>
-                                                        <td>
-                                                            {member.Role}
-                                                        </td>
-                                                        <td>
-                                                            <Button color="link"
+                                                <tr key={idx}>
+                                                    <td>
+                                                        {member.FirstName}{member.LastName}{member.Password}
+                                                    </td>
+                                                    <td>
+                                                        {member.Role}
+                                                    </td>
+                                                    <td>
+                                                        <Button color="link"
                                                                 onClick={() => this.definirLeader(this.state.idSession, this.state.idProj, member._id)}>
-                                                                Definir comme leader
-                                                            </Button>
-                                                            &nbsp;
-                                                            <Link to={"/members/editMember/5cba2219bb0f481fe0e48b36/5cba238d2b5d6736fc6c8949/" + member._id}
-                                                                params={{idMembre: member._id}}>
-                                                                Editer
-                                                            </Link>
-                                                            <Button color="link"
-                                                                    onClick={() => this.supprimerMembre(this.state.idSession, this.state.idProj, member._id)}>
-                                                                Supprimer
-                                                            </Button>
+                                                            Definir comme leader
+                                                        </Button>
+                                                        &nbsp;
+                                                        <Link to={"/members/editMember/5cba2219bb0f481fe0e48b36/5cba238d2b5d6736fc6c8949/" + member._id}
+                                                              params={{idMembre: member._id}}>
+                                                            Editer
+                                                        </Link>
+                                                        <Button color="link"
+                                                                onClick={() => this.supprimerMembre(this.state.idSession, this.state.idProj, member._id)}>
+                                                            Supprimer
+                                                        </Button>
 
-                                                        </td>
+                                                    </td>
 
 
-                                                    </tr>
+                                                </tr>
 
-                                                )
-                                            }
+                                            )
+                                        }
 
-                                        })}
+                                    })}
 
                                     {/*</>*/}
                                     {/*}*/}

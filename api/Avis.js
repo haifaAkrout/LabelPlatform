@@ -14,31 +14,36 @@ nodemailer = require('nodemailer');
 router.get('/sendEmailToMember/:idCand', function (req, res, next) {
     var idC = req.params.idCand;
 
-
+    console.log("sending mail");
     Candidature.findById(idC).then(cand=> {
         console.log(cand);
         var transporter = nodemailer.createTransport({
-            service: 'gmail',
+            // service: 'gmail',
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true,
             auth: {
                 user: 'fadhlounferiel@gmail.com',
                 pass: 'donottrustanyone!27'
             }
         });
-        console.log(cand.Email)
+        console.log(cand.Email);
         const mailOptions = {
             from: 'fadhlounferiel@gmail.com', // sender address
             to: 'fadhlounferiel@gmail.com', // list of receivers
             subject: "Reponse candidature", // Subject line
             html: '<p> mail from feriel</p>'// plain text body
         };
-        transporter.sendMail(mailOptions, function (err, info) {
-            if(err)
-                console.log(err)
-            else
-            {
-                console.log("hello ")
-                res.send("mail send")
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                return console.log(error);
             }
+            console.log('Message %s sent: %s', info.messageId, info.response);
+            // res.render('index');
+            });
+
+        app.listen(port, function(){
+            console.log('Server is running at port: ',port);
         });
 
     });
