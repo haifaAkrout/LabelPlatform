@@ -39,7 +39,7 @@ export default class listCandidatures extends React.Component{
         return (
 
             <div                id = "container"
-                className = "effect mainnav-sm navbar-fixed mainnav-fixed" >
+                                className = "effect mainnav-sm navbar-fixed mainnav-fixed" >
 
                 <Header/>
                 <div className="boxed">
@@ -54,15 +54,20 @@ export default class listCandidatures extends React.Component{
 
                                 <Table striped id={"tableSession"}>
                                     <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Start Date</th>
-                                            <th>End Date</th>
-                                            <th>Status</th>
-                                        </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Status</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
-                                        {   this.state.sessions.map(function (session,idx) {
+                                    {   this.state.sessions.map(function (session,idx) {
+                                        if(this.state.sessions.length == 0)
+                                            return (
+                                                <label>Aucune session disponible</label>
+                                            )
+                                        else
                                             return(
                                                 <tr  key={idx}>
                                                     <td>
@@ -80,9 +85,9 @@ export default class listCandidatures extends React.Component{
                                                     </td>
 
                                                 </tr>
-                                                )
+                                            )
 
-                                        }.bind(this))}
+                                    }.bind(this))}
                                     </tbody>
                                 </Table>
 
