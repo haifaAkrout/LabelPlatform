@@ -32,8 +32,9 @@ class Question extends React.Component {
             console.log(this.state.status)
             switch (type) {
                 case 'info':
-                    if(this.state.status===1)
+                    if(this.state.status===1){
                     NotificationManager.info('Your are eligible for the startup label,you need to provide the necessary document and 30 euros for registration');
+                    this.props.history.push("/registerCandidat");}
                     else {
                         NotificationManager.info('Your are not eligible for the startup label because of some errors in your innovation criteria');
                     }

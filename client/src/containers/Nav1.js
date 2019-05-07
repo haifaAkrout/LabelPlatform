@@ -78,18 +78,17 @@ class Nav1 extends React.Component {
                                         <a href="#">
                                             <i className="fa fa-th"></i>
                                             <span className="menu-title">
-                                             Demands
+                                             Sessions Management
                                             </span>
                                             <i className="arrow"></i>
                                         </a>
 
                                         <ul className="collapse">
-                                            <li><a href=""><i className="fa fa-caret-right"></i>
-                                                Add Judge  </a></li>
-                                            <li><a href="layout-boxed.html"><i className="fa fa-caret-right"></i>
-                                                Delete Judge  </a></li>
-                                            <li><a href="layout-collapsed-sidebar.html"><i
-                                                className="fa fa-caret-right"></i> show Judges </a></li>
+                                            <li><a href="http://localhost:3000/addSession"><i className="fa fa-caret-right"></i>
+                                                Add Session </a></li>
+                                            <li><a href="http://localhost:3000/Sessions2"><i className="fa fa-caret-right"></i>
+                                             Show Sessions  </a></li>
+
 
 
                                         </ul>
@@ -138,12 +137,27 @@ class Nav1 extends React.Component {
                                         <ul className="collapse">
 
 
-                                            {this.state.Sessions.map(d=> (
-                                                <li>
+                                            {/*{this.state.Sessions.map(d=> (*/}
+                                                {/*<li>*/}
 
-                                                    <Link to={"/votes/"+d._id}params={{ id1: d._id}}>{d.Name}</Link>
-                                                </li>))}
+                                                    {/*<Link to={"/votes/"+d._id}params={{ id1: d._id}}>{d.Name}</Link>*/}
+                                                {/*</li>))}*/}
+                                            <li>
+                                                <a href="#">
+                                                    <i className="fa fa-th"></i>
+                                                    <span className="menu-title">
+                                              Les sessions
+                                            </span>
+                                                    <i className="arrow"></i>
+                                                </a>
 
+                                                <ul className="collapse">
+                                                    <li><a href="http://localhost:3000/sessions/"><i className="fa fa-caret-right"></i>
+                                                        Liste des sessions  </a></li>
+
+
+                                                </ul>
+                                            </li>
 
                                         </ul>
                                     </li>

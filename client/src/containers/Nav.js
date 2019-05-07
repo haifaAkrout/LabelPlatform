@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import React from 'react';
 import axios from "axios";
+import logo from './logo_label.png';
 
 
 class Nav extends React.Component {
@@ -10,7 +11,7 @@ class Nav extends React.Component {
         super(props);
 
         this.state = {
-          Sessions:[]
+            Sessions:[]
         } ;
 
 
@@ -32,10 +33,10 @@ class Nav extends React.Component {
             <nav id="mainnav-container">
 
                 <div className="navbar-header">
-                    <a href="index.html" className="navbar-brand">
-                        <i className="fa fa-forumbee brand-icon"></i>
+                    <a href="/" className="navbar-brand h_108">
+
                         <div className="brand-title">
-                            <span className="brand-text">WOW22</span>
+                            <img className="logo_h_91 signin_html_wrap btm_0" src={logo} />
                         </div>
                     </a>
                 </div>
@@ -46,15 +47,12 @@ class Nav extends React.Component {
                     <div id="mainnav-menu-wrap">
                         <div className="nano">
                             <div className="nano-content">
-                                <ul id="mainnav-menu" className="list-group">
+                                <ul id="mainnav-menu" className="list-group txt_left">
 
-                                    <li className="list-header">Navigation</li>
+                                    <li className="list-header txt_center">MENU</li>
 
-                                    <li><a href="index.html"> <i className="fa fa-home"></i> <span
+                                    <li><a href="/"> <i className="fa fa-home"></i> <span
                                         className="menu-title"> Dashboard </span> </a></li>
-
-                                    <li className="list-header">Components</li>
-
 
 
                                     <li>
@@ -80,18 +78,17 @@ class Nav extends React.Component {
                                         <a href="#">
                                             <i className="fa fa-th"></i>
                                             <span className="menu-title">
-                                             Demands
+                                             Sessions Management
                                             </span>
                                             <i className="arrow"></i>
                                         </a>
 
                                         <ul className="collapse">
-                                            <li><a href=""><i className="fa fa-caret-right"></i>
-                                                Add Judge  </a></li>
-                                            <li><a href="layout-boxed.html"><i className="fa fa-caret-right"></i>
-                                                Delete Judge  </a></li>
-                                            <li><a href="layout-collapsed-sidebar.html"><i
-                                                className="fa fa-caret-right"></i> show Judges </a></li>
+                                            <li><a href="http://localhost:3000/addSession"><i className="fa fa-caret-right"></i>
+                                                Add Session </a></li>
+                                            <li><a href="http://localhost:3000/Sessions2"><i className="fa fa-caret-right"></i>
+                                                Show Sessions  </a></li>
+
 
 
                                         </ul>
@@ -130,9 +127,9 @@ class Nav extends React.Component {
 
 
                                             {this.state.Sessions.map(d=> (
-                                            <li>
+                                                <li>
 
-                                                <Link to={"/SecondTour/"+d._id}params={{ id1: d._id}}>{d.Name}</Link>
+                                                    <Link to={"/SecondTour/"+d._id}params={{ id1: d._id}}>{d.Name}</Link>
                                                 </li>))}
 
 
@@ -140,16 +137,33 @@ class Nav extends React.Component {
                                         <ul className="collapse">
 
 
-                                            {this.state.Sessions.map(d=> (
-                                                <li>
+                                            {/*{this.state.Sessions.map(d=> (*/}
+                                            {/*<li>*/}
 
-                                                    <Link to={"/votes/"+d._id}params={{ id1: d._id}}>{d.Name}</Link>
-                                                </li>))}
+                                            {/*<Link to={"/votes/"+d._id}params={{ id1: d._id}}>{d.Name}</Link>*/}
+                                            {/*</li>))}*/}
+                                            <li>
+                                                <a href="#">
+                                                    <i className="fa fa-th"></i>
+                                                    <span className="menu-title">
+                                              Les sessions
+                                            </span>
+                                                    <i className="arrow"></i>
+                                                </a>
 
+                                                <ul className="collapse">
+                                                    <li><a href="http://localhost:3000/sessions/"><i className="fa fa-caret-right"></i>
+                                                        Liste des sessions  </a></li>
+
+
+                                                </ul>
+                                            </li>
 
                                         </ul>
                                     </li>
 
+                                    <li><a href="/logout"> <i className="fa fa-sign-out"></i> <span
+                                        className="menu-title"> Logout </span> </a></li>
 
 
 
@@ -162,40 +176,7 @@ class Nav extends React.Component {
 
                                 </ul>
 
-                                <div className="mainnav-widget">
 
-                                    <div className="show-small">
-                                        <a href="#" data-toggle="menu-widget" data-target="#demo-wg-server">
-                                            <i className="fa fa-desktop"></i>
-                                        </a>
-                                    </div>
-
-                                    <div id="demo-wg-server" className="hide-small mainnav-widget-content">
-                                        <ul className="list-group">
-                                            <li className="list-header pad-no pad-ver">Server Status</li>
-                                            <li className="mar-btm">
-                                                <span className="label label-primary pull-right">15%</span>
-                                                <p>CPU Usage</p>
-                                                <div className="progress progress-sm">
-                                                    <div className="progress-bar progress-bar-primary"
-                                                         style={{width: 15}}>
-                                                        <span className="sr-only">15%</span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li className="mar-btm">
-                                                <span className="label label-purple pull-right">75%</span>
-                                                <p>Bandwidth</p>
-                                                <div className="progress progress-sm">
-                                                    <div className="progress-bar progress-bar-purple"
-                                                         style={{width: 75}}>
-                                                        <span className="sr-only">75%</span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
 
                             </div>
                         </div>

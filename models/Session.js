@@ -7,7 +7,8 @@ var SessionSchema = new mongoose.Schema(
         Status:{type:String},
         Project:[Project],
         StartDate:{type:Date,required:true},
-        EndDate:{type:Date,required:true}
+        EndDate:{type:Date,required:true},
+            Comment:{type:String}
 
 
     }

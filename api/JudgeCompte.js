@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 const Judge = mongoose.model('Judge');
+
 var Demande = require('../models/Demande');
 var bcrypt = require('bcrypt-nodejs');
 const Nexmo = require('nexmo');
@@ -16,7 +17,7 @@ var Review=mongoose.model('Review');
 
 var Session= require('../models/Session');
 var ReviewCharge=require('../models/ReviewCharge');
-const candidat = mongoose.model('Candidat');
+const Candidat = mongoose.model('Candidat');
 const Charge= mongoose.model('Charge');
 const nexmo = new Nexmo({
     apiKey: '6c4de09e',
@@ -66,6 +67,25 @@ router.get('/listJudges', function (req, res) {
 //           }
 //     })
 // });
+
+
+router.post('/registerCandidat',function (req, res) {
+    var salt = bcrypt.genSaltSync(10,10);
+console.log(req.body)
+    var candidat2= new Candidat({
+
+        Password:bcrypt.hashSync(req.body.Password, salt),
+
+        Email: req.body.Email,
+        LastName:req.body.LastName,
+        FirstName:req.body.FirstName,
+        TypeLabel:"5cc0aa4046f5243750e39182",
+        Status:"non Traitée"
+
+    })
+    candidat2.save();
+
+});
 router.put('/addCompte',function (req,res) {
     var salt = bcrypt.genSaltSync(10,10);
 
@@ -341,5 +361,75 @@ router.post('/login2',function (req, res) {
 
 
 });
+router.post('/login3',function (req, res) {
+    const Email = req.body.Email;
+    const Password = req.body.Password;
 
+    Candidat.findOne({Email})
+        .then(Charge => {
+
+            bcrypt.compare(Password, Candidat.Password)
+                .then(isMatch => {
+                    if(isMatch) {
+                        console.log("jjj")
+                        const payload = {
+                            id: Candidat._id,
+                            name: Candidat.FirstName,
+
+                        }
+                        jwt.sign(payload, 'secret', {
+                            expiresIn: 3600
+                        }, (err, token) => {
+                            if(err) console.error('There is some error in token', err);
+                            else {
+                                res.json({
+                                    success: true,
+                                    token: `Bearer ${token}`
+                                });
+                            }
+                        });
+                    }
+
+                });
+        });
+
+
+
+
+    Candidat.findOne({ Email: req.body.Email},function (err, Candidat) {
+        console.log(Charge.Password)
+        console.log(req.body.Password)
+
+        if (bcrypt.compareSync(req.body.Password.toString(),Candidat.Password)) {
+            console.log('user found', Candidat);
+            console.log("jjj")
+            const payload = {
+                id: Candidat._id,
+                name: Candidat.FirstName,
+
+            }
+            jwt.sign(payload, 'secret', {
+                expiresIn: 3600
+            }, (err, token) => {
+                if(err) console.error('There is some error in token', err);
+                else {
+                    res.json({
+                        success: true,
+                        token: `Bearer ${token}`
+                    });
+                }
+            });
+        } else {
+            res.status(401).json('unauthorized');
+        }
+    });
+
+
+
+
+
+
+
+
+});
 module.exports = router;

@@ -56,7 +56,7 @@ class login3 extends React.Component{
 
             })
 
-        this.props.history.push("/Dashboard");
+        this.props.history.push("/DashboardCharges");
     }
 
 

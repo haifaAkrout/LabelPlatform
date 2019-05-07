@@ -9,7 +9,7 @@ import {
 } from "../../../store/actions";
 import Header from '../../../containers/Header.js';
 import ContentContainer from '../../../containers/ContentContainer.js';
-import Nav from '../../../containers/Nav.js';
+import Nav1 from '../../../containers/Nav1.js';
 class sendEmail extends Component{
     createNotification = (type) => {
         return () => {
@@ -94,9 +94,9 @@ class sendEmail extends Component{
             this.setState({error_msg1: 'LastName is required!'})
             this.setState({error1:false})
         }
-        if(this.state.FirstName.length == 0) {
+        if(this.state.To.length == 0) {
 
-            this.setState({error_msg2: 'Firstname is required!'})
+            this.setState({error_msg2: 'Recepient is required!'})
             this.setState({error2:false})
         }
 
@@ -139,7 +139,7 @@ class sendEmail extends Component{
                                         <input type="text" name="LastName" onChange={this.handleLastNameChange} className="form-control "/>
                                     </div>
                                 </div>
-                                <div hidden={this.state.error2} className="alert alert-danger" role="alert">{this.state.error_msg2}</div>
+
 
 
                                 <div className="form-group nb">
@@ -148,6 +148,7 @@ class sendEmail extends Component{
                                         <input type="text" name="FirstName" onChange={this.handleFirstNameChange} className="form-control "/>
                                     </div>
                                 </div>
+                                <div hidden={this.state.error2} className="alert alert-danger" role="alert">{this.state.error_msg2}</div>
                                 <div className="form-group nb">
                                     <label style={{color:"black",fontSize:"12px"}} className="control-label col-md-2">To: </label>
                                     <div className="col-md-6">
@@ -167,8 +168,8 @@ class sendEmail extends Component{
                                         <textarea type="text" disabled value="http://localhost:3000/Judges/addCompte" name="Content" onChange={this.handleContentChange} className="form-control "/>
                                     </div>
                                 </div>
-                                <NotificationContainer/>
-                             <center><button  type="Submit"   onClick={this.createNotification('info')} className="btn btn-danger"><i className="fa fa-send"></i> Send</button></center>
+                                <NotificationContainer hidden={this.state.error2 || this.state.error1}/>
+                             <center><button  type="Submit"    className="btn btn-danger"><i className="fa fa-send"></i> Send</button></center>
 
                             </form>
 
@@ -180,7 +181,7 @@ class sendEmail extends Component{
             </div>
                         </div>
                     </div>
-                        <Nav/>
+                        <Nav1/>
 
 
 </div>

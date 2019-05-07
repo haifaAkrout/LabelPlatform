@@ -7,7 +7,13 @@ var ProjectSchema = new mongoose.Schema(
     {
         Name :{ type: String, required: true },
         members:[Member],
-        questionnaire:[questionnaire],
+        Question1:{type:String},
+        Reponse1:{type:String},
+        Question2:{type:String},
+        Reponse2:{type:String},
+        Question3:{type:String},
+        Reponse3:{type:String},
+       // questionnaire:[questionnaire],
         createdBy:{ type: mongoose.Schema.ObjectId, ref: 'Candidat' },
 
     }

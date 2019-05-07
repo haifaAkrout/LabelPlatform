@@ -1,12 +1,20 @@
  import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import sendEmail from "./components/Dashboard/Judges/sendEmail";
-import AddCompte from "./components/Dashboard/Judges/AddCompte";
+import addQuestion from "./components/Questions/addQuestion";
+ import AddCompte from "./components/Dashboard/Judges/AddCompte";
 import EditJudge from "./components/Dashboard/Judges/EditJudge";
 import JudgeList from "./components/Dashboard/Judges/DemandesJudges";
+
+ import addSession from "./components/Dashboard/Sessions/addSession";
+ import showSessions from "./components/Dashboard/Sessions/showSessions";
+ import showSessionsBack from "./components/Dashboard/Judges/showSessionsBack";
+ import addCompte1 from "./components/Dashboard/Candidatures/addCompte";
+
 import login from "../src/components/login/login";
  import login2 from "../src/components/login/login2";
  import login3 from "../src/components/login/login3";
+
 import register from "../src/components/login/register";
 import NotFoundPage from "../src/components/NotFoundPage/NotFoundPage";
 import home from "../src/components/Home/home";
@@ -18,6 +26,7 @@ import listCandidatures from "./components/Dashboard/SecondTour/listCandidatures
  import DetailsCandidaturesAJuger from "./components/Dashboard/SecondTour/DetailsCandidatureAJuger";
  import VotesProjet from "./components/Dashboard/SecondTour/VotesProjet";
 import Dashboard from "./components/Dashboard/Dashboard";
+ import DashboardCharges from "./components/Dashboard/DashboardCharge";
 import { Redirect, Switch } from 'react-router-dom';
  import listeSessions from "./components/Dashboard/FirstTour/listSessions";
  import listeProjetsparIdSes from"./components/Dashboard/FirstTour/ListeProjetByIDSessions";
@@ -62,10 +71,15 @@ class App extends Component {
           <Router>
             <React.Fragment>
           <Switch>
+              <Route path="/addQuestion" exact component={addQuestion} />
+              <Route path="/addSession" exact component={addSession} />
+              <Route path="/Candidatures" exact component={showSessions} />
+              <Route path="/Sessions2" exact component={showSessionsBack} />
                 <Route path="/" exact component={home} />
                 <Route path="/login" exact component={login} />
               <Route path="/SignIn" exact component={login2} />
               <Route path="/SignInUse" exact component={login3} />
+              <Route path="/registerCandidat" exact component={addCompte1} />
                 {/*<PrivateRoute path="/Dashboard" exact component={Dashboard} />*/}
                 <PrivateRoute path="/profile" exact component={profile} />
                 <PrivateRoute path="/update/profile" exact component={updateprofile} />
@@ -80,6 +94,7 @@ class App extends Component {
                 <Route path="/Front" exact component={Front} />
                 <Route path="/Questionnaire" exact component={front2} />
                 <Route path="/Dashboard" exact component={Dashboard}/>
+              <Route path="/DashboardCharges" exact component={DashboardCharges}/>
                 {/*<Route path="/sessions/listeSessions" exact component={listeSessions}/>*/}
                  {/*<PrivateRoute path='/protected' component={Dashboard} />*/}
 

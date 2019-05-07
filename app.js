@@ -23,6 +23,7 @@ var projectsRouter=require('./api/Project');
 var candidaturesRouter=require('./api/Candidature')
 var JudgesRouter=require('./api/JudgeCompte')
 var sessionsRouter=require('./api/Session')
+var sessions1Router=require('./api/SessionWijden')
 var responsescandidat=require('./api/ResponseCandidat')
 var app = express();
 var passport = require('passport');
@@ -59,6 +60,7 @@ app.use('/projects',projectsRouter);
 app.use('/Judges',JudgesRouter);
 app.use('/Candidatures',candidaturesRouter);
 app.use('/sessions',sessionsRouter);
+app.use('/sessionsWij',sessions1Router);
 app.use('/experience',experience);
 app.use('/education',education);
 app.use('/label',label);

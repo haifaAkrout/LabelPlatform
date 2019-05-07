@@ -5,7 +5,7 @@ var Review=require('../models/Review');
 var router = express.Router();
 var mongoose = require('mongoose');
 require("../models/Questionnaire")
-const  Questionnaire=mongoose.model("Questionnaire");
+var  Questionnaire=mongoose.model("Questionnaire");
 
 
 
@@ -28,22 +28,31 @@ res.send(Questionnaire1)
 
     });
 router.post('/add', function (req, res) {
-
-    // var Question1 = new Questionnaire({
-    //     text:req.body.text,
-    //     type:req.body.type
-    // })
-
-
-
-
+    var Response = mongoose.model('Response');
 
     var Question1 = new Questionnaire({
-        text:"\n" +
-            "How many members do you have in your team ?",
+        text:req.body.Question,
         type:"QuestionJury"
     })
+    var resp1= new Response({
+        text:req.body.Response1,
+        verify:true,
+        type:req.body.type1
+    });
+    var resp2 = new Response({
+        text:req.body.Response2,
+        verify:true,
+        type:req.body.type2
+    });
 
+    var resp3 = new Response({
+        text:req.body.Response3,
+        verify:true,
+        type:req.body.type3
+    });
+Question1.responses.push(resp1);
+Question1.responses.push(resp2);
+Question1.responses.push(resp2);
     // var Questionnaire1 = new Questionnaire({
     //     text:"questionnaire2",
     //     type:"souel2"
@@ -55,13 +64,9 @@ router.post('/add', function (req, res) {
     //     else
     //         res.send(Questionnaire1)
     // })
-    Question1.save(function (err, Questionnaire2) {
-        if (err) {
-            res.send(err)
-        }
-        else
-            res.send(Questionnaire2)
-    })
+    Question1.save();
+
+
 
 
 

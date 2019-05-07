@@ -102,13 +102,13 @@ const AVG = 1;
                                    </li>
                                    <li><a href="#about">About</a></li>
                                    <li><Link to={"/Questionnaire"}>Apply</Link></li>
-
-
-                                   <li><a href="#contact">Contact</a></li>
-                                   <li><Link to={"/SignIN"} >Sign in </Link></li>
+                                   <li><Link to={"/Candidatures"}>Candidatures</Link></li>
 
 
 
+                                   <li><Link to={"/SignIN"} >Judges </Link></li>
+                                   <li><Link to={"/SignINUSE"} >Charges </Link></li>
+                                   <li><Link to={"/register"} >Admin </Link></li>
                                </ul>
 
                            </div>

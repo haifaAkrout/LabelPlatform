@@ -7,7 +7,7 @@ import {
 import {connect} from "react-redux";
 import Header from '../../../containers/Header.js';
 import ContentContainer from '../../../containers/ContentContainer.js';
-import Nav from '../../../containers/Nav.js';
+import Nav1 from '../../../containers/Nav1.js';
 import {NotificationManager} from "react-notifications";
 import setAuthToken from "../../../setAuthToken";
 import jwt_decode from "jwt-decode";
@@ -105,7 +105,7 @@ this.loadJudges()
                             <div className="panel-heading">
                                 <h3 className="panel-title">     <a href="/Judges/demandes"><strong>Judges </strong></a><strong>->all</strong></h3>
                             </div>
-                            <div className="panel-body">
+                            <div className="panel-body" className="td">
                                 <table ref="table2" id="demo-dt-basic" className="table table-striped table-bordered">
                                     <thead>
                                     <tr>
@@ -155,7 +155,7 @@ this.loadJudges()
 
                     </div>
 
-               <Nav/>
+               <Nav1/>
 
                 </div>
 
