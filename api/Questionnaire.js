@@ -52,7 +52,7 @@ router.post('/add', function (req, res) {
     });
 Question1.responses.push(resp1);
 Question1.responses.push(resp2);
-Question1.responses.push(resp2);
+Question1.responses.push(resp3);
     // var Questionnaire1 = new Questionnaire({
     //     text:"questionnaire2",
     //     type:"souel2"

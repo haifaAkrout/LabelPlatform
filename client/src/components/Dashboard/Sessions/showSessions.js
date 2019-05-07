@@ -42,43 +42,40 @@ session:[]
                 <Header2/>
 
                 <div id="content-container">
-
+                    <br/>
+                    <br/>
+<div className="row">
 
                     <div className="panel">
 
-                        <div className="panel-heading">
+
                             {this.state.session.map(function(d, idx) {
 
                             return(
                                 <form id="demo-custom-container" action="#" className="form-horizontal">
-                                    <div className="panel-body">
-                                        <h1>{d.Name}</h1>
+
+                                        <h4>{d.Name}</h4>
                                         <div className="form-group">
 
                                             <center>
                                                 <button className="btn btn-info btn-lg" type="submit"><Link
-                                                    to={"/Question"}>Apply</Link></button>
+                                                    to={"/Question"}>Label</Link></button>
                                             </center>
                                         </div>
 
 
-                                    </div>
-                                    <div className="panel-footer">
-                                        <div className="row">
-                                            <div className="col-sm-7 col-sm-offset-3">
 
-                                            </div>
-                                        </div>
-                                    </div>
+
+
                                 </form>)
                             })}
-                    </div>
 
 
 
 
 
-</div>
+
+</div></div>
 
 
                 </div>

@@ -14,6 +14,7 @@ import JudgeList from "./components/Dashboard/Judges/DemandesJudges";
 import login from "../src/components/login/login";
  import login2 from "../src/components/login/login2";
  import login3 from "../src/components/login/login3";
+ import login4 from "../src/components/login/login4";
 
 import register from "../src/components/login/register";
 import NotFoundPage from "../src/components/NotFoundPage/NotFoundPage";
@@ -76,7 +77,8 @@ class App extends Component {
               <Route path="/Candidatures" exact component={showSessions} />
               <Route path="/Sessions2" exact component={showSessionsBack} />
                 <Route path="/" exact component={home} />
-                <Route path="/login" exact component={login} />
+                <Route path="/SignInCa" exact component={login4} />
+              <Route path="/login" exact component={login} />
               <Route path="/SignIn" exact component={login2} />
               <Route path="/SignInUse" exact component={login3} />
               <Route path="/registerCandidat" exact component={addCompte1} />

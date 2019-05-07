@@ -30,24 +30,23 @@ class Header2 extends React.Component {
                         < ul
                             className = "nav navbar-top-links right" >
 
-                                <li className="col-sm-3 col-xs-4">
-                                    <a href="index-2.html" className="logo">Labelling Platform</a>
-                                </li>
+                            <li className="col-sm-3 col-xs-4">
+                                <a href="index-2.html" className="logo">Labelling Platform</a>
+                            </li>
 
-                                            <li className="current"><Link to={'/front'}>Home</Link>
+                            <li className="current"><Link to={'/front'}>Home</Link>
 
-                                            </li>
-                                            <li><a href="#about">About</a></li>
-                                            <li><Link to={"/Questionnaire"}>Apply</Link></li>
-
-
-                                            <li><a href="#contact">Contact</a></li>
-                            <li><Link to={"/login"} >Sign in </Link></li>
+                            </li>
+                            <li><a href="#about">About</a></li>
+                            <li><Link to={"/Questionnaire"}>Apply</Link></li>
+                            <li><Link to={"/SignInCa"}>Candidatures</Link></li>
 
 
 
+                            <li><Link to={"/SignIN"} >Judges </Link></li>
+                            <li><Link to={"/SignINUSE"} >Charges </Link></li>
+                            <li><Link to={"/register"} >Admin </Link></li>
                         </ul>
-
                     </div>
 
                 </div>

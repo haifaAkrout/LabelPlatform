@@ -85,6 +85,7 @@ class addQuestion extends Component{
         axios.post('http://localhost:6003/questionnaire/add',Question
         ).then(res=>{console.log(res);
             console.log(res.data)})
+        window.location.reload();
 
     }
 

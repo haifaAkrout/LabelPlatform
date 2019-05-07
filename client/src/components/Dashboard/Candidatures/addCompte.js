@@ -96,7 +96,11 @@ class addCompte1 extends Component{
                     <div className="login-form">
                         <form  onSubmit={this.handleSubmit} >
                             <div className="sign-in-htm">
-
+                                <div className="group row col-12">
+                                    <br/>
+                                </div>
+                                <br/>
+                                <br/>
 
                                 <div className="group">
 
@@ -133,8 +137,8 @@ class addCompte1 extends Component{
 
 
                                 </div>
-
-                                    <button type="submit"  className="button " name="signup" value="Submit">Add</button>
+                                <div className="group">
+                                    <button type="submit"  className="button " name="signup" value="Submit">Save</button></div>
                                 </div>
 
                         </form>
