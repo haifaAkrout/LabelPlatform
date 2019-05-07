@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import {Bar,Line,Pie} from "react-chartjs-2";
+import {Bar,Line,Pie,Doughnut} from "react-chartjs-2";
 import "../../../App.css"
 import Header from "../../../containers/Header";
 import ContentContainer from "../../../containers/ContentContainer";
@@ -14,22 +14,11 @@ export  default  class Resultat extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            chartData :{
-                labels:['Boston','Worcester', 'Springfield','lowell','cambridge',
-                    'new bedford'],
-                datasets:[{
-                        label:'Population',
-                        data:[
-                            12563,
-                            14523,
-                            12563,
-                            12563,
-                            125365,
-                            145231
-                            ]
-                    }
-                ]
-            }
+            StartDate:'',
+            nomSession :'',
+            Project:[],
+            nomProjet:[]
+
         };
 
 
@@ -42,22 +31,49 @@ export  default  class Resultat extends React.Component{
     componentDidMount=event=> {
         // const {idSession} = this.props.match.params
         // console.log(idSession)
-        axios.get(`http://localhost:6003/sessions/resultat/5cba2219bb0f481fe0e48b36`)
+        var listeProjet=[];
+        axios.get(`http://localhost:6003/sessions/charts/5cba2219bb0f481fe0e48b36`)
             .then(response => {
-                this.setState({
-                        resultats: response.data.Project,
-                        membres: response.data.Project.members,
-                        idCharge: response.data.Project,
-                        NomSession: response.data.Name,
-                        DateSession: response.data.EndDate
-                    },
-                    console.log(response.data.Project)
-                );
+                const projets=response.data;
+                let listePValide=[];
+                let listePInvalide =[];
+                listePValide.push(projets.valide);
+                listePInvalide.push(projets.invalide);
 
-            })
-            .catch(function (error) {
-                console.log(error);
+
+                console.log("listePValide")
+                console.log(listePValide)
+                console.log("listePInvalide")
+                console.log(listePInvalide)
+                this.setState({
+                    StartDate:response.data.data.StartDate,
+                    nomSession:response.data.data.Name ,
+                    chartData :{
+                        labels:  listePValide+listePInvalide ,
+                        datasets:[{
+                            label:'Project',
+                            data:[
+                                'valide','invalide'
+                            ],
+                            backgroundColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                            ],
+                            borderColor:'#777',
+                            borderWidth: 1,
+                            hoverBorderColor:'#000',
+                            hoverBorderWidth:3
+
+                        }
+                        ]
+                    }
+                })
+
             });
+
+
+
+
 
 
 
@@ -66,7 +82,10 @@ export  default  class Resultat extends React.Component{
     static defaultProps={
         displayTitle:true,
         displayLegend:true,
-        legendPosition:'right'
+        legendPosition:'right',
+        labelsLegend: {
+            fontColor:'#000'
+        }
     }
 
 
@@ -94,19 +113,27 @@ export  default  class Resultat extends React.Component{
 
 
                                 <div className="panel-body">
-                                    <h1>chart</h1>
-                                    <Pie
+                                    <Doughnut
                                         data={this.state.chartData}
                                         options={{
                                             title:{
-                                            display:this.props.displayTitle,
-                                            text:'Liste des Projets valide',
-                                            fontSize:25
-                                        },
-                                        legend:{
-                                            display:this.props.displayLegend,
-                                            position:this.props.displayPosition,
-                                        }
+                                                display:this.props.displayTitle,
+                                                text: this.state.nomSession +' '+ Moment(this.state.StartDate).format('YYYY'),
+                                                fontSize:30
+                                            },
+                                            legend:{
+                                                display:this.props.displayLegend,
+                                                position:true,
+                                                labels:this.props.labelsLegend
+                                            },
+                                            layout:{
+                                                padding:{
+                                                    left:50,
+                                                    right:0,
+                                                    bottom:0,
+                                                    top:0
+                                                }
+                                            }
                                         }}
                                     />
                                 </div>
