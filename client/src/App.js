@@ -28,6 +28,7 @@ import { Redirect, Switch } from 'react-router-dom';
  import Resultat from "./components/Dashboard/Resultat/Resultat";
 import Front from "./components/Front/Front";
  import front2 from "./components/Front/front2";
+ import {Chart} from "./components/Dashboard/Resultat/Charts"
 //import Questionnaire from "./components/Dashboard/Questionnaire/Questionnaire";
 import Question from "./components/Front/Question"
 import { Provider } from 'react-redux'
@@ -86,6 +87,7 @@ class App extends Component {
 
 
               <Route path="/sessions/" exact component={listeSessions}/>
+              <Route path="/chart/" exact component={Charts} />
 
               <Route path="/sessions/listeProjetsparIdSes/:idSession" exact component={listeProjetsparIdSes}/>
               <Route path="/projects/detailsProjets/:idSessionP/:idProjet" exact component={DetailsProjetParIdSesIdProjet}/>
