@@ -5,6 +5,7 @@ import AddCompte from "./components/Dashboard/Judges/AddCompte";
 import EditJudge from "./components/Dashboard/Judges/EditJudge";
 import JudgeList from "./components/Dashboard/Judges/DemandesJudges";
 import login from "../src/components/login/login";
+ import login2 from "../src/components/login/login2";
 import register from "../src/components/login/register";
 import NotFoundPage from "../src/components/NotFoundPage/NotFoundPage";
 import home from "../src/components/Home/home";
@@ -61,6 +62,7 @@ class App extends Component {
           <Switch>
                 <Route path="/" exact component={home} />
                 <Route path="/login" exact component={login} />
+              <Route path="/SignIn" exact component={login2} />
                 <PrivateRoute path="/Dashboard" exact component={Dashboard} />
                 <PrivateRoute path="/profile" exact component={profile} />
                 <PrivateRoute path="/update/profile" exact component={updateprofile} />

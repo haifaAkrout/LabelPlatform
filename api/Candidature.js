@@ -31,7 +31,8 @@ const Judge = mongoose.model('Judge');
 const Charge= mongoose.model('Charge');
 
 router.get('/:id', function (req, res) {
-    Session.findById(req.params.id).populate({path:'Project.createdBy',populate: ({path:'TypeLabel'})}).populate({path:'Project.createdBy',populate: ({path:'review'})}).
+    Session.findById(req.params.id).populate({path:'Project.createdBy',populate: ({path:'TypeLabel'})})
+        .populate({path:'Project.createdBy',populate: ({path:'charges',populate:({path:'review'})})}).
     exec( function (err,Session){
         if (err)
             res.send(err)

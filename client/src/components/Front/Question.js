@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Header2 from'../../containers/Header2.js';
 import {connect} from "react-redux";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import Label from "reactstrap/es/Label";
 
 
 
@@ -99,18 +100,23 @@ console.log(this.state.status)
 
                 <div id="content-container">
 
-<center>
-                <form>
+<center><div className="panel">
+
+<form>
+
                             {
                                 Questions.map((question) => {
                                     if(question.type==="QuestionJury")
                                         return (
-                                            <div>
-                                                {question.text}
+                                <div>
+
+                                            <div className="panel-body">
+                                                <div className="form-group">
+                                                    <Label style={{color:"black"}}>{question.text}</Label>
                                                 {question.responses.map(response => (
                                                     <div className="radio" key={response._id}>
-                                                        <label>
-                                                            <input type="radio"
+                                                        <label style={{color:"black"}}>
+                                                            <input type="radio" style={{color:"black"}}
                                                                    checked={this.state.selectedOption[question._id] === response._id}
                                                                    onChange={() => this.handleOptionChange(question,question._id, response)}/>
                                                             {response.text}
@@ -118,7 +124,8 @@ console.log(this.state.status)
                                                     </div>
 
                                                 ))}
-
+                                                </div>
+                                            </div>
                                             </div>
                                         )
 
@@ -127,8 +134,9 @@ console.log(this.state.status)
 
 
                     < Link  onClick={  this.createNotification('info')}> <button  className="btn btn-pink" type="submit" onClick={this.handleFormSubmit}>Submit </button></ Link>
-                    <span>  <button className="btn btn-info" onClick={this.handleClick} >Reinitialisate  </button></span>
-                        </form>
+        <span>  <button className="btn btn-info" onClick={this.handleClick} >Reinitialisate  </button></span>
+
+</form></div>
 </center>
                     <NotificationContainer/>
                 </div>

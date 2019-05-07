@@ -10,4 +10,4 @@ var AvisSchema = new mongoose.Schema(
         date:{type:Date}
     }
 )
-module.exports=mongoose.model('Avis',AvisSchema)
+module.exports=mongoose.model('avis',AvisSchema)

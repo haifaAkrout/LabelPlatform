@@ -8,12 +8,16 @@ router.post('/sendEmailToJudge', function (req, res, next) {
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'haifaakrout123@gmail.com',
-            pass: 'haifa123A@'
-        }
+            user: 'haifa.akrout@esprit.tn',
+            pass: 'apokojun'
+        },
+
+        tls: {
+        rejectUnauthorized: false
+    }
     });
     const mailOptions = {
-        from: 'haifakrout123@gmail.com', // sender address
+        from: 'haifa.akrout@esprit.tn', // sender address
         to: req.body.To, // list of receivers
         subject: req.body.Subject, // Subject line
         html: '<p>'+req.body.Content+'</p>'// plain text body

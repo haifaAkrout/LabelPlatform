@@ -38,7 +38,11 @@ class sendEmail extends Component{
             Subject:'',
             Content:'',
             LastName:'',
-            FirstName:''
+            FirstName:'',
+            error_msg1: '',
+            error_msg2: '',
+            error1: true,
+            error2:true
 
 
         } ;
@@ -81,14 +85,30 @@ class sendEmail extends Component{
             LastName:this.state.LastName,
             FirstName:this.state.FirstName
 
+
+        }
+        event.preventDefault();
+
+        if(this.state.LastName.length == 0) {
+
+            this.setState({error_msg1: 'LastName is required!'})
+            this.setState({error1:false})
+        }
+        if(this.state.FirstName.length == 0) {
+
+            this.setState({error_msg2: 'Firstname is required!'})
+            this.setState({error2:false})
         }
 
 
 
+       else{
+            this.setState({error1:true})
 
-        event.preventDefault();
-        this.props.sendemail(email);
-        this.createNotification('success')
+            this.setState({error2:true})
+
+            this.props.sendemail(email);
+        this.createNotification('success') }
      //   window.location.reload()
    }
 
@@ -102,69 +122,47 @@ class sendEmail extends Component{
                     <Header/>
                     <div id="content-container">
                         <ContentContainer/>
+                        <div id="page-content">
+
             <div className="row">
-                <div className="col-xs-12 col-md-3 col-lg-3">
-                    <div className="mail-categories">
-                        <ul className="list-group">
-                            <li className="list-group-item">
-                                <a href="javascript:;"> <i className="fa fa-inbox"></i> Inbox <span
-                                    className="label label-info pull-right">6</span> </a>
-                            </li>
-                            <li className="list-group-item">
-                                <a href="javascript:;"> <i className="fa fa-envelope-o"></i> Send mail </a>
-                            </li>
-                            <li className="list-group-item">
-                                <a href="javascript:;"> <i className="fa fa-star"></i> Starred <span
-                                    className="label label-danger pull-right">3</span> </a>
-                            </li>
-                            <li className="list-group-item">
-                                <a href="javascript:;"> <i className="fa fa-comment-o"></i> Chat <span
-                                    className="label label-success pull-right">9</span> </a>
-                            </li>
-                            <li className="list-group-item">
-                                <a href="javascript:;"> <i className="fa fa-pencil"></i> Draft <span
-                                    className="label label-warning pull-right">1</span> </a>
-                            </li>
-                            <li className="list-group-item">
-                                <a href="javascript:;"> <i className="fa fa-trash-o"></i> Spam </a>
-                            </li>
-                        </ul>
-                    </div>
 
-
-                </div>
                 <div className="col-xs-12 col-md-9 col-lg-9">
                     <div className="panel">
                         <div className="panel-body">
-
                             <form className="form-horizontal form-bordered" onSubmit={this.handleSubmit} >
+                                <div hidden={this.state.error1} className="alert alert-danger" role="alert">{this.state.error_msg1}</div>
+
                                 <div className="form-group ">
-                                    <label className="control-label col-md-2">LastName: </label>
+                                    <label style={{color:"black",fontSize:"13px"}} className="control-label col-md-2">LastName: </label>
+
                                     <div className="col-md-6">
                                         <input type="text" name="LastName" onChange={this.handleLastNameChange} className="form-control "/>
                                     </div>
                                 </div>
+                                <div hidden={this.state.error2} className="alert alert-danger" role="alert">{this.state.error_msg2}</div>
+
+
                                 <div className="form-group nb">
-                                    <label className="control-label col-md-2">FirstName: </label>
+                                    <label style={{color:"black",fontSize:"12px"}} className="control-label col-md-2">FirstName: </label>
                                     <div className="col-md-6">
                                         <input type="text" name="FirstName" onChange={this.handleFirstNameChange} className="form-control "/>
                                     </div>
                                 </div>
                                 <div className="form-group nb">
-                                    <label className="control-label col-md-2">To: </label>
+                                    <label style={{color:"black",fontSize:"12px"}} className="control-label col-md-2">To: </label>
                                     <div className="col-md-6">
                                         <input type="text" name="To" onChange={this.handleToChange} className="form-control "/>
                                     </div>
                                 </div>
 
                                 <div className="form-group nb">
-                                    <label className="control-label col-md-2">Subject: </label>
+                                    <label style={{color:"black",fontSize:"12px"}} className="control-label col-md-2">Subject: </label>
                                     <div className="col-md-6">
                                         <input type="text"  value="Invitation" disabled name="Subject" onChange={this.handleSubjectChange} className="form-control "/>
                                     </div>
                                 </div>
                                 <div className="form-group nb">
-                                    <label className="control-label col-md-2">Content: </label>
+                                    <label style={{color:"black",fontSize:"12px"}} className="control-label col-md-2">Content: </label>
                                     <div className="col-md-7">
                                         <textarea type="text" disabled value="http://localhost:3000/Judges/addCompte" name="Content" onChange={this.handleContentChange} className="form-control "/>
                                     </div>
@@ -180,6 +178,7 @@ class sendEmail extends Component{
 
 
             </div>
+                        </div>
                     </div>
                         <Nav/>
 

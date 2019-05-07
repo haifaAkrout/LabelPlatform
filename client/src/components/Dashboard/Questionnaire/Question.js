@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import Header from '../../../containers/Header.js';
 import ContentContainer from '../../../containers/ContentContainer.js';
 import Nav from '../../../containers/Nav.js';
+import {Link} from "react-router-dom";
 
 const AVG = 1;
 
@@ -81,34 +82,57 @@ class Question extends React.Component {
                 <div className="boxed">
                     <div id="content-container">
                         <ContentContainer/>
-                        <form onSubmit={this.handleFormSubmit}>
-                            {
-                                Questions.map((question) => {
-                                    if(question.type==="QuestionJury")
-                                    return (
-                                        <div>
-                                            {question.text}
-                                            {question.responses.map(response => (
-                                                <div className="radio" key={response._id}>
-                                                    <label>
-                                                        <input type="radio"
-                                                               checked={this.state.selectedOption[question._id] === response._id}
-                                                               onChange={() => this.handleOptionChange(question,question._id, response)}/>
-                                                        {response.text}
-                                                    </label>
-                                                </div>
 
-                                            ))}
+                        <div className="panel">
+
+                            <div className="panel-heading">
+                                <h3 className="panel-title">Apply for the startup label as a compagny</h3>
+                            </div>
+                            <form onSubmit={this.handleFormSubmit}>
+                                <div className="panel-body">
+
+                                    <div className="form-group">
+                                        {
+                                            Questions.map((question) => {
+                                                if(question.type==="QuestionJury")
+                                                    return (
+                                                        <div>
+                                                            {question.text}
+                                                            {question.responses.map(response => (
+                                                                <div className="radio" key={response._id}>
+                                                                    <label>
+                                                                        <input type="radio"
+                                                                               checked={this.state.selectedOption[question._id] === response._id}
+                                                                               onChange={() => this.handleOptionChange(question,question._id, response)}/>
+                                                                        {response.text}
+                                                                    </label>
+                                                                </div>
+
+                                                            ))}
+
+                                                        </div>
+                                                    )
+
+
+                                            })}
+
+                                    </div>
+
+
+
+                                </div>
+                                <div className="panel-footer">
+                                    <div className="row">
+                                        <div className="col-sm-7 col-sm-offset-3">
 
                                         </div>
-                                    )
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
 
 
-                                })}
 
-
-                            <button className="btn btn-default" type="submit">Save</button>
-                        </form>
 
                     </div>
 

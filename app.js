@@ -8,6 +8,7 @@ const cors=require('cors');
 var chatRouter=require('./api/chat');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var avisRouter = require('./api/Avis');
 var userRouter=require('./api/user');
 var emailRouter=require('./api/email');
 var pollRouter=require('./api/poll1');
@@ -67,6 +68,7 @@ app.use('/questionnaire',questionnaire);
 app.use('/',chatRouter);
 app.use('/poll',pollRouter);
 app.use('/responsesJudges',responseJudge);
+app.use('/avis',avisRouter);
 app.use('/responsecandidat',responsescandidat);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

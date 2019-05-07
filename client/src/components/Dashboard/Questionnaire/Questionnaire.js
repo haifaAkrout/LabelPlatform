@@ -52,16 +52,15 @@ class   Questionnaire extends React.Component{
 
                         <div className="panel">
 
-                            <div className="panel-heading">
-                                <h3 className="panel-title">Am I eligible to the startup label?</h3>
-                            </div>
+                                <h3 >Am I eligible to the startup label?</h3>
+
                             <form id="demo-custom-container" action="#" className="form-horizontal">
                                 <div className="panel-body">
 
                                     <div className="form-group">
 
 <center>
-                                            <button className="btn btn-info btn-lg" type="submit">Start the test</button>
+    <button className="btn btn-info btn-lg" type="submit"><Link to={"/Question"}>Start the tsssest</Link></button>
 </center>
                                     </div>
 
@@ -114,7 +113,7 @@ class   Questionnaire extends React.Component{
                                 <div className="form-group">
 
                             <center>
-                                        <button className="btn btn-info btn-lg" type="submit">Start the Application</button>
+                                <button className="btn btn-info btn-lg" type="submit"><Link to={"/Question"}>Start the Application</Link></button>
                             </center>
                                 </div>
 

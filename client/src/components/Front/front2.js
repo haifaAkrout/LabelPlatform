@@ -73,15 +73,14 @@ class front2 extends React.Component{
                     <div className="panel">
 
                         <div className="panel-heading">
-                            <h3 className="panel-title">Am I eligible to the startup label?</h3>
-                        </div>
+                            <h3 style={{color:"black"}} className="panel-title">Am I eligible to the startup label?</h3></div>
                         <form id="demo-custom-container" action="#" className="form-horizontal">
                             <div className="panel-body">
 
                                 <div className="form-group">
 
                                     <center>
-                                        <button className="btn btn-info btn-lg" type="submit">Start the test</button>
+                                        <button className="btn btn-info btn-lg" type="submit"> <Link to={"/Question"}>Start the application</Link></button>
                                     </center>
                                 </div>
 
@@ -97,10 +96,11 @@ class front2 extends React.Component{
                             </div>
                         </form>
                     </div>
+
                     <div className="panel">
 
                         <div className="panel-heading">
-                            <h3 className="panel-title">Apply for the startup label as a compagny</h3>
+                            <h3 style={{color:"black"}}style={{color:"black"}}className="panel-title">Apply for the startup label as a compagny</h3>
                         </div>
                         <form id="demo-custom-container" action="#" className="form-horizontal">
                             <div className="panel-body">
@@ -123,10 +123,12 @@ class front2 extends React.Component{
                                 </div>
                             </div>
                         </form>
-                    </div> <div className="panel">
+                    </div>
+
+                    <div className="panel">
 
                     <div className="panel-heading">
-                        <h3 className="panel-title">Apply for the startup label as an individual</h3>
+                        <h3  className="panel-title">Apply for the startup label as an individual</h3>
                     </div>
                     <form id="demo-custom-container" action="#" className="form-horizontal">
                         <div className="panel-body">
@@ -134,7 +136,7 @@ class front2 extends React.Component{
                             <div className="form-group">
 
                                 <center>
-                                    <button className="btn btn-info btn-lg" type="submit">Start the Application</button>
+                                    <button className="btn btn-info btn-lg" type="submit"><Link to={"/Question"}>Start the Application</Link></button>
                                 </center>
                             </div>
 

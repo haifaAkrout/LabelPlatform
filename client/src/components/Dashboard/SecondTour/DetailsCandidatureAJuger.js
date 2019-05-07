@@ -152,89 +152,100 @@ console.log(this.state.currentJudge.payload.id)
                     <div id="content-container">
                        <ContentContainer/>
 
-                        <div className="panel">
-                            <div className="panel-heading">
+                        <div id="page-content">
+                            <div className="row">
 
 
-
-                                <h2 className="panel-title" style={{float: 'left',width: '34%', textalign:'left'}}>{this.state.NomSession}</h2>
-                                <p className="panel-title" style={{float: 'left', width: '33%', textalign: 'center'}}>2eme Tour</p>
-                                <p className="panel-title" style={{float: 'left', width: '33%', textalign: 'right'}}>
-
-                                    Deadline:     {formattedDate}
-
-                                </p>
-                            </div>
-
-
-                            <center> <div className="text-center">25%</div>
-                                <Progress color="#31b0d5" value="25" />
-                            </center>
-
-
-
-
-
-                        </div>
-                        <Nav tabs>
-                            <NavItem>
-                                <NavLink
-                                    className={classnames({ active: this.state.activeTab === '1' })}
-                                    onClick={() => { this.toggle('1'); }}
-                                >
-                                    Candidatures non traitées
-                                </NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink
-                                    className={classnames({ active: this.state.activeTab === '2' })}
-                                    onClick={() => { this.toggle('2'); }}
-                                >
-                                    Candidatures traitées
-                                </NavLink>
-                            </NavItem>
-                        </Nav>
                         <TabContent activeTab={this.state.activeTab}>
                             <TabPane tabId="1">
+                                <div className="col-lg-10 col-md-10 col-sm-10">
+
+                                    <div className="panel"  style={{height:"700px",width:"120%"}}>
+                                        <div className="panel">
+                                            <div className="panel-heading">
+
+
+
+                                                <h2 className="panel-title" style={{float: 'left',width: '34%',color:"black", textalign:'left'}}>{this.state.NomSession}</h2>
+                                                <p className="panel-title" style={{float: 'left', width: '33%',color:"black", textalign: 'center'}}>Second Tour</p>
+                                                <p className="panel-title" style={{float: 'left', width: '33%', color:"black",textalign: 'right'}}>
+
+                                                    Deadline:     {formattedDate}
+
+                                                </p>
+                                            </div>
+
+
+                                            <center> <div className="text-center" style={{color:"black"}}>25%</div>
+                                                <Progress color="#31b0d5" value="25" />
+                                            </center>
+
+
+
+
+
+                                        </div>
+                                        <div className="panel-body pad-no" className="td">
+
+                                            <div className="tab-base" className="td">
+                                                <Nav tabs>
+                                                    <NavItem>
+                                                        <NavLink
+                                                            className={classnames({ active: this.state.activeTab === '1' })}
+                                                            onClick={() => { this.toggle('1'); }}
+                                                        >
+                                                            Candidatures non traitées
+                                                        </NavLink>
+                                                    </NavItem>
+                                                    <NavItem>
+                                                        <NavLink
+                                                            className={classnames({ active: this.state.activeTab === '2' })}
+                                                            onClick={() => { this.toggle('2'); }}
+                                                        >
+                                                            Candidatures traitées
+                                                        </NavLink>
+                                                    </NavItem>
+                                                </Nav>
                                 {Projects.map(project=>{
                                     const {id1}=this.props.match.params
                                     if (project._id===id1)
                                     {
-                                        this.state.type=project.createdBy.review.type;
+                                        this.state.type=project.createdBy.charges.review.type;
                                         this.state.id3=project.createdBy._id;
 
                                         return (
+
                                             <div>
-                                     <span style={{textDecoration: "underline", color:"blue"}} href="#" id="UncontrolledTooltipExample">Tour2   ></span>
-                                    <span>{project.Name}</span>
+                                     <span style={{textDecoration: "underline",float:'left', color:"blue"}} href="#" id="UncontrolledTooltipExample">Second Tour   ></span>
+                                    <span style={{float:"left"}}>{project.Name}</span>
+
+                                            <br/>
 
 
+<div  style={{float:"left"}}>
 
-
-                                            <ListGroup>
-
-                                                <ListGroupItem><legend>Avis Charge</legend>
-                                                    <Button color="success">{project.createdBy.review.type}</Button>{' '}
+                                                <h4>Review  Charge</h4>
+                                                    <Button color="success">{project.createdBy.charges.review.type}</Button>{' '}
                                                     <br/>
-                                                    {project.createdBy.review.text}</ListGroupItem>
-                                            </ListGroup>
+                                                    {project.createdBy.charges.review.text}
 
+</div><br/><br/><br/><br/><hr/>
 
                                                 {project.createdBy.Questions.map(question => (
-                                                    <ListGroup>
+                                                    <div  style={{float:"left"}}>
 
-                                                        <ListGroupItem>
 
-                                                         <strong>Question:</strong>   {question.text}</ListGroupItem>
+
+                                                         <h4>Question:</h4>   {question.text}
                                                         {question.responses.map(response => (
-                                                            <ListGroupItem>
 
-                                                                {response.text}</ListGroupItem>
+<div>
+    {response.text}</div>
 
 
                                                         ))}
 
-                                                    </ListGroup>
+                                                    </div>
 
                                                 ))}
 
@@ -242,15 +253,18 @@ console.log(this.state.currentJudge.payload.id)
 
 
                                             </div> )}})}
-                                <ListGroup>
 
-                                    <fieldset border="1">
-                                    <legend>Avis Tour2</legend>
+                                                <br/><br/><br/><br/><hr/>
+
+                                    <h4 style={{float:"left"}}>Review Second Tour</h4>
+
+                                                <br/>
+                                                <br/>
                                         {Projects.map(project=>{
                                             const {id1}=this.props.match.params
                                             if (project._id===id1) {
 return(
-                                                <Link onClick={this.masquer(project.createdBy.review.text).bind(this)}>Reprendre
+                                                <Link  style={{color:"black",float:"left"}}onClick={this.masquer(project.createdBy.charges.review.text).bind(this)}>Reprendre
                                                     la recommendation du chargé</Link>)
                                             }})}
                                 <br/>
@@ -258,38 +272,41 @@ return(
                                                 <textarea ref="container"  type="text" name="text" onChange={this.handleTextChange} className="form-control" placeholder="Commentaire"/>
 
                                         </div>
+
 <br/>
 
 
 
                                         <h2 className="panel-title" style={{float: 'left',width: '34%', textalign:'left'}}>
-                                            <button className="btn btn-info "  onClick={this.handleSubmit(this.refs.container).bind(this)}type="submit">Enregistrer le brouillon</button></h2>
+                                            <button className="btn btn-info "  onClick={this.handleSubmit(this.refs.container).bind(this)}type="submit">Save brouillon</button></h2>
 
 
 
 
                                         <p className="panel-title" style={{float: 'left', width: '33%', textalign: 'center'}}>
 
-                                            <button className="btn btn-danger" onClick={this.handleSubmit2(this.refs.container).bind(this)} type="submit">Refuser</button></p>
+                                            <button className="btn btn-danger" onClick={this.handleSubmit2(this.refs.container).bind(this)} type="submit">Refuse</button></p>
 
 
                                         <p className="panel-title" style={{float: 'left', width: '15%', textalign: 'right'}}>
                                             <button className="btn btn-success" type="submit" onClick={this.handleSubmit3(this.refs.container).bind(this)}>
-                                                Appeler pour pitch</button>
+                                                Call  pitch</button>
 
                                         </p>
 
                                         <p className="panel-title" style={{float: 'left', width: '15%', textalign: 'right'}}>
                                             <button className="btn btn-info" type="submit">
-                                                Suivant</button>
+                                                Next</button>
 
                                         </p>
-                                    </fieldset>
 
-                                </ListGroup>
+
+                                                        </div></div></div></div>
 
                             </TabPane>
                         </TabContent>
+                            </div>
+                        </div>
                        <Nav1/>
 
                     </div>

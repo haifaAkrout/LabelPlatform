@@ -11,12 +11,13 @@ import {
 import Header from '../../../containers/Header.js';
 import ContentContainer from '../../../containers/ContentContainer.js';
 import Nav from '../../../containers/Nav.js';
+import logo from "../../login/logo_label_blanc.png";
 class AddCompte extends Component{
     createNotification = (type) => {
         return () => {
             switch (type) {
                 case 'success':
-                    NotificationManager.success('your account has been added successfully', 'Title here');
+                    NotificationManager.success('your account has been added successfully', 'Success');
                     break;
 
             }
@@ -92,103 +93,102 @@ class AddCompte extends Component{
         event.preventDefault();
         this.props. addCompte(judge); }
     render(){
-        return (
-
-            < div
-        id = "container"
-        className = "effect mainnav-sm navbar-fixed mainnav-fixed" >
-
-        <div className="boxed">
-            <Header/>
-            <div id="content-container">
-        <ContentContainer/>
-                <div className="row">
-                    <div className="col-lg-6">
-                        <div className="panel">
-                            <div className="panel-heading">
-                                <div className="panel-control">
-                                    <button className="btn btn-default" data-click="panel-expand"><i
-                                        className="fa fa-expand"></i></button>
-                                    <button className="btn btn-default" data-click="panel-reload"><i
-                                        className="fa fa-refresh"></i></button>
-                                    <button className="btn btn-default" data-click="panel-collapse"><i
-                                        className="fa fa-chevron-down"></i></button>
-                                    <button className="btn btn-default" data-dismiss="panel"><i className="fa fa-times"></i>
-                                    </button>
-                                </div>
-                                <h3 className="panel-title">Add account</h3>
-                            </div>
-
-                            <form className="panel-body form-horizontal" onSubmit={this.handleSubmit }>
+        return(
 
 
-                                <div className="form-group">
-                                    <label className="col-md-3 control-label" htmlFor="demo-text-input">LastName</label>
-                                    <div className="col-md-4">
-                                        <input type="text" name="LastName" onChange={this.handleLastNameChange} className="form-control" placeholder="LastName"/>
+        <div className="login-wrap sign_in_wrap">
+            <div className="login-html">
+                <a href="/" className="aligncenter">
+                    <img className="logo_h_91 signin_html_wrap" src={logo} /><br />
+                </a>
 
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <label className="col-md-3 control-label" htmlFor="demo-text-input">FirstName</label>
-                                    <div className="col-md-4">
-                                        <input type="text" name="FirstName" onChange={this.handleFirstNameChange} className="form-control"
-                                               placeholder="FirstName"/>
+                <input id="tab-1" type="radio" name="tab" className="sign-in" defaultChecked /><label htmlFor="tab-1" className="tab"></label>
+                <input id="tab-2" type="radio" name="tab" className="for-pwd" /><label htmlFor="tab-2" className="tab" />
 
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <label className="col-md-3 control-label" htmlFor="demo-text-input">Email</label>
-                                    <div className="col-md-4">
-                                        <input type="text" name="Email" onChange={this.handleEmailChange} className="form-control" placeholder="Email"/>
 
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <label className="col-md-3 control-label" htmlFor="demo-text-input">Password</label>
-                                    <div className="col-md-4">
-                                        <input type="password" name="Password" onChange={this.handlePasswordChange} className="form-control" placeholder="Password" />
+                <div className="login-form">
+                    <form  onSubmit={this.handleSubmit} >
+                    <div className="sign-in-htm">
 
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <label className="col-md-3 control-label" htmlFor="demo-text-input">YearsOfExperience</label>
-                                    <div className="col-md-4">
-                                        <input type="Number"  name="YearsOfExperience" onChange={this.handleYearsOfExperienceChange} className="form-control" placeholder="years of experience"/>
 
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <label className="col-md-3 control-label" htmlFor="demo-text-input">Speciality</label>
-                                    <div className="col-md-4">
-                                        <input type="text"  name="Spécialité" onChange={this.handleSpécialitéChange} className="form-control"  placeholder="specialité"/>
+                        <div className="group">
 
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <label className="col-md-3 control-label" htmlFor="demo-text-input">phone Number</label>
-                                    <div className="col-md-4">
-                                        <input type="tetx" name="Telephone" onChange={this.handleTelephoneChange} className="form-control" placeholder="Telephone"/>
 
-                                    </div>
-                                </div>
-                                <NotificationContainer/>
-                            <center><button type="submit" onClick={this.createNotification('success')} className="btn btn-info " name="signup" value="Submit">
-                                    Add
-                                </button></center>
+                            <label className="col-md-3 control-label" htmlFor="demo-text-input">LastName</label>
 
-                            </form>
+                                <input type="text" name="LastName" onChange={this.handleLastNameChange} className="input" placeholder="LastName"/>
+
+
+
                         </div>
-                    </div>
+                            <div className="group row col-12">
+                                <div className="col-12">
+                            <label className="col-md-3 control-label" htmlFor="demo-text-input">FirstName</label>
 
+                                <input type="text" name="FirstName" onChange={this.handleFirstNameChange} className="input"
+                                       placeholder="FirstName"/>
+
+                            </div>
+                        </div>
+                        <div className="group row col-12">
+                            <div className="col-12">
+                            <label className="col-md-3 control-label" htmlFor="demo-text-input">Email</label>
+
+                                <input type="text" name="Email" onChange={this.handleEmailChange} className="input" placeholder="Email"/>
+                            </div>
+                        </div>
+                        <div className="group row col-12">
+                            <div className="col-12">
+                            </div>
+                            <label className="col-md-3 control-label" htmlFor="demo-text-input">Password</label>
+
+                                <input type="password" name="Password" onChange={this.handlePasswordChange} className="input" placeholder="Password" />
+
+
+                        </div>
+                        <div className="group row col-12">
+                            <div className="col-12">
+                            <label className="col-md-3 control-label" htmlFor="demo-text-input">YearsOfExperience</label>
+
+                                <input type="Number"  name="YearsOfExperience" onChange={this.handleYearsOfExperienceChange} className="input" placeholder="years of experience"/>
+
+
+                        </div>
+                        </div>
+                        <div className="group row col-12">
+
+                            <label className="col-md-3 control-label" htmlFor="demo-text-input">Speciality</label>
+
+                                <input type="text"  name="Spécialité" onChange={this.handleSpécialitéChange} className="input"  placeholder="specialité"/>
+
+
+
+                        </div>
+                        <div className="group row col-12">
+                            <div className="col-12">
+                            <label className="col-md-3 control-label" htmlFor="demo-text-input">phone Number</label>
+
+                                <input type="tetx" name="Telephone" onChange={this.handleTelephoneChange} className="input" placeholder="Telephone"/>
+
+
+                        </div>
+                        </div>
+                        <div className="group">
+
+                        <NotificationContainer/>
+
+                            <button type="submit" onClick={this.createNotification('success')} className="button " name="signup" value="Submit">Add</button>
+                        </div>
+
+
+                    </div>
+                    </form>
                 </div>
 
             </div>
-<Nav/>
-
         </div>
 
-    </div>
+
 
     )
     }

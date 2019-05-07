@@ -2,8 +2,10 @@ var express = require('express');
 
 var router = express.Router();
 var mongoose = require('mongoose');
+const candidat = mongoose.model('Candidat');
 require('../models/ReviewCharge');
-const avis = mongoose.model('Avis');
+var reviewCharge =require('../models/ReviewCharge');
+var avis=require('../models/Avis');
 require('../models/User');
 const Charge = mongoose.model('Charge');
 const Candidature = mongoose.model('Candidat');
@@ -60,6 +62,48 @@ router.get('/', function (req, res) {
         }
     });
 });
+// router.post('/addAvis/:idCharge', function (req, res) {
+//     var idC = req.params.idCharge;
+//
+//     console.log("ajouter avis")
+//     Charge.findById(idC).then(charge=>
+//         {
+//             console.log(charge)
+//             var avis1 = new avis({
+//                 cause : req.body.cause,
+//                 commentaire: req.body.commentaire,
+//                 date: Date.now()
+//             });
+//             var review = new reviewCharge({
+//                 text : req.body.cause,
+//                 candidat:"5cc0aa4046f5243750e39184"
+//             });
+//             review.save();
+//             avis1.save().then(console.log("avis created with success"));
+//             console.log(avis1._id);
+//             charge.avis = avis1._id;
+//             charge.review=review._id;
+//             Charge.findByIdAndUpdate(idC, charge, {new: true}, (err, membre) => {
+//                 console.log("updated charge with avis");
+//
+//             });
+//             candidat.findById("5cc0aa4046f5243750e39184").exec(function (err,candidat1) {
+//                 candidat1.charges=idC;
+//                 candidat.findByIdAndUpdate("5cc0aa4046f5243750e39184", candidat1, {new: true}, (err, candidat) => {
+//                     console.log("updated");
+//
+//                 });
+//
+//
+//             })
+//         }
+//     );
+//
+//
+//
+//
+// });
+
 router.post('/addAvis/:idCharge', function (req, res) {
     var idC = req.params.idCharge;
 
@@ -72,13 +116,17 @@ router.post('/addAvis/:idCharge', function (req, res) {
                     commentaire: req.body.commentaire,
                     date: Date.now()
                 });
+
+                review.save();
                 avis1.save().then(console.log("avis created with success"));
-                console.log(avis1.id);
-                charge.avis = avis1.id;
+                console.log(avis1._id);
+                charge.avis = avis1._id;
+
                 Charge.findByIdAndUpdate(idC, charge, {new: true}, (err, membre) => {
                     console.log("updated charge with avis");
 
                 });
+
             }
         );
 
