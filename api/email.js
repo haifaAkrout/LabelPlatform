@@ -8,6 +8,7 @@ router.post('/sendEmailToJudge', function (req, res, next) {
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
+
             user: 'haifa.akrout@esprit.tn',
             pass: 'apokojun'
         },
@@ -15,6 +16,7 @@ router.post('/sendEmailToJudge', function (req, res, next) {
         tls: {
         rejectUnauthorized: false
     }
+
     });
     const mailOptions = {
         from: 'haifa.akrout@esprit.tn', // sender address

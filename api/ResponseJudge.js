@@ -58,7 +58,7 @@ router.post('/:idJudge/:idCandidature/addAvis',function (req,res) {
 
             judge.findById(req.params.idJudge).exec(function (err,Judge1) {
 
-                Judge1.nbredeVotes+=1;
+               // Judge1.nbredeVotes+=1;
 
                 judge.findByIdAndUpdate(req.params.idJudge, Judge1, {new: true}, (err, judge) => {
 
@@ -119,6 +119,8 @@ router.put('/:idJudge/:idCandidature/refuser',function (req,res) {
     candidat.findById(req.params.idCandidature).exec(function (err,candidat1) {
 
             candidat1.countNegatif+=1
+        candidat1.review2.push(reviewJudge1);
+        candidat1.Status="Traité";
 
         candidat.findByIdAndUpdate(req.params.idCandidature, candidat1, {new: true}, (err, candidat) => {
 

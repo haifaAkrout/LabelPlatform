@@ -145,38 +145,6 @@ router.get('/:id/:id2/avisPositif', function (req, res) {
 
 
 );
-//addAvisCharge
-router.post('/:idCandidature/addAvis',function (req,res) {
-
-    var charge1= new Charge({
-        LastName:'akrout',
-        FirstName:'atef',
-        Email:'atef.akrout@esprit.tn',
-        Password:'atoufa'
-    }) ;
-   // charge1.save();
-    var avis=new ReviewCharge({
-        text:'pas mal',
-        type:'negatif',
-        createdBy:"5cc0bda369d2061adcb1c3ea",
-        candidat:req.params.idCandidature
-    });
-
-    avis.save();
-
-    var id=req.params.idCandidature;
-    candidat.findById(id).exec(function (err,candidat1) {
-        candidat1.review = avis._id;
-        candidat.findByIdAndUpdate(id, candidat1, {new: true}, (err, candidat) => {
-            console.log("updated");
-
-        });
-
-
-    })
-
-})
-
 router.put('/:idJudge/:idCandidature/:numCandidature/call', function(req, res) {
     console.log("jjjjjj")
     const Review=mongoose.model('Review')
@@ -210,7 +178,7 @@ router.put('/:idJudge/:idCandidature/:numCandidature/call', function(req, res) {
 
 
     const num="216"+req.params.numCandidature;
-
+    console.log(num)
     nexmo.calls.create({
 
             to: [{
@@ -229,20 +197,54 @@ router.put('/:idJudge/:idCandidature/:numCandidature/call', function(req, res) {
     )
 
 })
-// router.post('/callHaifa', function(request, response) {
-//
-//     nexmo.message.sendSms(
-//         +21658011658, 21658011658, 'yo',
-//         (err, responseData) => {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 console.dir(responseData);
-//             }
-//         }
-//     );
-//
-// })
+//addAvisCharge
+router.post('/:idCandidature/addAvis',function (req,res) {
+
+    var charge1= new Charge({
+        LastName:'akrout',
+        FirstName:'atef',
+        Email:'atef.akrout@esprit.tn',
+        Password:'atoufa'
+    }) ;
+   // charge1.save();
+    var avis=new ReviewCharge({
+        text:'pas mal',
+        type:'negatif',
+        createdBy:"5cc0bda369d2061adcb1c3ea",
+        candidat:req.params.idCandidature
+    });
+
+    avis.save();
+
+    var id=req.params.idCandidature;
+    candidat.findById(id).exec(function (err,candidat1) {
+        candidat1.review = avis._id;
+        candidat.findByIdAndUpdate(id, candidat1, {new: true}, (err, candidat) => {
+            console.log("updated");
+
+        });
+
+
+    })
+
+})
+
+
+router.post('/call/:num', function(request, response) {
+
+    const num="+216"+request.params.num;
+    nexmo.message.sendSms(
+        +21658011658, 21658011658, 'Sorry you have been refused ',
+        (err, responseData) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.dir(responseData);
+            }
+        }
+    );
+
+})
 //nombre de juges qui ont voté
 router.get('/:id/nombreJudges', function (req, res) {
     list=[]
@@ -399,8 +401,8 @@ router.post('/:idCandidature/addQuestion', function (req, res) {
 
 
     var id = req.params.idCandidature;
-    // require('../models/Questionnaire');
-    // var Questionnaire = mongoose.model('Questionnaire');
+    require('../models/Questionnaire');
+    var Questionnaire = mongoose.model('Questionnaire');
     require('../models/Response');
     var Response = mongoose.model('Response');
     //console.log("haifa")

@@ -13,12 +13,15 @@ import moment from 'moment';
 import Header from '../../../containers/Header.js';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 import {connect} from "react-redux";
 import ContentContainer from "../../../containers/ContentContainer";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "../../../setAuthToken";
 class DetailsCandidatureAJuger extends React.Component{
+
+
+
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
@@ -104,6 +107,12 @@ console.log(this.state.currentJudge.payload.id)
             const id4=this.state.id3;
 
             this.props.refuserCandidature(this.state.currentJudge.payload.id,id4,Review)
+             axios.post('http://localhost:6003/candidatures/call/'+55626214).then(res=>{
+                 console.log(res.data)
+
+
+
+            })
         }
     }
 
@@ -137,6 +146,26 @@ console.log(this.state.currentJudge.payload.id)
         }
     }
 
+    createNotification = (type) => {
+        return () => {
+            switch (type) {
+                case 'info':
+                    NotificationManager.info('Your review has been added successfully');
+                    break;
+                case 'success':
+                    NotificationManager.success('Success message', 'Title here');
+                    break;
+                case 'warning':
+                    NotificationManager.warning('The candidature has been  refused', 'Refusation', 3000);
+                    break;
+                case 'error':
+                    NotificationManager.error('Error message', 'Click me!', 5000, () => {
+                        alert('callback');
+                    });
+                    break;
+            }
+        };
+    };
     render(){
         const formattedDate = moment(this.state.DateEnd).format("LLL");
         const {Projects} = this.state;
@@ -170,7 +199,14 @@ console.log(this.state.currentJudge.payload.id)
                                                 <p className="panel-title" style={{float: 'left', width: '33%',color:"black", textalign: 'center'}}>Second Tour</p>
                                                 <p className="panel-title" style={{float: 'left', width: '33%', color:"black",textalign: 'right'}}>
 
+
                                                     Deadline:     {formattedDate}
+
+                            <center>
+                                <center><span>{Projects.length}projects %</span></center>
+                                <Progress color="#31b0d5" value={Projects.length}/>
+                            </center>
+
 
                                                 </p>
                                             </div>
@@ -278,14 +314,23 @@ return(
 
 
                                         <h2 className="panel-title" style={{float: 'left',width: '34%', textalign:'left'}}>
+
                                             <button className="btn btn-info "  onClick={this.handleSubmit(this.refs.container).bind(this)}type="submit">Save brouillon</button></h2>
+
+                                       <Link onClick={this.createNotification('info')}>     <button className="btn btn-info "  onClick={this.handleSubmit(this.refs.container).bind(this)}type="submit">Enregistrer le brouillon</button>
+                                       </Link>
 
 
 
 
                                         <p className="panel-title" style={{float: 'left', width: '33%', textalign: 'center'}}>
 
+
                                             <button className="btn btn-danger" onClick={this.handleSubmit2(this.refs.container).bind(this)} type="submit">Refuse</button></p>
+
+                                          <p>  <Link   onClick={this.handleSubmit2(this.refs.container).bind(this)}>    <button className="btn btn-danger"onClick={this.createNotification('warning')} type="submit">Refuser</button>
+                                            </Link></p>
+
 
 
                                         <p className="panel-title" style={{float: 'left', width: '15%', textalign: 'right'}}>
@@ -294,6 +339,7 @@ return(
 
                                         </p>
 
+
                                         <p className="panel-title" style={{float: 'left', width: '15%', textalign: 'right'}}>
                                             <button className="btn btn-info" type="submit">
                                                 Next</button>
@@ -301,7 +347,19 @@ return(
                                         </p>
 
 
-                                                        </div></div></div></div>
+
+
+
+                                                        </div>
+
+
+
+
+
+
+
+
+                                    </div></div></div>
 
                             </TabPane>
                         </TabContent>
@@ -310,7 +368,7 @@ return(
                        <Nav1/>
 
                     </div>
-
+<NotificationContainer/>
                 </div>
 
             </div>

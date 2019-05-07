@@ -6,6 +6,7 @@ import EditJudge from "./components/Dashboard/Judges/EditJudge";
 import JudgeList from "./components/Dashboard/Judges/DemandesJudges";
 import login from "../src/components/login/login";
  import login2 from "../src/components/login/login2";
+ import login3 from "../src/components/login/login3";
 import register from "../src/components/login/register";
 import NotFoundPage from "../src/components/NotFoundPage/NotFoundPage";
 import home from "../src/components/Home/home";
@@ -28,7 +29,7 @@ import { Redirect, Switch } from 'react-router-dom';
  import Resultat from "./components/Dashboard/Resultat/Resultat";
 import Front from "./components/Front/Front";
  import front2 from "./components/Front/front2";
- import {Chart} from "./components/Dashboard/Resultat/Charts"
+ import Chart from "./components/Dashboard/Resultat/Charts"
 //import Questionnaire from "./components/Dashboard/Questionnaire/Questionnaire";
 import Question from "./components/Front/Question"
 import { Provider } from 'react-redux'
@@ -43,13 +44,13 @@ var isAuthenticated = false;
         isAuthenticated = true
       
 const PrivateRoute = ({ component: Component, ...rest }) => (
- 
+
   <Route {...rest} render={(props) => (
     isAuthenticated === true
       ? <Component {...props} />
       : <Redirect to='/login' />
   )} />
-)      
+)
 
 class App extends Component {
 
@@ -64,7 +65,8 @@ class App extends Component {
                 <Route path="/" exact component={home} />
                 <Route path="/login" exact component={login} />
               <Route path="/SignIn" exact component={login2} />
-                <PrivateRoute path="/Dashboard" exact component={Dashboard} />
+              <Route path="/SignInUse" exact component={login3} />
+                {/*<PrivateRoute path="/Dashboard" exact component={Dashboard} />*/}
                 <PrivateRoute path="/profile" exact component={profile} />
                 <PrivateRoute path="/update/profile" exact component={updateprofile} />
                 <PrivateRoute path="/disable/profile" exact component={disableprofile} />
@@ -77,8 +79,9 @@ class App extends Component {
                 <Route path="/SecondTour/:id1" exact component={listCandidatures} />
                 <Route path="/Front" exact component={Front} />
                 <Route path="/Questionnaire" exact component={front2} />
+                <Route path="/Dashboard" exact component={Dashboard}/>
                 {/*<Route path="/sessions/listeSessions" exact component={listeSessions}/>*/}
-                 <PrivateRoute path='/protected' component={Dashboard} />
+                 {/*<PrivateRoute path='/protected' component={Dashboard} />*/}
 
                 <Route path="/Question" exact component={Question} />
                 <Route path="/SecondTour/:id2/Details/:id1" exact component={DetailsCandidaturesAJuger} />
@@ -87,7 +90,7 @@ class App extends Component {
 
 
               <Route path="/sessions/" exact component={listeSessions}/>
-              <Route path="/chart/" exact component={Charts} />
+              <Route path="/chart/" exact component={Chart} />
 
               <Route path="/sessions/listeProjetsparIdSes/:idSession" exact component={listeProjetsparIdSes}/>
               <Route path="/projects/detailsProjets/:idSessionP/:idProjet" exact component={DetailsProjetParIdSesIdProjet}/>

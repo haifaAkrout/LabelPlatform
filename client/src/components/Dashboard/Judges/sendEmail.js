@@ -15,7 +15,7 @@ class sendEmail extends Component{
         return () => {
             switch (type) {
                 case 'info':
-                    NotificationManager.info('Votre email a étè envoyée avec succées');
+                    NotificationManager.info('Your email has been sended successfully');
                     break;
                 case 'success':
                     NotificationManager.success('Success message', 'Title here');

@@ -1,4 +1,3 @@
-
 import React, { Component, Suspense } from 'react';
 import Nav1 from '../../containers/Nav1.js';
 import Header from '../../containers/Header.js';
@@ -13,12 +12,12 @@ export default class Dashboard extends Component{
             < div
                 id = "container"
                 className = "effect mainnav-sm navbar-fixed mainnav-fixed" >
-             <Header/>
+                <Header/>
 
                 <div className="boxed">
-                <ContentContainer/>
+                    <ContentContainer/>
 
-             <Nav1/>
+                    <Nav1/>
 
                 </div>
 

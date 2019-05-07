@@ -261,6 +261,85 @@ router.post('/login',function (req, res) {
             res.status(401).json('unauthorized');
         }
     });
+
+
+
+
+
+
+
+
+});
+router.post('/login2',function (req, res) {
+    const Email = req.body.Email;
+    const Password = req.body.Password;
+
+    Charge.findOne({Email})
+        .then(Charge => {
+
+            bcrypt.compare(Password, Charge.Password)
+                .then(isMatch => {
+                    if(isMatch) {
+                        console.log("jjj")
+                        const payload = {
+                            id: Charge._id,
+                            name: Charge.FirstName,
+
+                        }
+                        jwt.sign(payload, 'secret', {
+                            expiresIn: 3600
+                        }, (err, token) => {
+                            if(err) console.error('There is some error in token', err);
+                            else {
+                                res.json({
+                                    success: true,
+                                    token: `Bearer ${token}`
+                                });
+                            }
+                        });
+                    }
+
+                });
+        });
+
+
+
+
+    Charge.findOne({ Email: req.body.Email},function (err, Charge) {
+        console.log(Charge.Password)
+        console.log(req.body.Password)
+
+        if (bcrypt.compareSync(req.body.Password.toString(),Charge.Password)) {
+            console.log('user found', Charge);
+            console.log("jjj")
+            const payload = {
+                id: Charge._id,
+                name: Charge.FirstName,
+
+            }
+            jwt.sign(payload, 'secret', {
+                expiresIn: 3600
+            }, (err, token) => {
+                if(err) console.error('There is some error in token', err);
+                else {
+                    res.json({
+                        success: true,
+                        token: `Bearer ${token}`
+                    });
+                }
+            });
+        } else {
+            res.status(401).json('unauthorized');
+        }
+    });
+
+
+
+
+
+
+
+
 });
 
 module.exports = router;

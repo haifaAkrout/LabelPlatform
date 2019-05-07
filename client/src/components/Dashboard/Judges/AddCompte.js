@@ -11,7 +11,12 @@ import {
 import Header from '../../../containers/Header.js';
 import ContentContainer from '../../../containers/ContentContainer.js';
 import Nav from '../../../containers/Nav.js';
+
 import logo from "../../login/logo_label_blanc.png";
+
+import Header2 from "../../Front/front2";
+import {Link} from "react-router-dom";
+
 class AddCompte extends Component{
     createNotification = (type) => {
         return () => {
@@ -93,6 +98,7 @@ class AddCompte extends Component{
         event.preventDefault();
         this.props. addCompte(judge); }
     render(){
+
         return(
 
 
@@ -183,10 +189,125 @@ class AddCompte extends Component{
 
                     </div>
                     </form>
-                </div>
 
+        return (
+
+            <div>
+                < header
+                    id = "navbar" >
+                    < div
+                        id = "navbar-container"
+                        className = "boxed" >
+
+                        < div
+                            className = "navbar-content clearfix" >
+                            < ul
+                                className = "nav navbar-top-links pull-left" >
+
+                                < li
+                                    className = "tgl-menu-btn" >
+                                    < a
+                                        className = "mainnav-toggle"
+                                        href = "#" > < i
+                                        className = "fa fa-navicon fa-lg" > </i>
+                                    </a >
+
+                                </li>
+                            </ul>
+                            < ul
+                                className = "nav navbar-top-links right" >
+
+                                <li className="col-sm-3 col-xs-4">
+                                    <a href="index-2.html" className="logo">Labelling Platform</a>
+                                </li>
+
+                                <li className="current"><Link to={'/front'}>Home</Link>
+
+                                </li>
+                                <li><a href="#about">About</a></li>
+                                <li><Link to={"/Questionnaire"}>Apply</Link></li>
+
+
+                                <li><a href="#contact">Contact</a></li>
+                                <li><Link to={"/login"} >Sign in </Link></li>
+
+
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+                </header>
+
+                <div id="content-container">
+
+                           <center> <form className="panel-body form-horizontal" onSubmit={this.handleSubmit }>
+
+
+                                <div className="form-group">
+                                    <label className="col-md-3 control-label" htmlFor="demo-text-input">LastName</label>
+                                    <div className="col-md-4">
+                                        <input type="text" name="LastName" onChange={this.handleLastNameChange} className="form-control" placeholder="LastName"/>
+
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label className="col-md-3 control-label" htmlFor="demo-text-input">FirstName</label>
+                                    <div className="col-md-4">
+                                        <input type="text" name="FirstName" onChange={this.handleFirstNameChange} className="form-control"
+                                               placeholder="FirstName"/>
+
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label className="col-md-3 control-label" htmlFor="demo-text-input">Email</label>
+                                    <div className="col-md-4">
+                                        <input type="text" name="Email" onChange={this.handleEmailChange} className="form-control" placeholder="Email"/>
+
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label className="col-md-3 control-label" htmlFor="demo-text-input">Password</label>
+                                    <div className="col-md-4">
+                                        <input type="password" name="Password" onChange={this.handlePasswordChange} className="form-control" placeholder="Password" />
+
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label className="col-md-3 control-label" htmlFor="demo-text-input">YearsOfExperience</label>
+                                    <div className="col-md-4">
+                                        <input type="Number"  name="YearsOfExperience" onChange={this.handleYearsOfExperienceChange} className="form-control" placeholder="years of experience"/>
+
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label className="col-md-3 control-label" htmlFor="demo-text-input">Speciality</label>
+                                    <div className="col-md-4">
+                                        <input type="text"  name="Spécialité" onChange={this.handleSpécialitéChange} className="form-control"  placeholder="specialité"/>
+
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label className="col-md-3 control-label" htmlFor="demo-text-input">phone Number</label>
+                                    <div className="col-md-4">
+                                        <input type="tetx" name="Telephone" onChange={this.handleTelephoneChange} className="form-control" placeholder="Telephone"/>
+
+                                    </div>
+                                </div>
+                                <NotificationContainer/>
+                            <center><button type="submit" onClick={this.createNotification('success')} className="btn btn-info " name="signup" value="Submit">
+                                    Add
+                                </button></center>
+
+                            </form></center>
+
+                </div>
             </div>
+
         </div>
+            </div></div>
+
 
 
 

@@ -52,9 +52,11 @@ class login2 extends React.Component{
                 const decoded = jwt_decode(token);
                 const user1 =setCurrentUser(decoded)
                 console.log(user1)
-            })
-        this.props.history.push("../Dashboard");
+                console.log("login in login +++")
 
+            })
+
+        this.props.history.push("/Dashboard");
     }
 
 
@@ -80,7 +82,7 @@ class login2 extends React.Component{
                             <div className="hr2" />
                             <div className="group">
                                 <label htmlFor="username" className="label">Username or Email</label>
-                                <input type="password" name="Email" onChange={this.handleEmailChange} className="input" placeholder="Email" />              </div>
+                                <input type="text" name="Email" onChange={this.handleEmailChange} className="input" placeholder="Email" />              </div>
                             <div className="group">
                                 <label htmlFor="password" className="label">Password</label>
                                 <input type="password" name="Password" onChange={this.handlePasswordChange} className="input" placeholder="Password" />

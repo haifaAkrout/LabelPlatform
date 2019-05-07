@@ -3,6 +3,8 @@ import axios from "axios";
 
 
 import {connect} from "react-redux";
+import Header2 from "./front2";
+import {Link} from "react-router-dom";
 
 const AVG = 1;
   class Front extends React.Component{
@@ -65,71 +67,57 @@ const AVG = 1;
 
 
 
-               <header className="header_area" id="home">
-                   <div className="header_top" id="sticker">
-                       <div className="container">
-                           <div className="row">
-                               <div className="col-sm-3 col-xs-4">
-                                   <a href="index-2.html" className="logo">Labelling Platform</a>
-                               </div>
-                               <div className="col-sm-9 menu_col col-xs-8">
-                                   <nav className="menu-container">
-                                       <ul className="menu" id="nav">
-                                           <li className="current"><a href="#home">Home</a>
-                                               <ul className="sub-menu">
-                                                   <li><a href="index-2.html">Homepage One</a></li>
-                                                   <li><a href="index-3.html">Homepage Two</a></li>
-                                                   <li><a href="index-4.html">Homepage Three</a></li>
-                                               </ul>
-                                           </li>
-                                           <li><a href="#about">About</a></li>
-                                           <li><a href="#features">Apply</a></li>
+               <div>
+
+                   < header
+                       id = "navbar" >
+                       < div
+                           id = "navbar-container"
+                           className = "boxed" >
+
+                           < div
+                               className = "navbar-content clearfix" >
+                               < ul
+                                   className = "nav navbar-top-links pull-left" >
+
+                                   < li
+                                       className = "tgl-menu-btn" >
+                                       < a
+                                           className = "mainnav-toggle"
+                                           href = "#" > < i
+                                           className = "fa fa-navicon fa-lg" > </i>
+                                       </a >
+
+                                   </li>
+                               </ul>
+                               < ul
+                                   className = "nav navbar-top-links right" >
+
+                                   <li className="col-sm-3 col-xs-4">
+                                       <a href="index-2.html" className="logo">Labelling Platform</a>
+                                   </li>
+
+                                   <li className="current"><Link to={'/front'}>Home</Link>
+
+                                   </li>
+                                   <li><a href="#about">About</a></li>
+                                   <li><Link to={"/Questionnaire"}>Apply</Link></li>
 
 
-                                           <li><a href="#contact">Contact</a></li>
-                                           <li><a href="#services">Sign in </a></li>
-                                       </ul>
-                                   </nav>
-                               </div>
+                                   <li><a href="#contact">Contact</a></li>
+                                   <li><Link to={"/SignIN"} >Sign in </Link></li>
+
+
+
+                               </ul>
+
                            </div>
+
                        </div>
-                   </div>
-                   <div >
-                       <div >
-                           <div className="container">
-                               <div className="row">
+                   </header>
 
-                                   <center> <form onSubmit={this.handleFormSubmit}>
-                                       {
-                                           Questions.map((question) => {
-                                               if(question.type==="QuestionJury")
-                                                   return (
-                                                       <div>
-                                                           {question.text}
-                                                           {question.responses.map(response => (
-                                                               <div className="radio" key={response._id}>
-                                                                   <label>
-                                                                       <input type="radio"
-                                                                              checked={this.state.selectedOption[question._id] === response._id}
-                                                                              onChange={() => this.handleOptionChange(question,question._id, response)}/>
-                                                                       {response.text}
-                                                                   </label>
-                                                               </div>
+                   <div id="content-container">
 
-                                                           ))}
-
-                                                       </div>
-                                                   )
-
-
-                                           })}
-
-
-                                       <button className="btn btn-default" type="submit">Save</button>
-                                   </form></center>
-                               </div>
-                           </div>
-                       </div>
                        <div className="single-slide">
                            <div className="container">
                                <div className="row">
@@ -138,16 +126,20 @@ const AVG = 1;
                                    </div>
                                    <div className="col-md-7">
                                        <div className="slide-images">
-                                           <img src="../../../public/Front/assets/images/slide-01.png" alt=""/>
+                                           <img src="/Front/assets/images/slide-01.png" alt=""/>
                                        </div>
                                    </div>
                                </div>
                            </div>
                        </div>
 
+
                    </div>
 
-               </header>
+
+
+
+                   </div>
 
 
 
@@ -156,7 +148,14 @@ const AVG = 1;
 
 
 
-           </div>
+               </div>
+
+
+
+
+
+
+
         )
 
     }}

@@ -107,6 +107,23 @@ router.post('/:idSession/add/:idQuest/:idCanda', function (req, res) {
 
 
 
+    var prelabel=new Label({
+        type:"prelabel",
+        SoumissionDate:Date.now(),
+        PreLabelDate:Date.now()
+    });
+    Label1.save();
+    prelabel.save();
+    var Candidature2=new Candidat({
+        LastName: 'basly',
+        FirstName:'rahma',
+        Email:'basly@esprit.tn',
+        Password: 'rahma',
+        TypeLabel:prelabel.id,
+        Status:'non Traité'
+    })
+
+
     var id = req.params.idSession;
     var idQ = req.params.idQuest;
     var idCa = req.params.idCanda;

@@ -100,35 +100,26 @@ class VotesProjet extends React.Component{
                             </div>
 
 
-                            <center> <div className="text-center">25%</div>
-                                <Progress color="#31b0d5" value="25" />
+                            <center>
+                                <center><span>{Sessions.length}projects %</span></center>
+                                <Progress color="#31b0d5" value={Sessions.length}/>
                             </center>
-
-
-
 
 
                         </div>
                         <Nav tabs>
-                            <NavItem>
-                                <NavLink
-                                    className={classnames({ active: this.state.activeTab === '1' })}
-                                    onClick={() => { this.toggle('1'); }}
-                                >
-                                    Jury
-                                </NavLink>
-                            </NavItem>
+
                             <NavItem>
                                 <NavLink
                                     className={classnames({ active: this.state.activeTab === '2' })}
-                                    onClick={() => { this.toggle('2'); }}
+                                    onClick={() => { this.toggle('1'); }}
                                 >
-                                    Projets
+                                    Projects
                                 </NavLink>
                             </NavItem>
                         </Nav>
                         <TabContent activeTab={this.state.activeTab}>
-                            <TabPane tabId="2">
+                            <TabPane tabId="1">
 
 
 
@@ -146,7 +137,7 @@ class VotesProjet extends React.Component{
 
                                             <th >votes pour </th>
 
-                                            <th> Action </th>
+                                           
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -164,9 +155,7 @@ class VotesProjet extends React.Component{
                                                         <td>{d.members[0].Email}</td>
                                                         <td>{d.createdBy.countPositif}/{d.createdBy.countNegatif}</td>
 
-                                                        <td> <center>
-                                                            <button className="btn btn-info " type="submit"> <Link to={"/Question"}>Consulter</Link></button>
-                                                        </center></td>
+
 
                                                     </tr>
                                                 )
@@ -183,36 +172,7 @@ class VotesProjet extends React.Component{
                                 </div>
                             </TabPane>
                         </TabContent>
-                        <TabContent activeTab={this.state.activeTab}>
-                            <TabPane tabId="1">
 
-
-
-
-                                <div className="panel-body">
-
-                                    <table id="demo-foo-filtering"
-                                           className="table table-bordered table-hover toggle-circle" data-page-size="7">
-
-                                        <thead>
-                                        <tr>
-                                            <th>Nom</th>
-                                            <th >Project voté </th>
-                                            <th >Avancement </th>
-
-
-
-                                        </tr>
-                                        </thead>
-
-
-
-                                    </table>
-
-
-                                </div>
-                            </TabPane>
-                        </TabContent>
                        <Nav1/>
 
                     </div>
