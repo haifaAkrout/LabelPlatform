@@ -64,7 +64,7 @@ handleChange(event) {
 
    if(this.state.password.length != 0 && this.state.username.length !=0){
 
-       axios.post('http://localhost:6003/login', {email:this.state.username , password:this.state.password})
+       axios.post('https://labelplatform.herokuapp.com/login', {email:this.state.username , password:this.state.password})
                 .then(res => {
                    //  const {token} = res.data;
                    //  localStorage.setItem('jwtToken', token);
