@@ -99,7 +99,7 @@ class App extends Component {
                 <Route path="/Questionnaire" exact component={front2} />
                 <Route path="/Dashboard" exact component={Dashboard}/>
               <Route path="/DashboardCharges" exact component={DashboardCharges}/>
-                {/*<Route path="/sessions/listeSessions" exact component={listeSessions}/>*/}
+                <Route path="/sessions/listeSessions" exact component={listeSessions}/>
                  {/*<PrivateRoute path='/protected' component={Dashboard} />*/}
 
                 <Route path="/Question" exact component={Question} />
@@ -115,7 +115,7 @@ class App extends Component {
               <Route path="/projects/detailsProjets/:idSessionP/:idProjet" exact component={DetailsProjetParIdSesIdProjet}/>
 
 
-              <Route path="/members/addMember/" exact component={AddMember} />
+              <Route path="/members/addMember/:idSession/:idProjet" exact component={AddMember} />
               <Route path="/projects/ListeMembres/:idSessionP/:idProjet" exact component={ListEquipe} />
               <Route path="/members/editMember/:idSession/:idProjet/:idMembre" exact component={EditMember} />
               <Route path="/resultat/" exact component={Resultat} />

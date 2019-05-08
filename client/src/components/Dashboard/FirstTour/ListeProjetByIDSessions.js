@@ -109,12 +109,12 @@ class ListeProjetByIDSessions extends Component {
                     <div id="content-container">
                         <ContentContainer/>
 
-                        <div className="panel">
+                        <div className="panel ">
 
                             <div className="panel-body">
 
                                 <div className="panel-heading" id={"divtitle"}>
-                                    <label id={"label1"}>
+                                    <label id={"label1 "} className="td">
                                         {this.state.NomSession} &nbsp;
                                         <span>
                                                     {Moment(this.state.DateFinSession).format('YYYY')}
@@ -123,7 +123,7 @@ class ListeProjetByIDSessions extends Component {
 
 
                                 </div>
-                                <Nav tabs id={"nav"}>
+                                <Nav tabs id={"nav"} className="td">
                                     <NavItem>
                                         <NavLink
                                             className={classnames({ active: this.state.activeTab === '1' })}

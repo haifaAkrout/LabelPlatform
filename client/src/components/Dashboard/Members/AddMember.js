@@ -78,6 +78,8 @@ export default class AddMember extends Component{
 
 
     handleSubmit(e) {
+        const {idSession} = this.props.match.params;
+        const {idProjet} = this.props.match.params;
         e.preventDefault();
         console.log("ajout")
         const formData = new FormData();
@@ -98,11 +100,11 @@ export default class AddMember extends Component{
                 }
             };
 
-            axios.post('http://localhost:6003/members/addMemberwithLinkedIn/5cba2219bb0f481fe0e48b36/5cba238d2b5d6736fc6c8949',
-                formData,config).then(res => {
-                console.log(res);
-                //  this.props.history.push('/sessions/');
-            })
+        axios.post('https://localhost:6003/members/addMemberwithLinkedIn/'+idSession+'/'+idProjet,
+            formData,config).then(res => {
+            console.log(res);
+            //  this.props.history.push('/sessions/');
+        })
 
     }
     render(){

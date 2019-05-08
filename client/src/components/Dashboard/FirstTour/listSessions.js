@@ -7,7 +7,7 @@ import ContentContainer from "../../../containers/ContentContainer";
 import Nav1 from "../../../containers/Nav1";
 import {Link} from "react-router-dom";
 import "../../../App.css"
-export default class listCandidatures extends React.Component{
+export default class listSessions extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -38,21 +38,22 @@ export default class listCandidatures extends React.Component{
         //render
         return (
 
-            <div                id = "container"
-                                className = "effect mainnav-sm navbar-fixed mainnav-fixed" >
+            < div
+                id = "container"
+                className = "effect mainnav-sm navbar-fixed mainnav-fixed" >
 
-                <Header/>
                 <div className="boxed">
-
+                    <Header/>
                     <div id="content-container">
                         <ContentContainer/>
+
 
 
 
                         <div className="panel">
                             <div className="panel-body">
 
-                                <Table striped id={"tableSession"}>
+                                <Table striped id={"tableSession"} className="td">
                                     <thead>
                                     <tr>
                                         <th>Name</th>
@@ -70,7 +71,7 @@ export default class listCandidatures extends React.Component{
                                         else
                                             return(
                                                 <tr  key={idx}>
-                                                    <td>
+                                                    <td style={{color:"Black"}}>
 
                                                         <Link to={"/sessions/listeProjetsparIdSes/"+ session._id} params={{ idSession: session._id}}>{session.Name}</Link>
                                                     </td>
@@ -80,7 +81,7 @@ export default class listCandidatures extends React.Component{
                                                     <td>
                                                         {Moment(session.EndDate).format('DD-MM-YYYY')}
                                                     </td>
-                                                    <td>
+                                                    <td style={{color:"Black"}}>
                                                         {session.Status}
                                                     </td>
 
@@ -91,17 +92,15 @@ export default class listCandidatures extends React.Component{
                                     </tbody>
                                 </Table>
 
+
                             </div>
 
+
                         </div>
-
-
                     </div>
-
                     <Nav1/>
 
                 </div>
-
             </div>)
     }}
 

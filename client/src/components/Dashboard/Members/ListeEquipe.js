@@ -206,7 +206,12 @@ export default class ListeEquipe extends React.Component {
                                     </tbody>
                                 </Table>
                                 <div id={"btnajout"}>
-                                    <Link to={"/members/addMember"}>Ajouter un nouveau membre</Link>
+                                    <Link  style={{color:"Black"}} to={"/members/addMember/"+this.state.idSession+"/"+this.state.idProj}
+                                           params={{
+                                               idSession: this.state.idSess,
+                                               idProjet: this.state.idProj
+                                           }}
+                                    >Ajouter un nouveau membre</Link>
 
                                 </div>
                             </div>
