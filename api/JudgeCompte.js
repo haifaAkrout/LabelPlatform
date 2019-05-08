@@ -25,6 +25,13 @@ const nexmo = new Nexmo({
     applicationId: '03b973dd-2e0a-404a-bc9d-473f160c95f1',
     //privateKey: privateKey
 });
+var app = express();
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 var jwt = require('jsonwebtoken');
 
 router.get('/listJudges', function (req, res) {
