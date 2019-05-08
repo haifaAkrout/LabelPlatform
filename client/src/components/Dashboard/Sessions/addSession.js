@@ -10,7 +10,7 @@ import {
 } from "../../../store/actions";
 import Header from '../../../containers/Header.js';
 import ContentContainer from '../../../containers/ContentContainer.js';
-import Nav from '../../../containers/Nav.js';
+import Nav1 from '../../../containers/Nav1.js';
 
 import logo from "../../login/logo_label_blanc.png";
 
@@ -141,7 +141,7 @@ class addSession extends Component{
                             </div>
                         </div>
                     </div>
-                    <Nav/>
+                    <Nav1/>
 
 
                 </div>

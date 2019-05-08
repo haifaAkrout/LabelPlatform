@@ -10,7 +10,7 @@ import JudgeList from "./components/Dashboard/Judges/DemandesJudges";
  import showSessions from "./components/Dashboard/Sessions/showSessions";
  import showSessionsBack from "./components/Dashboard/Judges/showSessionsBack";
  import addCompte1 from "./components/Dashboard/Candidatures/addCompte";
-
+ import Project from "./components/Dashboard/Candidatures/Project";
 import login from "../src/components/login/login";
  import login2 from "../src/components/login/login2";
  import login3 from "../src/components/login/login3";
@@ -72,6 +72,7 @@ class App extends Component {
           <Router>
             <React.Fragment>
           <Switch>
+
               <Route path="/addQuestion" exact component={addQuestion} />
               <Route path="/addSession" exact component={addSession} />
               <Route path="/Candidatures" exact component={showSessions} />
@@ -86,6 +87,7 @@ class App extends Component {
                 <PrivateRoute path="/profile" exact component={profile} />
                 <PrivateRoute path="/update/profile" exact component={updateprofile} />
                 <PrivateRoute path="/disable/profile" exact component={disableprofile} />
+              <Route path="/addProject/:id1" exact component={Project} />
                 <Route path="/logout" exact component={logout} />
                 <Route path="/register" exact component={register} />
               <Route path="/Judges/sendEmail" exact component={sendEmail} />

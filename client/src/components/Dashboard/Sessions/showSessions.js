@@ -59,7 +59,7 @@ session:[]
 
                                             <center>
                                                 <button className="btn btn-info btn-lg" type="submit"><Link
-                                                    to={"/Question"}>Label</Link></button>
+                                                    to={"/addProject/"+d._id} params={{ id1: d._id}}>Label</Link></button>
                                             </center>
                                         </div>
 

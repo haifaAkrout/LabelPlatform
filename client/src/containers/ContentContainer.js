@@ -8,7 +8,7 @@ class ContentContainer extends React.Component {
         return (
 
                 <div className="pageheader hidden-xs">
-                    <h3><i className="fa fa-home"></i> Labelling Platform </h3>
+                    <h3 style={{float:"left"}}><i className="fa fa-home"></i> Labelling Platform </h3>
                     <div className="breadcrumb-wrapper">
                         <span className="label">You are here:</span>
                         <ol className="breadcrumb">

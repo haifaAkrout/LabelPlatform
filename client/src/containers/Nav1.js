@@ -97,70 +97,22 @@ class Nav1 extends React.Component {
                                         <a href="#">
                                             <i className="fa fa-th"></i>
                                             <span className="menu-title">
-                                              Labeling startups
+                                             Questions Management
                                             </span>
                                             <i className="arrow"></i>
                                         </a>
 
                                         <ul className="collapse">
-                                            <li><a href=""><i className="fa fa-caret-right"></i>
-                                                Add Judge  </a></li>
-                                            <li><a href="layout-boxed.html"><i className="fa fa-caret-right"></i>
-                                                Delete Judge  </a></li>
-                                            <li><a href="layout-collapsed-sidebar.html"><i
-                                                className="fa fa-caret-right"></i> show Judges </a></li>
+                                            <li><a href="http://localhost:3000/addQuestion"><i className="fa fa-caret-right"></i>
+                                                Add Question </a></li>
+
+
 
 
                                         </ul>
                                     </li>
 
-                                    <li>
-                                        <a href="#">
-                                            <i className="fa fa-th"></i>
-                                            <span className="menu-title">
-                                            Sessions
-                                            </span>
-                                            <i className="arrow"></i>
-                                        </a>
 
-                                        <ul className="collapse">
-
-
-                                            {this.state.Sessions.map(d=> (
-                                                <li>
-
-                                                    <Link to={"/SecondTour/"+d._id}params={{ id1: d._id}}>{d.Name}</Link>
-                                                </li>))}
-
-
-                                        </ul>
-                                        <ul className="collapse">
-
-
-                                            {/*{this.state.Sessions.map(d=> (*/}
-                                                {/*<li>*/}
-
-                                                    {/*<Link to={"/votes/"+d._id}params={{ id1: d._id}}>{d.Name}</Link>*/}
-                                                {/*</li>))}*/}
-                                            <li>
-                                                <a href="#">
-                                                    <i className="fa fa-th"></i>
-                                                    <span className="menu-title">
-                                              Les sessions
-                                            </span>
-                                                    <i className="arrow"></i>
-                                                </a>
-
-                                                <ul className="collapse">
-                                                    <li><a href="http://localhost:3000/sessions/"><i className="fa fa-caret-right"></i>
-                                                        Liste des sessions  </a></li>
-
-
-                                                </ul>
-                                            </li>
-
-                                        </ul>
-                                    </li>
 
                                      <li><a href="/logout"> <i className="fa fa-sign-out"></i> <span
                                         className="menu-title"> Logout </span> </a></li>

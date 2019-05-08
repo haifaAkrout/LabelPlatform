@@ -7,7 +7,7 @@ require('../models/User');
 const Membre = mongoose.model('Member');
 
 var Session= require('../models/Session');
-var Projet = require('../models/Project');
+var Project = require('../models/Project');
 const Label=mongoose.model('Label');
 var path = require('path');
 
@@ -194,6 +194,30 @@ router.get('/ListeMembres/:idSession/:idProjet', function (req, res) {
 
 
         }).catch();
+
+});
+router.post('/add/:id', function (req, res) {
+
+
+    Session.findById(req.body.id).exec(function (err , Session) {
+        Projecttt = mongoose.model('Project',Project);
+        var projet4 = new Projecttt({
+            Name:req.body.Name,
+            Response1:req.body.Response1,
+            Response2:req.body.Response2,
+            createdBy:req.body.createdBy
+
+        });
+        projet4.save();
+        Session.Project.push(projet4);
+        Session.save(function (err , Sessionn) {
+            if (err)
+                res.send(err);
+            else
+                res.send(Sessionn)
+        });
+
+    });
 
 });
 
