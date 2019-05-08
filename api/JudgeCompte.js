@@ -14,7 +14,7 @@ require('../models/Review')
 var Project=require('../models/Project')
 
 var Review=mongoose.model('Review');
-var cors = require('cors')
+
 var Session= require('../models/Session');
 var ReviewCharge=require('../models/ReviewCharge');
 const Candidat = mongoose.model('Candidat');
@@ -25,13 +25,6 @@ const nexmo = new Nexmo({
     applicationId: '03b973dd-2e0a-404a-bc9d-473f160c95f1',
     //privateKey: privateKey
 });
-var app = express();
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
-
 var jwt = require('jsonwebtoken');
 
 router.get('/listJudges', function (req, res) {
@@ -226,7 +219,7 @@ router.delete('/:id/:id1',function (req, res) {
 })
 
 
-router.post('/login4',cors(),function (req, res) {
+router.post('/login4',function (req, res) {
     const Email = req.body.Email;
     const Password = req.body.Password;
 
