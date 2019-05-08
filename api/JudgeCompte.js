@@ -14,7 +14,7 @@ require('../models/Review')
 var Project=require('../models/Project')
 
 var Review=mongoose.model('Review');
-
+var cors = require('cors')
 var Session= require('../models/Session');
 var ReviewCharge=require('../models/ReviewCharge');
 const Candidat = mongoose.model('Candidat');
@@ -226,7 +226,7 @@ router.delete('/:id/:id1',function (req, res) {
 })
 
 
-router.post('/login4',function (req, res) {
+router.post('/login4',cors(),function (req, res) {
     const Email = req.body.Email;
     const Password = req.body.Password;
 
