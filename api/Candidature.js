@@ -2,13 +2,13 @@
 var express = require('express');
 var router = express.Router();
 const Nexmo = require('nexmo');
-const privateKey = require('fs').readFileSync(__dirname +"\\"+'private.key');
+//const privateKey = require('fs').readFileSync(__dirname +"\\"+'private.key');
 
 const nexmo = new Nexmo({
     apiKey: '6c4de09e',
     apiSecret: '0Qr6NuiURwaOxqMG',
     applicationId: '03b973dd-2e0a-404a-bc9d-473f160c95f1',
-    privateKey: privateKey
+    //privateKey: privateKey
 });
 
 

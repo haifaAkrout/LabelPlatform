@@ -7,7 +7,7 @@ var Demande = require('../models/Demande');
 var bcrypt = require('bcrypt-nodejs');
 const Nexmo = require('nexmo');
 mongoose.set('useFindAndModify', false);
-const privateKey = require('fs').readFileSync(__dirname +"\\"+'private.key');
+//const privateKey = require('fs').readFileSync(__dirname +"\\"+'private.key');
 var mongoose = require('mongoose');
 require('../models/Review')
 
@@ -23,7 +23,7 @@ const nexmo = new Nexmo({
     apiKey: '6c4de09e',
     apiSecret: '0Qr6NuiURwaOxqMG',
     applicationId: '03b973dd-2e0a-404a-bc9d-473f160c95f1',
-    privateKey: privateKey
+    //privateKey: privateKey
 });
 var jwt = require('jsonwebtoken');
 
