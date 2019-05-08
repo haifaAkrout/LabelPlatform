@@ -546,10 +546,10 @@ router.post('/addMemberwithLinkedIn/:idSession/:idProjet', upload.single('image'
 
                     UserMem.save().then(members => {
                         console.log('----'+members.id);
-                        config.rootProfiles.push(req.body.LinkLinkedIn);
-                        config.user = req.body.LinkLinkedIn;
-                        config.idUser = members.id;
-                        scrap(config);
+                        // config.rootProfiles.push(req.body.LinkLinkedIn);
+                        // config.user = req.body.LinkLinkedIn;
+                        // config.idUser = members.id;
+                        // scrap(config);
                         res.send({
                             message: 'member add successfully',
                             data: members

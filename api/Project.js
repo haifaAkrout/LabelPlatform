@@ -196,10 +196,11 @@ router.get('/ListeMembres/:idSession/:idProjet', function (req, res) {
         }).catch();
 
 });
-router.post('/add/:id', function (req, res) {
+router.post('/add/:id1', function (req, res) {
+    console.log("haifa")
+console.log(req.params.id1)
 
-
-    Session.findById(req.body.id).exec(function (err , Session) {
+    Session.findById(req.params.id1).exec(function (err , Session) {
         Projecttt = mongoose.model('Project',Project);
         var projet4 = new Projecttt({
             Name:req.body.Name,
@@ -209,6 +210,7 @@ router.post('/add/:id', function (req, res) {
 
         });
         projet4.save();
+        console.log(Session.Name)
         Session.Project.push(projet4);
         Session.save(function (err , Sessionn) {
             if (err)
