@@ -27,6 +27,7 @@ import listCandidatures from "./components/Dashboard/SecondTour/listCandidatures
  import DetailsCandidaturesAJuger from "./components/Dashboard/SecondTour/DetailsCandidatureAJuger";
  import VotesProjet from "./components/Dashboard/SecondTour/VotesProjet";
 import Dashboard from "./components/Dashboard/Dashboard";
+ import DashboardJudge from "./components/Dashboard/DashboardJudge";
  import DashboardCharges from "./components/Dashboard/DashboardCharge";
 import { Redirect, Switch } from 'react-router-dom';
  import listeSessions from "./components/Dashboard/FirstTour/listSessions";
@@ -98,6 +99,7 @@ class App extends Component {
                 <Route path="/Front" exact component={Front} />
                 <Route path="/Questionnaire" exact component={front2} />
                 <Route path="/Dashboard" exact component={Dashboard}/>
+              <Route path="/DashboardJudge" exact component={DashboardJudge}/>
               <Route path="/DashboardCharges" exact component={DashboardCharges}/>
                 <Route path="/sessions/listeSessions" exact component={listeSessions}/>
                  {/*<PrivateRoute path='/protected' component={Dashboard} />*/}

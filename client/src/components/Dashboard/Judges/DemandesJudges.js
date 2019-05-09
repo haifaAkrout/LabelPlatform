@@ -52,7 +52,7 @@ class JudgeList extends React.Component{
       //   setAuthToken(localStorage.getItem("token"));
         const decoded = jwt_decode(localStorage.getItem('jwtToken'));
         const user1 =setCurrentUser(decoded)
-        console.log(user1.id)
+        console.log(user1.payload.id)
         this.loadJudges();
     }
 

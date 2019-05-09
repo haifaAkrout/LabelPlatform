@@ -6,7 +6,7 @@ import moment from 'moment';
 import axios from 'axios';
 import ContentContainer from "../../../containers/ContentContainer";
 import Header from '../../../containers/Header.js';
-import Nav1 from '../../../containers/Nav1.js';
+import Nav2 from '../../../containers/Nav2.js';
 import { Link } from 'react-router-dom';
 import {deleteJudge,
 } from "../../../store/actions";
@@ -61,13 +61,13 @@ export  default  class listCandidatures extends React.Component{
                 id = "container"
                 className = "effect mainnav-sm navbar-fixed mainnav-fixed" >
                 <Header/>
-                <div className="boxed">
+                <div className="boxed" >
 
                     <div id="content-container">
 
                         <ContentContainer/>
 
-                        <div className="panel">
+                        <div className="panel" >
                             <div className="panel-heading">
 
 
@@ -90,7 +90,7 @@ export  default  class listCandidatures extends React.Component{
 
 
 
-                            <div className="panel-body">
+                            <div className="panel-body" className="td">
                                 <Nav tabs>
                                     <NavItem>
                                         <NavLink
@@ -156,7 +156,7 @@ export  default  class listCandidatures extends React.Component{
                                             <tr>
                                                 <th>Type of candidature </th>
                                                 <th >Project Name </th>
-                                                <th >Lead </th>
+                                                {/*<th >Lead </th>*/}
 
                                                 <th >Soumission Date </th>
                                                 <th> Review Charge </th>
@@ -168,7 +168,7 @@ export  default  class listCandidatures extends React.Component{
                                             <tbody>
                                             {Sessions.map(d=> {
 
-                                                    if (d.createdBy.Status === "non Traité")
+                                                    if (d.createdBy.Status === "non Traitée")
                                                         return (
 
                                                             <tr key={d._id}>
@@ -177,7 +177,7 @@ export  default  class listCandidatures extends React.Component{
                                                                 <td>{d.createdBy.TypeLabel.type}</td>
                                                                 <td>{d.Name}</td>
 
-                                                                <td>{d.members[0].Email}</td>
+                                                                {/*<td>{d.members[0].Email}</td>*/}
                                                                 <td>{d.createdBy.TypeLabel.SoumissionDate}</td>
                                                                 <td>{d.createdBy.charges.review.type}</td>
                                                                 <td>{d.createdBy.Status}</td>
@@ -221,7 +221,7 @@ export  default  class listCandidatures extends React.Component{
                                                 <tr>
                                                     <th>Type of candidature</th>
                                                     <th >Project Name </th>
-                                                    <th >Lead </th>
+                                                    {/*<th >Lead </th>*/}
 
                                                     <th >Soumission Date </th>
                                                     <th> Review Charge </th>
@@ -239,7 +239,7 @@ export  default  class listCandidatures extends React.Component{
                                                                 <td>{d.createdBy.TypeLabel.type}</td>
                                                                 <td>{d.Name }</td>
 
-                                                                <td>{d.members[0].Email}</td>
+                                                                {/*<td>{d.members[0].Email}</td>*/}
                                                                 <td>{d.createdBy.TypeLabel.SoumissionDate}</td>
                                                                 <td>{d.createdBy.charges.review.type}</td>
                                                                 <td>{d.createdBy.Status}</td>
@@ -557,7 +557,7 @@ export  default  class listCandidatures extends React.Component{
 
 
                         </div>
-                        <Nav1/>
+                        <Nav2/>
 
 
                     </div>

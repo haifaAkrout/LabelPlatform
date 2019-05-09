@@ -189,7 +189,7 @@ console.log(this.state.currentJudge.payload.id)
                             <TabPane tabId="1">
                                 <div className="col-lg-10 col-md-10 col-sm-10">
 
-                                    <div className="panel"  style={{height:"700px",width:"120%"}}>
+                                    <div className="panel"  style={{height:"800px",width:"120%"}}>
                                         <div className="panel">
                                             <div className="panel-heading">
 
@@ -202,26 +202,22 @@ console.log(this.state.currentJudge.payload.id)
 
                                                     Deadline:     {formattedDate}
 
-                            <center>
-                                <center><span>{Projects.length}projects %</span></center>
-                                <Progress color="#31b0d5" value={Projects.length}/>
-                            </center>
 
 
                                                 </p>
                                             </div>
 
 
-                                            <center> <div className="text-center" style={{color:"black"}}>25%</div>
-                                                <Progress color="#31b0d5" value="25" />
+
+                                            <center>
+                                                <center><span>{Projects.length}projects %</span></center>
+                                                <Progress color="#31b0d5" value={Projects.length}/>
                                             </center>
 
 
 
-
-
                                         </div>
-                                        <div className="panel-body pad-no" className="td">
+                                        <div className="panel-body pad-no" className="td" >
 
                                             <div className="tab-base" className="td">
                                                 <Nav tabs>
@@ -264,26 +260,26 @@ console.log(this.state.currentJudge.payload.id)
                                                     <Button color="success">{project.createdBy.charges.review.type}</Button>{' '}
                                                     <br/>
                                                     {project.createdBy.charges.review.text}
-
-</div><br/><br/><br/><br/><hr/>
-
-                                                {project.createdBy.Questions.map(question => (
-                                                    <div  style={{float:"left"}}>
-
+</div>
+{/*</div><br/><br/><br/><br/><hr/>*/}
+                                                {/*{project.createdBy.Questions.map(question => (*/}
+                                                    {/*<div  style={{float:"left"}}>*/}
 
 
-                                                         <h4>Question:</h4>   {question.text}
-                                                        {question.responses.map(response => (
 
-<div>
-    {response.text}</div>
+                                                        {/*<h4>Question:</h4>   {question.text}*/}
+                                                        {/*{question.responses.map(response => (*/}
+
+                                                            {/*<div>*/}
+                                                                {/*{response.text}</div>*/}
 
 
-                                                        ))}
+                                                        {/*))}*/}
 
-                                                    </div>
+                                                    {/*</div>*/}
 
-                                                ))}
+                                                {/*))}*/}
+
 
 
 
@@ -317,8 +313,6 @@ return(
 
                                             <button className="btn btn-info "  onClick={this.handleSubmit(this.refs.container).bind(this)}type="submit">Save brouillon</button></h2>
 
-                                       <Link onClick={this.createNotification('info')}>     <button className="btn btn-info "  onClick={this.handleSubmit(this.refs.container).bind(this)}type="submit">Enregistrer le brouillon</button>
-                                       </Link>
 
 
 
@@ -328,8 +322,7 @@ return(
 
                                             <button className="btn btn-danger" onClick={this.handleSubmit2(this.refs.container).bind(this)} type="submit">Refuse</button></p>
 
-                                          <p>  <Link   onClick={this.handleSubmit2(this.refs.container).bind(this)}>    <button className="btn btn-danger"onClick={this.createNotification('warning')} type="submit">Refuser</button>
-                                            </Link></p>
+
 
 
 
@@ -340,11 +333,7 @@ return(
                                         </p>
 
 
-                                        <p className="panel-title" style={{float: 'left', width: '15%', textalign: 'right'}}>
-                                            <button className="btn btn-info" type="submit">
-                                                Next</button>
 
-                                        </p>
 
 
 

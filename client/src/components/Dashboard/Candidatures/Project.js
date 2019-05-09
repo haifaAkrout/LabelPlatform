@@ -29,7 +29,7 @@ class Project extends Component{
             Response1:'',
             Response2:'',
             createdBy:'',
-            id1:''
+
 
 
         } ;
@@ -51,18 +51,16 @@ class Project extends Component{
     }
 
     handleSubmit= (event) => {
-       this.state.id1=this.props.match.params;
+        const {id1} =this.props.match.params;
 
         event.preventDefault()
 
-        const data = this.state
-        console.log(data)
-        axios.post('http://localhost:6003/projects/add/'+this.state.id1, {
+        axios.post('http://localhost:6003/projects/add/'+id1, {
             Name: this.state.Name,
             Response2: this.state.Response2,
             Response1: this.state.Response1,
-            createdBy: "5cd1e82379a6d77674105264",
-            id1:this.state.id1
+            createdBy: "5cd2be6d53a4e101c8942f12",
+
         })
             .then(function (response) {
                 console.log(response);
@@ -86,7 +84,7 @@ class Project extends Component{
 
             < div
                 id = "container"
-          >
+            >
 
                 <div className="boxed">
                     < header
@@ -137,10 +135,10 @@ class Project extends Component{
                     <div id="content-container">
 
                         <div id="page-content">
-<br/>
-<br/>
-<br/>
-<br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
                             <div className="row">
 
                                 <div className="col-xs-12 col-md-9 col-lg-9">

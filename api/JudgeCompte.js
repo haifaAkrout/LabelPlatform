@@ -219,7 +219,7 @@ router.delete('/:id/:id1',function (req, res) {
 })
 
 
-router.post('/login4',function (req, res) {
+router.post('/login',function (req, res) {
     const Email = req.body.Email;
     const Password = req.body.Password;
 
@@ -401,7 +401,7 @@ router.post('/login3',function (req, res) {
         console.log(req.body.Password)
 
         if (bcrypt.compareSync(req.body.Password.toString(),Candidat.Password)) {
-            console.log('user found', Candidat);
+            console.log('user found', Charge);
             console.log("jjj")
             const payload = {
                 id: Candidat._id,

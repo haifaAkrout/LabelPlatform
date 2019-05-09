@@ -202,30 +202,30 @@ router.post('/:idCandidature/addAvis',function (req,res) {
 
     var charge1= new Charge({
         LastName:'akrout',
-        FirstName:'atef',
-        Email:'atef.akrout@esprit.tn',
-        Password:'atoufa'
+        FirstName:'atef2',
+        Email:'atef2.akrout@esprit.tn',
+        Password:'atef'
     }) ;
-   // charge1.save();
-    var avis=new ReviewCharge({
-        text:'pas mal',
-        type:'negatif',
-        createdBy:"5cc0bda369d2061adcb1c3ea",
-        candidat:req.params.idCandidature
-    });
-
-    avis.save();
-
-    var id=req.params.idCandidature;
-    candidat.findById(id).exec(function (err,candidat1) {
-        candidat1.review = avis._id;
-        candidat.findByIdAndUpdate(id, candidat1, {new: true}, (err, candidat) => {
-            console.log("updated");
-
-        });
-
-
-    })
+   charge1.save();
+    // var avis=new ReviewCharge({
+    //     text:'pas mal',
+    //     type:'negatif',
+    //     createdBy:charge1._id,
+    //     candidat:req.params.idCandidature
+    // });
+    //
+    // avis.save();
+    //
+    // var id=req.params.idCandidature;
+    // candidat.findById(id).exec(function (err,candidat1) {
+    //     candidat1.review = avis._id;
+    //     candidat.findByIdAndUpdate(id, candidat1, {new: true}, (err, candidat) => {
+    //         console.log("updated");
+    //
+    //     });
+    //
+    //
+    // })
 
 })
 

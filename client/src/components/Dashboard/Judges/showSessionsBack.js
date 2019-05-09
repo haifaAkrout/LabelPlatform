@@ -10,7 +10,7 @@ import {
 } from "../../../store/actions";
 import Header from '../../../containers/Header.js';
 import ContentContainer from '../../../containers/ContentContainer.js';
-import Nav from '../../../containers/Nav.js';
+import Nav1 from '../../../containers/Nav1.js';
 
 import logo from "../../login/logo_label_blanc.png";
 
@@ -89,7 +89,7 @@ class showSessionsBack extends Component{
                                                 return (
 
                                                     <tr key={idx}>
-                                                        <td>{d.Name }</td>
+                                                        <td> <Link to={"/SecondTour/"+d._id}params={{ id1: d._id}} classsName="td">{d.Name }</Link></td>
                                                         <td>{ d.StartDate }</td>
                                                         <td>{ d.EndDate}</td>
 
@@ -119,7 +119,7 @@ class showSessionsBack extends Component{
 
 
                     </div>
-                    <Nav/>
+                    <Nav1/>
 
 
                 </div>
