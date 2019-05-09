@@ -381,6 +381,8 @@ export default class DetailsProjetParIdSesIdProjet extends Component {
                                                         <label htmlFor={'cause2'} id="labValide">  Entreprise ayant plus que 8 ans </label>
                                                     </label>
                                                 </div>
+
+                                                <label>{this.state.refus1} {this.state.refus2}</label>
                                             </div>
                                         }
                                         <textarea className="form-control" label="Commentaire"
@@ -429,5 +431,3 @@ export default class DetailsProjetParIdSesIdProjet extends Component {
         );
     }
 }
-
-

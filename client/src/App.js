@@ -113,7 +113,7 @@ class App extends Component {
               <Route path="/sessions/" exact component={listeSessions}/>
               <Route path="/chart/" exact component={Chart} />
 
-              <Route path="/sessions/listeProjetsparIdSes/:idSession" exact component={listeProjetsparIdSes}/>
+              <Route path="/sessions/listeProjetsparIdSes/:idSessionP" exact component={listeProjetsparIdSes}/>
               <Route path="/projects/detailsProjets/:idSessionP/:idProjet" exact component={DetailsProjetParIdSesIdProjet}/>
 
 

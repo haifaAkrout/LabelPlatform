@@ -121,7 +121,7 @@ router.post('/:idSession/add/:idQuest/:idCanda', function (req, res) {
         SoumissionDate:Date.now(),
         PreLabelDate:Date.now()
     });
-    Label1.save();
+    prelabel.save();
     // prelabel.save();
     // var Candidature2=new Candidat({
     //     LastName: 'basly',

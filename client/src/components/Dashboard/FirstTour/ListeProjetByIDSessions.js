@@ -46,7 +46,7 @@ class ListeProjetByIDSessions extends Component {
     handleChange= (e) => {
         this.setState({ chargeSelected : e.target.value });
     }
-     componentDidMount() {
+    componentDidMount() {
         const {idSession} = this.props.match.params
         console.log(idSession)
         axios.get(`http://localhost:6003/sessions/listeProjetsparIdSes/`+idSession)
@@ -54,7 +54,7 @@ class ListeProjetByIDSessions extends Component {
                 this.setState({
                     projets:response.data.Project,
                     idProjet : response.data.Project._id}
-                    );
+                );
                 console.log(response.data.Project)
                 console.log(response.data.Name)
                 console.log(response.data._id)
@@ -67,19 +67,19 @@ class ListeProjetByIDSessions extends Component {
                 console.log(error);
             })
 
-          //afficher liste de chargees
-          axios.get(`http://localhost:6003/sessions/charges/`)
-              .then(response => {
-                  this.setState({
-                      charges: response.data,
-                      idCharge:response.data._id
-                  });
-                  console.log(response.data)
+        //afficher liste de chargees
+        axios.get(`http://localhost:6003/sessions/charges/`)
+            .then(response => {
+                this.setState({
+                    charges: response.data,
+                    idCharge:response.data._id
+                });
+                console.log(response.data)
 
-              })
-              .catch(function (error) {
-                  console.log(error);
-              })
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
     }
 
 
@@ -101,7 +101,7 @@ class ListeProjetByIDSessions extends Component {
     render() {
         return (
             <div  id = "container"
-                className = "effect mainnav-sm navbar-fixed mainnav-fixed" >
+                  className = "effect mainnav-sm navbar-fixed mainnav-fixed" >
 
                 <Header/>
                 <div className="boxed">
@@ -109,12 +109,12 @@ class ListeProjetByIDSessions extends Component {
                     <div id="content-container">
                         <ContentContainer/>
 
-                        <div className="panel ">
+                        <div className="panel">
 
                             <div className="panel-body">
 
                                 <div className="panel-heading" id={"divtitle"}>
-                                    <label id={"label1 "} className="td">
+                                    <label id={"label1"}>
                                         {this.state.NomSession} &nbsp;
                                         <span>
                                                     {Moment(this.state.DateFinSession).format('YYYY')}
@@ -123,7 +123,7 @@ class ListeProjetByIDSessions extends Component {
 
 
                                 </div>
-                                <Nav tabs id={"nav"} className="td">
+                                <Nav tabs id={"nav"}>
                                     <NavItem>
                                         <NavLink
                                             className={classnames({ active: this.state.activeTab === '1' })}
@@ -173,14 +173,27 @@ class ListeProjetByIDSessions extends Component {
                                                                 || projet.createdBy.Status === 'Brouillon'
                                                                 || projet.createdBy.Status === '1er_tour'
                                                             ) {
-                                                            if(projet.length == 0)
-                                                            {
-                                                                return (<h1>Cette session n'a aucun projet</h1>)
-                                                            }else
-                                                            if(projet.members.length == 0)
-                                                            {
-                                                                return (<h1>Ce n'a aucun membre</h1>)
-                                                            }else
+                                                                if(projet.length == 0)
+                                                                {
+                                                                    return (<h1>Cette session n'a aucun projet</h1>
+                                                                    )
+
+
+                                                                }else
+                                                                if(projet.members.length == 0)
+                                                                {
+                                                                    return(<div id={"btnajout"}>
+                                                                        <h1 key={idx}>Ce projet n'a aucun membre</h1>
+                                                                        <Link to={"/members/addMember/"+this.state.idSess+"/"+projet._id}
+                                                                              params={{
+
+                                                                                  idSession: this.state.idSess,
+                                                                                  idProjet: projet._id}}>
+
+                                                                            Ajouter un nouveau membre</Link>
+
+                                                                    </div>)
+                                                                }else
                                                                 if (projet.members[0].Role === 'lead')
                                                                     return (
 
@@ -281,14 +294,24 @@ class ListeProjetByIDSessions extends Component {
                                                                 || projet.createdBy.Status === 'refusee_premier_tour'
                                                                 || projet.createdBy.Status === '2eme_tour_en_instance')
                                                             {
-                                                            if(projet.length == 0)
-                                                            {
-                                                                return (<h1>Cette session n'a aucun projet</h1>)
-                                                            }else
-                                                            if(projet.members.length == 0)
-                                                            {
-                                                                return (<h1>Ce n'a aucun membre</h1>)
-                                                            }else
+                                                                if(projet.length == 0)
+                                                                {
+                                                                    return (<h1>Cette session n'a aucun projet</h1>)
+                                                                }else
+                                                                if(projet.members.length == 0)
+                                                                {
+                                                                    return(<div id={"btnajout"}>
+                                                                        <h1 key={idx}>Ce projet n'a aucun membre</h1>
+                                                                        <Link to={"/members/addMember/"+this.state.idSess+"/"+projet._id}
+                                                                              params={{
+
+                                                                                  idSession: this.state.idSess,
+                                                                                  idProjet: projet._id}}>
+
+                                                                            Ajouter un nouveau membre</Link>
+
+                                                                    </div>)
+                                                                }else
                                                                 if (projet.members[0].Role === 'lead')
                                                                     return (
 
@@ -389,15 +412,26 @@ class ListeProjetByIDSessions extends Component {
                                                             if(projet.createdBy.Status === "1er_tour"
                                                                 || projet.createdBy.Status === "2eme_tour")
                                                             {
-                                                            if(projet.length == 0)
-                                                            {
-                                                                return (<h1>Cette session n'a aucun projet</h1>)
-                                                            }else
-                                                            if(projet.members.length == 0)
-                                                            {
-                                                                return (<h1 key={idx}>Ce projet n'a aucun membre</h1>)
-                                                            }else
-                                                            if (projet.members[0].Role === 'lead')
+                                                                if(projet.length == 0)
+                                                                {
+                                                                    return (<h1>Cette session n'a aucun projet</h1>)
+                                                                }else
+                                                                if(projet.members.length == 0)
+                                                                {
+
+                                                                    return(<div id={"btnajout"}>
+                                                                        <h1 key={idx}>Ce projet n'a aucun membre</h1>
+                                                                        <Link to={"/members/addMember/"+this.state.idSess+"/"+projet._id}
+                                                                              params={{
+
+                                                                                  idSession: this.state.idSess,
+                                                                                  idProjet: projet._id}}>
+
+                                                                            Ajouter un nouveau membre</Link>
+
+                                                                    </div>)
+                                                                }else
+                                                                if (projet.members[0].Role === 'lead')
                                                                     return (
 
                                                                         <tr key={idx}>

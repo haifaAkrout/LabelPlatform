@@ -7,11 +7,17 @@ const Nexmo = require('nexmo');
 const nexmo = new Nexmo({
     apiKey: '6c4de09e',
     apiSecret: '0Qr6NuiURwaOxqMG',
-    applicationId: '03b973dd-2e0a-404a-bc9d-473f160c95f1',
+  //  applicationId: '03b973dd-2e0a-404a-bc9d-473f160c95f1',
     //privateKey: privateKey
 });
 
+const accountSid = 'ACdca4c454f0dadb9c305ec409db9c8e8f';
+const authToken = '6997d7cd7aba8397f8b5f71ef2a8169c';
 
+const client = require('twilio')(accountSid, authToken);
+const accountSid1 = 'AC5ed23fe3707481bef82f26e6eb6956a0';
+const authToken1 = '9480e635c1d7a5958403036ac51015d1';
+const client1 = require('twilio')(accountSid1, authToken1);
 var mongoose = require('mongoose');
 require('../models/Review')
 
@@ -146,7 +152,7 @@ router.get('/:id/:id2/avisPositif', function (req, res) {
 
 );
 router.put('/:idJudge/:idCandidature/:numCandidature/call', function(req, res) {
-    console.log("jjjjjj")
+    console.log("Calling")
     const Review=mongoose.model('Review')
     console.log(req.body.text);
     reviewJudge1=new Review(req.body)
@@ -176,25 +182,15 @@ router.put('/:idJudge/:idCandidature/:numCandidature/call', function(req, res) {
 
     });
 
+    client.messages
+        .create({
+            body: 'You have been accepted for the third Tour and invited for a pitch  ',
+            from: '+'+request.params.numCandidature,
+            to: '+21650069020'
+        })
+        .then(message => console.log(message.sid));
+    console.log("jj")
 
-    const num="216"+req.params.numCandidature;
-    console.log(num)
-    nexmo.calls.create({
-
-            to: [{
-                type: 'phone',
-                number:+num // take a phone number from command line argument
-            }],
-            from: {
-                type: 'phone',
-                number: +num // your virtual number
-            },
-            answer_url: ['https://nexmo-community.github.io/ncco-examples/first_call_talk.json']
-
-        }, (err, res) =>{
-            if(err) { console.error(err); }
-            else { console.log(res); }}
-    )
 
 })
 //addAvisCharge
@@ -232,17 +228,14 @@ router.post('/:idCandidature/addAvis',function (req,res) {
 
 router.post('/call/:num', function(request, response) {
 
-    const num="+216"+request.params.num;
-    nexmo.message.sendSms(
-        +21658011658, 21658011658, 'Sorry you have been refused ',
-        (err, responseData) => {
-            if (err) {
-                console.log(err);
-            } else {
-                console.dir(responseData);
-            }
-        }
-    );
+    client.messages
+        .create({
+            body: 'You have been refused  ',
+            from: '+'+request.params.num,
+            to: '+21650069020'
+        })
+        .then(message => console.log(message.sid));
+    console.log("jj")
 
 })
 //nombre de juges qui ont voté
