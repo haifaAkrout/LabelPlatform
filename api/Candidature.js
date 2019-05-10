@@ -165,13 +165,15 @@ router.put('/:idJudge/:idCandidature/:numCandidature/call', function(req, res) {
 //Judge1.review.push(reviewJudge1);
         Judge.findByIdAndUpdate(req.params.idJudge, Judge1, {new: true}, (err, Judge) => {
 
-
+console.log("jjjjj")
         });
 
     });
-
+console.log("jjjjjjjjjjjjj")
     candidat.findById(req.params.idCandidature).exec(function (err,candidat1) {
+        console.log(req.params.idCandidature);
         candidat1.review2.push(reviewJudge1);
+        console.log("jjjjj")
         candidat1.Status= "Traité";
         candidat1.etat="accepted";
         candidat1.countPositif+=1
@@ -232,7 +234,7 @@ router.post('/call/:num', function(request, response) {
         .create({
             body: 'You have been refused  ',
             from: '+'+request.params.num,
-            to: '+21650069020'
+            to: '+21658011658'
         })
         .then(message => console.log(message.sid));
     console.log("jj")
