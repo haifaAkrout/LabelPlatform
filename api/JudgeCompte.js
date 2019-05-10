@@ -79,7 +79,7 @@ console.log(req.body)
         Email: req.body.Email,
         LastName:req.body.LastName,
         FirstName:req.body.FirstName,
-        TypeLabel:"5cc0aa4046f5243750e39182",
+        TypeLabel:"5cd4291b0330f4b9b02b738d",
         Status:"non Traitée"
 
     })
