@@ -21,7 +21,7 @@
     "jade": "~1.11.0",
     "jsonwebtoken": "^8.5.1",
     "jsy": "0.0.24",
-    "mongoose": "^5.4.19",
+    "mongoose": "^5.7.5",
     "mongoose-extend-schema": "^1.0.0",
     "mongoose-schema-extend": "^0.2.2",
     "morgan": "~1.9.0",
